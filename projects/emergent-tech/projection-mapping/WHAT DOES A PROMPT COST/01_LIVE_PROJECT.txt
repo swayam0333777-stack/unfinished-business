@@ -1,0 +1,7 @@
+WHAT DOES A PROMPT COST?
+
+Live Interactive Project:
+https://what-does-a-prompt-cost.onrender.com
+
+GitHub Repository:
+https://github.com/swayam0333777-stack/what-does-a-prompt-cost
