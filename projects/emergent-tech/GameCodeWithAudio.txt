@@ -1,0 +1,4723 @@
+import processing.serial.*;
+import java.util.ArrayList;
+import javax.sound.sampled.*;
+import java.io.File;
+
+
+// ==========================================================
+// SETTINGS
+// ==========================================================
+
+int SCREEN_WIDTH = 600;
+int SCREEN_HEIGHT = 600;
+
+int FPS = 60;
+
+
+// ==========================================================
+// PROCESSING SETTINGS
+// ==========================================================
+
+void settings() {
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+
+// ==========================================================
+// ARDUINO
+// ==========================================================
+
+String SERIAL_PORT = "COM5";
+int BAUD_RATE = 9600;
+
+
+// ==========================================================
+// BACKGROUND
+// ==========================================================
+
+PImage BG;
+
+
+// ==========================================================
+// PLAYER
+// ==========================================================
+
+float PLAYER_SPEED = 4.0;
+
+float PLAYER_WIDTH = 80;
+float PLAYER_HEIGHT = 80;
+
+float LAST_PLAYER_WIDTH = 80;
+float LAST_PLAYER_HEIGHT = 110;
+
+
+// ==========================================================
+// LIVES / KT
+// ==========================================================
+
+int MAX_LIVES = 6;
+int STARTING_LIVES = 6;
+
+int ktScore = 0;
+
+
+// ==========================================================
+// JOYSTICK
+// ==========================================================
+
+int JOYSTICK_LOW = 400;
+int JOYSTICK_HIGH = 600;
+
+int joystickX = 512;
+int joystickY = 512;
+int joystickButton = 1;
+
+boolean previousButtonPressed = false;
+
+
+// ==========================================================
+// GAME STATES
+// ==========================================================
+
+boolean startScreen = true;
+boolean disclaimerScreen = false;
+
+boolean characterInfo7Screen = false;
+boolean characterInfo8Screen = false;
+boolean characterInfo9Screen = false;
+
+boolean gameOver = false;
+boolean winScreen = false;
+
+int startTime = 0;
+int finalTime = 0;
+
+
+// ==========================================================
+// DIFFICULTY
+// ==========================================================
+
+int difficultyLevel = 1;
+
+int difficultyIncreaseTime = 10;
+int difficultyIncreaseTimeAfterChase = 8;
+
+
+// ==========================================================
+// MISSILES
+// ==========================================================
+
+ArrayList<Missile> missiles;
+
+float missileSpeed = 3.0;
+
+float STARTING_MISSILE_SPEED = 3.0;
+float MISSILE_SPEED_INCREASE = 0.55;
+
+int spawnInterval = 1000;
+
+int STARTING_SPAWN_INTERVAL = 1000;
+int SPAWN_INTERVAL_DECREASE = 100;
+
+int MINIMUM_SPAWN_INTERVAL = 250;
+
+int lastSpawnTime;
+
+
+// ==========================================================
+// CHASE MODE
+// ==========================================================
+
+int CHASE_START = 30;
+
+int CHASE_DURATION = 10;
+
+float CHASE_SPEED_MULTIPLIER = 0.35;
+float CHASE_TURN_SPEED = 0.025;
+
+
+// ==========================================================
+// WARNING
+// ==========================================================
+
+int WARNING_START = 25;
+int WARNING_END = 30;
+
+int WARNING_BLINK_SPEED = 300;
+
+
+// ==========================================================
+// HIT BLINK
+// ==========================================================
+
+boolean playerHitBlink = false;
+
+int playerHitBlinkStart = 0;
+
+int HIT_BLINK_TIME = 120;
+int HIT_BLINK_COUNT = 2;
+
+
+// ==========================================================
+// GREEN BLINK
+// ==========================================================
+
+boolean playerGreenBlink = false;
+
+int playerGreenBlinkStart = 0;
+
+
+// ==========================================================
+// IMAGES
+// ==========================================================
+
+PImage PLAYER1;
+PImage PLAYER2;
+PImage PLAYER3;
+PImage PLAYER4;
+PImage PLAYER5;
+PImage PLAYER6;
+
+PImage MISSILE_IMAGE;
+
+PImage MO_IMAGE;
+PImage VK_IMAGE;
+PImage PM_IMAGE;
+
+PImage DEGREE_IMAGE;
+
+PImage START_BUTTON;
+
+
+// ==========================================================
+// PLAYER POSITION
+// ==========================================================
+
+float playerX;
+float playerY;
+
+
+// ==========================================================
+// CHARACTER 7 - M.O
+// ==========================================================
+
+boolean MO_ACTIVE = false;
+boolean MO_WAITING = false;
+
+int MO_APPEAR_TIME = 0;
+int MO_START_TIME = 0;
+
+float MO_X = 0;
+float MO_Y = 0;
+
+float MO_ALPHA = 0;
+
+float MO_WIDTH = 80;
+float MO_HEIGHT = 90;
+
+float MO_COLLISION_DISTANCE = 85;
+
+String MO_DIALOGUE = "Submit K.T";
+
+
+// ==========================================================
+// CHARACTER 8 - V.K
+// ==========================================================
+
+boolean VK_ACTIVE = false;
+boolean VK_WAITING = false;
+
+int VK_APPEAR_TIME = 0;
+int VK_START_TIME = 0;
+
+float VK_X = 0;
+float VK_Y = 0;
+
+float VK_ALPHA = 0;
+
+float VK_WIDTH = 80;
+float VK_HEIGHT = 90;
+
+float VK_COLLISION_DISTANCE = 85;
+
+String VK_DIALOGUE = "Meet me in 519";
+
+
+// ==========================================================
+// CHARACTER 9 - P.M
+// ==========================================================
+
+boolean PM_ACTIVE = false;
+boolean PM_WAITING = false;
+
+boolean PM_ROLLED = false;
+
+int PM_APPEAR_TIME = 0;
+int PM_START_TIME = 0;
+
+float PM_X = 0;
+float PM_Y = 0;
+
+float PM_ALPHA = 0;
+
+float PM_WIDTH = 80;
+float PM_HEIGHT = 90;
+
+float PM_COLLISION_DISTANCE = 85;
+
+String PM_DIALOGUE = "Meet me";
+
+
+// ==========================================================
+// SPECIAL CHARACTER TIMING
+// ==========================================================
+
+int SPECIAL_MIN_DELAY = 5000;
+int SPECIAL_MAX_DELAY = 10000;
+
+int SPECIAL_FADE_TIME = 700;
+
+int SPECIAL_VISIBLE_TIME = 3000;
+
+int SPECIAL_BLINK_TIME = 250;
+int SPECIAL_BLINK_COUNT = 2;
+
+
+// ==========================================================
+// P.M TIMING
+// ==========================================================
+
+int PM_START_TIME_LIMIT = 40;
+int PM_END_TIME_LIMIT = 50;
+
+int PM_CHANCE_PERCENT = 10;
+
+
+// ==========================================================
+// WIN
+// ==========================================================
+
+int DEGREE_TIME = 60;
+
+
+// ==========================================================
+// SERIAL
+// ==========================================================
+
+Serial myPort;
+
+
+// ==========================================================
+// AUDIO
+// ==========================================================
+
+Clip clickSound;
+
+Clip defeatSound;
+
+Clip victorySound;
+
+Clip greenBlinkSound;
+
+Clip hitSound;
+
+Clip bgSound;
+
+Clip angleSound;
+
+
+boolean defeatSoundPlayed = false;
+
+boolean victorySoundPlayed = false;
+
+boolean drumRollStarted = false;
+
+boolean bgSoundPlaying = false;
+
+boolean angleSoundPlaying = false;
+
+
+// ==========================================================
+// SETUP
+// ==========================================================
+
+void setup() {
+
+  frameRate(FPS);
+
+
+  // --------------------------------------------------------
+  // BACKGROUND
+  // --------------------------------------------------------
+
+  BG = loadImage("BG.jpg");
+
+  if (BG == null) {
+
+    println("ERROR: BG.jpg was not found.");
+
+  } else {
+
+    println("BG.jpg loaded successfully.");
+
+  }
+
+
+  // --------------------------------------------------------
+  // PLAYER IMAGES
+  // --------------------------------------------------------
+
+  PLAYER1 = loadImage("player1.png");
+  PLAYER2 = loadImage("player2.png");
+  PLAYER3 = loadImage("player3.png");
+  PLAYER4 = loadImage("player4.png");
+  PLAYER5 = loadImage("player5.png");
+  PLAYER6 = loadImage("player6.png");
+
+
+  // --------------------------------------------------------
+  // SPECIAL CHARACTERS
+  // --------------------------------------------------------
+
+  MO_IMAGE = loadImage("specialCharacter.png");
+
+  VK_IMAGE = loadImage("character8.png");
+
+  PM_IMAGE = loadImage("character9.png");
+
+
+  if (PM_IMAGE == null) {
+
+    println("ERROR: character9.png was not found.");
+
+  } else {
+
+    println("character9.png loaded successfully.");
+
+  }
+
+
+  // --------------------------------------------------------
+  // MISSILE
+  // --------------------------------------------------------
+
+  MISSILE_IMAGE = loadImage("missile.png");
+
+
+  // --------------------------------------------------------
+  // DEGREE PNG
+  // --------------------------------------------------------
+
+  DEGREE_IMAGE = loadImage("degree.png");
+
+
+  // --------------------------------------------------------
+  // START BUTTON
+  // --------------------------------------------------------
+
+  START_BUTTON = loadImage("StartButton.png");
+
+
+  // --------------------------------------------------------
+  // REMOVE PINK BACKGROUND
+  // --------------------------------------------------------
+
+  makePinkTransparent(PLAYER1);
+  makePinkTransparent(PLAYER2);
+  makePinkTransparent(PLAYER3);
+  makePinkTransparent(PLAYER4);
+  makePinkTransparent(PLAYER5);
+  makePinkTransparent(PLAYER6);
+
+  makePinkTransparent(MO_IMAGE);
+  makePinkTransparent(VK_IMAGE);
+  makePinkTransparent(PM_IMAGE);
+
+
+  // --------------------------------------------------------
+  // MISSILES
+  // --------------------------------------------------------
+
+  missiles = new ArrayList<Missile>();
+
+
+  // --------------------------------------------------------
+  // AUDIO
+  // --------------------------------------------------------
+
+  clickSound =
+    loadAudioClip("ClickSound.wav");
+
+  defeatSound =
+    loadAudioClip("DefeateSound.wav");
+
+  victorySound =
+    loadAudioClip("VictoryDrumRollSound.wav");
+
+  greenBlinkSound =
+    loadAudioClip("GreenBlinkSound.wav");
+
+  hitSound =
+    loadAudioClip("HitSound.wav");
+
+  bgSound =
+    loadAudioClip("BGSound.wav");
+
+  angleSound =
+    loadAudioClip("AngleSound.wav");
+
+
+  // --------------------------------------------------------
+  // SERIAL
+  // --------------------------------------------------------
+
+  println("Available Serial Ports:");
+
+  String[] ports = Serial.list();
+
+  for (int i = 0; i < ports.length; i++) {
+
+    println(
+      i +
+      " : " +
+      ports[i]
+    );
+
+  }
+
+
+  try {
+
+    myPort =
+      new Serial(
+        this,
+        SERIAL_PORT,
+        BAUD_RATE
+      );
+
+    myPort.clear();
+
+    myPort.bufferUntil('\n');
+
+    println(
+      "Connected to " +
+      SERIAL_PORT
+    );
+
+  }
+
+  catch (Exception e) {
+
+    println(
+      "Could not connect to " +
+      SERIAL_PORT
+    );
+
+    println(
+      "Check that Arduino is connected to COM5."
+    );
+
+  }
+
+
+  // --------------------------------------------------------
+  // START SCREEN
+  // --------------------------------------------------------
+
+  startGame();
+}
+
+
+// ==========================================================
+// AUDIO HELPERS
+// ==========================================================
+
+Clip loadAudioClip(String filename) {
+
+  try {
+
+    File soundFile =
+      new File(
+        dataPath(filename)
+      );
+
+
+    if (!soundFile.exists()) {
+
+      println(
+        "ERROR: " +
+        filename +
+        " was not found in the data folder."
+      );
+
+      return null;
+
+    }
+
+
+    AudioInputStream audioInputStream =
+      AudioSystem.getAudioInputStream(
+        soundFile
+      );
+
+
+    Clip clip =
+      AudioSystem.getClip();
+
+
+    clip.open(
+      audioInputStream
+    );
+
+
+    println(
+      filename +
+      " loaded successfully."
+    );
+
+
+    return clip;
+
+  }
+
+  catch (Exception e) {
+
+    println(
+      "Could not load " +
+      filename +
+      ": " +
+      e.getMessage()
+    );
+
+    return null;
+  }
+}
+
+
+// ==========================================================
+// PLAY AUDIO
+// ==========================================================
+
+void playAudioClip(Clip clip) {
+
+  if (clip == null) {
+
+    return;
+  }
+
+
+  try {
+
+    if (clip.isRunning()) {
+
+      clip.stop();
+
+    }
+
+
+    clip.setFramePosition(0);
+
+    clip.start();
+
+  }
+
+  catch (Exception e) {
+
+    println(
+      "Could not play audio: " +
+      e.getMessage()
+    );
+
+  }
+}
+
+
+// ==========================================================
+// PLAY LOOPING AUDIO
+// ==========================================================
+
+void playLoopingAudio(Clip clip) {
+
+  if (clip == null) {
+
+    return;
+  }
+
+
+  try {
+
+    if (clip.isRunning()) {
+
+      return;
+
+    }
+
+
+    clip.setFramePosition(0);
+
+    clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+  }
+
+  catch (Exception e) {
+
+    println(
+      "Could not play looping audio: " +
+      e.getMessage()
+    );
+
+  }
+}
+
+
+// ==========================================================
+// STOP AUDIO
+// ==========================================================
+
+void stopAudioClip(Clip clip) {
+
+  if (clip == null) {
+
+    return;
+  }
+
+
+  try {
+
+    if (clip.isRunning()) {
+
+      clip.stop();
+
+    }
+
+  }
+
+  catch (Exception e) {
+
+    println(
+      "Could not stop audio: " +
+      e.getMessage()
+    );
+
+  }
+}
+
+
+// ==========================================================
+// PINK TRANSPARENT
+// ==========================================================
+
+void makePinkTransparent(PImage img) {
+
+  if (img == null) {
+
+    return;
+  }
+
+
+  img.loadPixels();
+
+
+  for (
+    int i = 0;
+    i < img.pixels.length;
+    i++
+  ) {
+
+    color c =
+      img.pixels[i];
+
+
+    float r =
+      red(c);
+
+    float g =
+      green(c);
+
+    float b =
+      blue(c);
+
+
+    if (
+      r > 200 &&
+      b > 200 &&
+      g < 170
+    ) {
+
+      img.pixels[i] =
+        color(
+          r,
+          g,
+          b,
+          0
+        );
+
+    }
+
+  }
+
+
+  img.updatePixels();
+}
+
+
+// ==========================================================
+// DRAW
+// ==========================================================
+
+void draw() {
+
+  boolean buttonPressed =
+    joystickButton == 0;
+
+
+  boolean newButtonPress =
+    buttonPressed &&
+    !previousButtonPressed;
+
+
+  previousButtonPressed =
+    buttonPressed;
+
+
+  // --------------------------------------------------------
+  // CLICK SOUND
+  // --------------------------------------------------------
+
+  if (newButtonPress) {
+
+    playAudioClip(clickSound);
+
+  }
+
+
+  // ========================================================
+  // START SCREEN
+  // ========================================================
+
+  if (startScreen) {
+
+    drawStartScreen();
+
+
+    if (newButtonPress) {
+
+      startScreen = false;
+
+      disclaimerScreen = true;
+
+    }
+
+
+    return;
+  }
+
+
+  // ========================================================
+  // DISCLAIMER
+  // ========================================================
+
+  if (disclaimerScreen) {
+
+    drawDisclaimerScreen();
+
+
+    if (newButtonPress) {
+
+      disclaimerScreen = false;
+
+      characterInfo7Screen = true;
+
+    }
+
+
+    return;
+  }
+
+
+  // ========================================================
+  // CHARACTER 7
+  // ========================================================
+
+  if (characterInfo7Screen) {
+
+    drawCharacterInfo7Screen();
+
+
+    if (newButtonPress) {
+
+      characterInfo7Screen = false;
+
+      characterInfo8Screen = true;
+
+    }
+
+
+    return;
+  }
+
+
+  // ========================================================
+  // CHARACTER 8
+  // ========================================================
+
+  if (characterInfo8Screen) {
+
+    drawCharacterInfo8Screen();
+
+
+    if (newButtonPress) {
+
+      characterInfo8Screen = false;
+
+      characterInfo9Screen = true;
+
+    }
+
+
+    return;
+  }
+
+
+  // ========================================================
+  // CHARACTER 9
+  // ========================================================
+
+  if (characterInfo9Screen) {
+
+    drawCharacterInfo9Screen();
+
+
+    if (newButtonPress) {
+
+      characterInfo9Screen = false;
+
+      beginActualGame();
+
+    }
+
+
+    return;
+  }
+
+
+  // ========================================================
+  // WIN SCREEN
+  // ========================================================
+
+  if (winScreen) {
+
+    if (newButtonPress) {
+
+      startGame();
+
+      return;
+
+    }
+
+
+    drawWinScreen();
+
+    return;
+  }
+
+
+  // ========================================================
+  // GAME OVER
+  // ========================================================
+
+  if (gameOver) {
+
+    if (newButtonPress) {
+
+      startGame();
+
+      return;
+
+    }
+
+
+    drawGameOver();
+
+    return;
+  }
+
+
+  // ========================================================
+  // GAMEPLAY BACKGROUND
+  // ========================================================
+
+  if (BG != null) {
+
+    imageMode(CORNER);
+
+    image(
+      BG,
+      0,
+      0,
+      width,
+      height
+    );
+
+  } else {
+
+    background(220);
+
+  }
+
+
+  // --------------------------------------------------------
+  // 60 SECOND CHECK
+  // --------------------------------------------------------
+
+  checkDegreeTime();
+
+
+  if (winScreen) {
+
+    drawWinScreen();
+
+    return;
+
+  }
+
+
+  // --------------------------------------------------------
+  // PLAYER
+  // --------------------------------------------------------
+
+  movePlayer();
+
+
+  // --------------------------------------------------------
+  // DIFFICULTY
+  // --------------------------------------------------------
+
+  updateDifficulty();
+
+
+  // --------------------------------------------------------
+  // SPECIAL CHARACTERS
+  // --------------------------------------------------------
+
+  updateMO();
+
+  updateVK();
+
+  updatePM();
+
+
+  // --------------------------------------------------------
+  // MISSILES
+  // --------------------------------------------------------
+
+  spawnMissiles();
+
+  updateMissiles();
+
+
+  // --------------------------------------------------------
+  // DRAW M.O
+  // --------------------------------------------------------
+
+  if (MO_ACTIVE) {
+
+    drawMO();
+
+  }
+
+
+  // --------------------------------------------------------
+  // DRAW V.K
+  // --------------------------------------------------------
+
+  if (VK_ACTIVE) {
+
+    drawVK();
+
+  }
+
+
+  // --------------------------------------------------------
+  // DRAW P.M
+  // --------------------------------------------------------
+
+  if (PM_ACTIVE) {
+
+    drawPM();
+
+  }
+
+
+  // --------------------------------------------------------
+  // PLAYER
+  // --------------------------------------------------------
+
+  drawPlayer();
+
+
+  // --------------------------------------------------------
+  // TIMER
+  // --------------------------------------------------------
+
+  int survivalTime =
+    (
+      millis() -
+      startTime
+    ) / 1000;
+
+
+  // --------------------------------------------------------
+  // INFORMATION PANEL
+  // --------------------------------------------------------
+
+  fill(
+    0,
+    170
+  );
+
+
+  rect(
+    10,
+    8,
+    150,
+    85
+  );
+
+
+  fill(255);
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+
+
+  textSize(20);
+
+
+  text(
+    "Time: " +
+    survivalTime +
+    " sec",
+    20,
+    30
+  );
+
+
+  // --------------------------------------------------------
+  // KT
+  // --------------------------------------------------------
+
+  text(
+    "KT: " +
+    ktScore +
+    " / " +
+    MAX_LIVES,
+    20,
+    55
+  );
+
+
+  // --------------------------------------------------------
+  // LEVEL
+  // --------------------------------------------------------
+
+  text(
+    "Level: " +
+    difficultyLevel,
+    20,
+    80
+  );
+
+
+  // --------------------------------------------------------
+  // WARNING
+  // --------------------------------------------------------
+
+  if (
+    survivalTime >= WARNING_START &&
+    survivalTime < WARNING_END
+  ) {
+
+    if (
+      (millis() /
+      WARNING_BLINK_SPEED) % 2 == 0
+    ) {
+
+      textAlign(
+        CENTER,
+        CENTER
+      );
+
+
+      fill(
+        255,
+        0,
+        0
+      );
+
+
+      textSize(30);
+
+
+      text(
+        "WARNING!",
+        width / 2,
+        110
+      );
+
+
+      textSize(24);
+
+
+      text(
+        "It's Jury time",
+        width / 2,
+        145
+      );
+
+    }
+
+
+    textAlign(
+      LEFT,
+      BASELINE
+    );
+
+  }
+
+
+  // --------------------------------------------------------
+  // CHASE MODE
+  // --------------------------------------------------------
+
+  if (
+    survivalTime >= CHASE_START &&
+    survivalTime <
+    CHASE_START + CHASE_DURATION
+  ) {
+
+    fill(
+      0,
+      190
+    );
+
+
+    rect(
+      15,
+      95,
+      145,
+      35,
+      6
+    );
+
+
+    PFont boldFont =
+      createFont(
+        "Arial Bold",
+        20
+      );
+
+
+    textFont(
+      boldFont
+    );
+
+
+    fill(
+      255,
+      0,
+      0
+    );
+
+
+    textSize(20);
+
+
+    text(
+      "CHASE MODE",
+      20,
+      120
+    );
+
+
+    textFont(
+      createFont(
+        "Arial",
+        20
+      )
+    );
+
+  }
+
+
+  // --------------------------------------------------------
+  // HIT BLINK
+  // --------------------------------------------------------
+
+  drawPlayerHitBlink();
+
+
+  // --------------------------------------------------------
+  // GREEN BLINK
+  // --------------------------------------------------------
+
+  drawPlayerGreenBlink();
+}
+
+
+// ==========================================================
+// START SCREEN
+// ==========================================================
+
+void drawStartScreen() {
+
+  if (BG != null) {
+
+    imageMode(CORNER);
+
+    image(
+      BG,
+      0,
+      0,
+      width,
+      height
+    );
+
+  } else {
+
+    background(0);
+
+  }
+
+
+  fill(
+    0,
+    150
+  );
+
+
+  rect(
+    0,
+    0,
+    width,
+    height
+  );
+
+
+  textAlign(
+    CENTER,
+    CENTER
+  );
+
+
+  fill(255);
+
+
+  textSize(58);
+
+
+  text(
+    "Surviving SSD",
+    width / 2,
+    180
+  );
+
+
+  if (START_BUTTON != null) {
+
+    imageMode(CENTER);
+
+
+    float buttonWidth =
+      230;
+
+
+    float buttonHeight =
+      buttonWidth *
+      START_BUTTON.height /
+      START_BUTTON.width;
+
+
+    image(
+      START_BUTTON,
+      width / 2,
+      350,
+      buttonWidth,
+      buttonHeight
+    );
+
+
+    imageMode(CORNER);
+
+  }
+
+
+  fill(255);
+
+
+  textSize(17);
+
+
+  text(
+    "Press the joystick button to continue",
+    width / 2,
+    470
+  );
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+}
+
+
+// ==========================================================
+// DISCLAIMER
+// ==========================================================
+
+void drawDisclaimerScreen() {
+
+  background(0);
+
+
+  textAlign(
+    CENTER,
+    CENTER
+  );
+
+
+  fill(
+    255,
+    0,
+    0
+  );
+
+
+  textSize(30);
+
+
+  text(
+    "DISCLAIMER",
+    width / 2,
+    100
+  );
+
+
+  fill(255);
+
+
+  textSize(19);
+
+
+  String[] disclaimerLines = {
+
+    "No Real Human were used or Harmed",
+
+    "in the game and if you think someone",
+
+    "resembles someone real it is not.",
+
+    "Every character is fictional used for",
+
+    "game mechanics and entertainment."
+
+  };
+
+
+  float paragraphStartY =
+    235;
+
+
+  float paragraphLineSpacing =
+    30;
+
+
+  for (
+    int i = 0;
+    i < disclaimerLines.length;
+    i++
+  ) {
+
+    text(
+      disclaimerLines[i],
+      width / 2,
+      paragraphStartY +
+      i *
+      paragraphLineSpacing
+    );
+
+  }
+
+
+  fill(120);
+
+
+  textSize(15);
+
+
+  text(
+    "PRESS JOYSTICK TO CONTINUE",
+    width / 2,
+    540
+  );
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+}
+
+
+// ==========================================================
+// CHARACTER 7 INFO
+// ==========================================================
+
+void drawCharacterInfo7Screen() {
+
+  background(0);
+
+
+  textAlign(
+    CENTER,
+    CENTER
+  );
+
+
+  fill(150);
+
+
+  textSize(16);
+
+
+  text(
+    "CHARACTER 07",
+    width / 2,
+    65
+  );
+
+
+  fill(255);
+
+
+  textSize(42);
+
+
+  text(
+    "When she appears...",
+    width / 2,
+    120
+  );
+
+
+  if (MO_IMAGE != null) {
+
+    imageMode(CENTER);
+
+
+    image(
+      MO_IMAGE,
+      width / 2,
+      245,
+      MO_WIDTH * 1.5,
+      MO_HEIGHT * 1.5
+    );
+
+
+    imageMode(CORNER);
+
+  }
+
+
+  fill(
+    255,
+    0,
+    0
+  );
+
+
+  textSize(30);
+
+
+  text(
+    "Submit K.T",
+    width / 2,
+    370
+  );
+
+
+  fill(210);
+
+
+  textSize(18);
+
+
+  text(
+    "Meet her before she disappears",
+    width / 2,
+    415
+  );
+
+
+  fill(255);
+
+
+  textSize(17);
+
+
+  text(
+    "Meeting her removes 1 K.T.",
+    width / 2,
+    450
+  );
+
+
+  fill(120);
+
+
+  textSize(15);
+
+
+  text(
+    "PRESS JOYSTICK TO CONTINUE",
+    width / 2,
+    540
+  );
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+}
+
+
+// ==========================================================
+// CHARACTER 8 INFO
+// ==========================================================
+
+void drawCharacterInfo8Screen() {
+
+  background(0);
+
+
+  textAlign(
+    CENTER,
+    CENTER
+  );
+
+
+  fill(150);
+
+
+  textSize(16);
+
+
+  text(
+    "CHARACTER 08",
+    width / 2,
+    65
+  );
+
+
+  fill(255);
+
+
+  textSize(42);
+
+
+  text(
+    "When he appears...",
+    width / 2,
+    120
+  );
+
+
+  if (VK_IMAGE != null) {
+
+    imageMode(CENTER);
+
+
+    image(
+      VK_IMAGE,
+      width / 2,
+      245,
+      VK_WIDTH * 1.5,
+      VK_HEIGHT * 1.5
+    );
+
+
+    imageMode(CORNER);
+
+  }
+
+
+  fill(
+    255,
+    0,
+    0
+  );
+
+
+  textSize(30);
+
+
+  text(
+    "Meet me in 519",
+    width / 2,
+    370
+  );
+
+
+  fill(210);
+
+
+  textSize(18);
+
+
+  text(
+    "Reach him before he disappears",
+    width / 2,
+    415
+  );
+
+
+  fill(255);
+
+
+  textSize(17);
+
+
+  text(
+    "If you don't, you fail 1 subject.",
+    width / 2,
+    450
+  );
+
+
+  fill(120);
+
+
+  textSize(15);
+
+
+  text(
+    "PRESS JOYSTICK TO CONTINUE",
+    width / 2,
+    540
+  );
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+}
+
+
+// ==========================================================
+// CHARACTER 9 INFO - P.M
+// ==========================================================
+
+void drawCharacterInfo9Screen() {
+
+  background(0);
+
+
+  textAlign(
+    CENTER,
+    CENTER
+  );
+
+
+  fill(150);
+
+
+  textSize(16);
+
+
+  text(
+    "CHARACTER 09",
+    width / 2,
+    65
+  );
+
+
+  fill(255);
+
+
+  textSize(42);
+
+
+  text(
+    "When she appears...",
+    width / 2,
+    120
+  );
+
+
+  // --------------------------------------------------------
+  // P.M IMAGE
+  // --------------------------------------------------------
+
+  if (PM_IMAGE != null) {
+
+    imageMode(CENTER);
+
+
+    image(
+      PM_IMAGE,
+      width / 2,
+      245,
+      PM_WIDTH * 1.5,
+      PM_HEIGHT * 1.5
+    );
+
+
+    imageMode(CORNER);
+
+  }
+
+
+  // --------------------------------------------------------
+  // TEXT
+  // --------------------------------------------------------
+
+  fill(
+    0,
+    255,
+    0
+  );
+
+
+  textSize(30);
+
+
+  text(
+    "Meet Her",
+    width / 2,
+    370
+  );
+
+
+  fill(210);
+
+
+  textSize(18);
+
+
+  text(
+    "She may appear between 40–50 seconds",
+    width / 2,
+    415
+  );
+
+
+  fill(255);
+
+
+  textSize(17);
+
+
+  text(
+    "Meeting her resets all K.T to 0.",
+    width / 2,
+    450
+  );
+
+
+  fill(120);
+
+
+  textSize(15);
+
+
+  text(
+    "PRESS JOYSTICK TO CONTINUE",
+    width / 2,
+    540
+  );
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+}
+
+
+// ==========================================================
+// BEGIN ACTUAL GAME
+// ==========================================================
+
+void beginActualGame() {
+
+  startScreen = false;
+
+  disclaimerScreen = false;
+
+  characterInfo7Screen = false;
+
+  characterInfo8Screen = false;
+
+  characterInfo9Screen = false;
+
+  gameOver = false;
+
+  winScreen = false;
+
+
+  defeatSoundPlayed = false;
+
+  victorySoundPlayed = false;
+
+  drumRollStarted = false;
+
+  bgSoundPlaying = false;
+
+  angleSoundPlaying = false;
+
+
+  // --------------------------------------------------------
+  // STOP OLD AUDIO
+  // --------------------------------------------------------
+
+  stopAudioClip(victorySound);
+
+  stopAudioClip(defeatSound);
+
+  stopAudioClip(bgSound);
+
+  stopAudioClip(angleSound);
+
+
+  // --------------------------------------------------------
+  // RESET KT
+  // --------------------------------------------------------
+
+  ktScore = 0;
+
+
+  playerX =
+    width / 2;
+
+
+  playerY =
+    height / 2;
+
+
+  missileSpeed =
+    STARTING_MISSILE_SPEED;
+
+
+  spawnInterval =
+    STARTING_SPAWN_INTERVAL;
+
+
+  difficultyLevel =
+    1;
+
+
+  missiles.clear();
+
+
+  // --------------------------------------------------------
+  // RESET M.O
+  // --------------------------------------------------------
+
+  MO_ACTIVE = false;
+
+  MO_WAITING = false;
+
+  MO_ALPHA = 0;
+
+
+  // --------------------------------------------------------
+  // RESET V.K
+  // --------------------------------------------------------
+
+  VK_ACTIVE = false;
+
+  VK_WAITING = false;
+
+  VK_ALPHA = 0;
+
+
+  // --------------------------------------------------------
+  // RESET P.M
+  // --------------------------------------------------------
+
+  PM_ACTIVE = false;
+
+  PM_WAITING = false;
+
+  PM_ROLLED = false;
+
+  PM_ALPHA = 0;
+
+
+  playerHitBlink = false;
+
+  playerGreenBlink = false;
+
+
+  // --------------------------------------------------------
+  // START GAME TIMER
+  // --------------------------------------------------------
+
+  startTime =
+    millis();
+
+
+  finalTime = 0;
+
+
+  lastSpawnTime =
+    millis();
+
+
+  // --------------------------------------------------------
+  // START BACKGROUND MUSIC
+  // --------------------------------------------------------
+
+  playLoopingAudio(bgSound);
+
+  bgSoundPlaying = true;
+
+
+  // --------------------------------------------------------
+  // SCHEDULE FIRST SPECIAL CHARACTERS
+  // --------------------------------------------------------
+
+  scheduleMO();
+
+  scheduleVK();
+}
+
+
+// ==========================================================
+// ADD 1 KT
+// ==========================================================
+
+void addKT() {
+
+  if (
+    gameOver ||
+    winScreen
+  ) {
+
+    return;
+  }
+
+
+  if (
+    ktScore >=
+    MAX_LIVES
+  ) {
+
+    return;
+  }
+
+
+  ktScore++;
+
+
+  // --------------------------------------------------------
+  // 6 KT = DEFEAT
+  // --------------------------------------------------------
+
+  if (
+    ktScore >=
+    MAX_LIVES
+  ) {
+
+    ktScore =
+      MAX_LIVES;
+
+
+    finalTime =
+      (
+        millis() -
+        startTime
+      ) / 1000;
+
+
+    gameOver = true;
+
+
+    // ------------------------------------------------------
+    // STOP BACKGROUND MUSIC
+    // ------------------------------------------------------
+
+    stopAudioClip(bgSound);
+
+    bgSoundPlaying = false;
+
+
+    // ------------------------------------------------------
+    // STOP P.M SOUND
+    // ------------------------------------------------------
+
+    stopAudioClip(angleSound);
+
+    angleSoundPlaying = false;
+
+
+    // ------------------------------------------------------
+    // STOP DRUM ROLL
+    // ------------------------------------------------------
+
+    if (drumRollStarted) {
+
+      stopAudioClip(victorySound);
+
+      drumRollStarted = false;
+
+    }
+
+
+    // ------------------------------------------------------
+    // DEFEAT SOUND
+    // ------------------------------------------------------
+
+    if (!defeatSoundPlayed) {
+
+      playAudioClip(
+        defeatSound
+      );
+
+      defeatSoundPlayed = true;
+
+    }
+
+
+    MO_ACTIVE = false;
+    MO_WAITING = false;
+
+    VK_ACTIVE = false;
+    VK_WAITING = false;
+
+    PM_ACTIVE = false;
+    PM_WAITING = false;
+
+
+    return;
+  }
+
+
+  // --------------------------------------------------------
+  // RED BLINK
+  // --------------------------------------------------------
+
+  playerGreenBlink = false;
+
+  playerHitBlink = true;
+
+
+  playerHitBlinkStart =
+    millis();
+}
+
+
+// ==========================================================
+// REMOVE 1 KT
+// ==========================================================
+
+void removeKT() {
+
+  if (
+    gameOver ||
+    winScreen
+  ) {
+
+    return;
+  }
+
+
+  if (
+    ktScore <= 0
+  ) {
+
+    return;
+  }
+
+
+  ktScore--;
+
+
+  playerHitBlink = false;
+
+  playerGreenBlink = true;
+
+
+  playAudioClip(
+    greenBlinkSound
+  );
+
+
+  playerGreenBlinkStart =
+    millis();
+}
+
+
+// ==========================================================
+// RESET ALL KT - P.M
+// ==========================================================
+
+void resetAllKT() {
+
+  if (
+    gameOver ||
+    winScreen
+  ) {
+
+    return;
+  }
+
+
+  ktScore = 0;
+
+
+  playerHitBlink = false;
+
+  playerGreenBlink = true;
+
+
+  playAudioClip(
+    greenBlinkSound
+  );
+
+
+  playerGreenBlinkStart =
+    millis();
+}
+
+
+// ==========================================================
+// 60 SECOND WIN
+// ==========================================================
+
+void checkDegreeTime() {
+
+  int elapsed =
+    (
+      millis() -
+      startTime
+    ) / 1000;
+
+
+  // --------------------------------------------------------
+  // STOP BG SOUND AT 56 SECONDS
+  // --------------------------------------------------------
+
+  if (
+    elapsed >= 56 &&
+    bgSoundPlaying
+  ) {
+
+    stopAudioClip(
+      bgSound
+    );
+
+    bgSoundPlaying = false;
+
+  }
+
+
+  // --------------------------------------------------------
+  // DRUM ROLL AT 56 SECONDS
+  // --------------------------------------------------------
+
+  if (
+    elapsed >= DEGREE_TIME - 4 &&
+    !drumRollStarted
+  ) {
+
+    playAudioClip(
+      victorySound
+    );
+
+    drumRollStarted = true;
+
+  }
+
+
+  // --------------------------------------------------------
+  // VICTORY AT 60
+  // --------------------------------------------------------
+
+  if (
+    elapsed >= DEGREE_TIME
+  ) {
+
+    winScreen = true;
+
+    victorySoundPlayed = true;
+
+    finalTime =
+      elapsed;
+
+
+    missiles.clear();
+
+
+    MO_ACTIVE = false;
+
+    MO_WAITING = false;
+
+
+    VK_ACTIVE = false;
+
+    VK_WAITING = false;
+
+
+    PM_ACTIVE = false;
+
+    PM_WAITING = false;
+
+
+    stopAudioClip(
+      angleSound
+    );
+
+    angleSoundPlaying = false;
+  }
+}
+
+
+// ==========================================================
+// WIN SCREEN
+// ==========================================================
+
+void drawWinScreen() {
+
+  background(0);
+
+
+  if (
+    DEGREE_IMAGE != null
+  ) {
+
+    imageMode(CENTER);
+
+
+    float scale =
+      min(
+        500.0 /
+        DEGREE_IMAGE.width,
+
+        500.0 /
+        DEGREE_IMAGE.height
+      );
+
+
+    float drawWidth =
+      DEGREE_IMAGE.width *
+      scale;
+
+
+    float drawHeight =
+      DEGREE_IMAGE.height *
+      scale;
+
+
+    image(
+      DEGREE_IMAGE,
+      width / 2,
+      height / 2,
+      drawWidth,
+      drawHeight
+    );
+
+
+    imageMode(CORNER);
+  }
+}
+
+
+// ==========================================================
+// CURRENT PLAYER IMAGE
+// ==========================================================
+
+PImage getCurrentPlayerImage() {
+
+  if (
+    ktScore == 0
+  ) {
+
+    return PLAYER6;
+  }
+
+
+  if (
+    ktScore == 1
+  ) {
+
+    return PLAYER5;
+  }
+
+
+  if (
+    ktScore == 2
+  ) {
+
+    return PLAYER4;
+  }
+
+
+  if (
+    ktScore == 3
+  ) {
+
+    return PLAYER3;
+  }
+
+
+  if (
+    ktScore == 4
+  ) {
+
+    return PLAYER2;
+  }
+
+
+  if (
+    ktScore >= 5
+  ) {
+
+    return PLAYER1;
+  }
+
+
+  return PLAYER6;
+}
+
+
+// ==========================================================
+// DRAW PLAYER
+// ==========================================================
+
+void drawPlayer() {
+
+  PImage img =
+    getCurrentPlayerImage();
+
+
+  if (
+    img == null
+  ) {
+
+    return;
+  }
+
+
+  imageMode(CENTER);
+
+
+  if (
+    ktScore >= 5
+  ) {
+
+    image(
+      img,
+      playerX,
+      playerY,
+      LAST_PLAYER_WIDTH,
+      LAST_PLAYER_HEIGHT
+    );
+
+  } else {
+
+    image(
+      img,
+      playerX,
+      playerY,
+      PLAYER_WIDTH,
+      PLAYER_HEIGHT
+    );
+
+  }
+
+
+  imageMode(CORNER);
+}
+
+
+// ==========================================================
+// PLAYER MOVEMENT
+// ==========================================================
+
+void movePlayer() {
+
+  if (
+    joystickY >
+    JOYSTICK_HIGH
+  ) {
+
+    playerX -=
+      PLAYER_SPEED;
+
+  }
+
+
+  if (
+    joystickY <
+    JOYSTICK_LOW
+  ) {
+
+    playerX +=
+      PLAYER_SPEED;
+
+  }
+
+
+  if (
+    joystickX <
+    JOYSTICK_LOW
+  ) {
+
+    playerY -=
+      PLAYER_SPEED;
+
+  }
+
+
+  if (
+    joystickX >
+    JOYSTICK_HIGH
+  ) {
+
+    playerY +=
+      PLAYER_SPEED;
+
+  }
+
+
+  float halfWidth =
+    PLAYER_WIDTH / 2;
+
+
+  float halfHeight =
+    PLAYER_HEIGHT / 2;
+
+
+  if (
+    ktScore >= 5
+  ) {
+
+    halfWidth =
+      LAST_PLAYER_WIDTH / 2;
+
+    halfHeight =
+      LAST_PLAYER_HEIGHT / 2;
+
+  }
+
+
+  playerX =
+    constrain(
+      playerX,
+      halfWidth,
+      width - halfWidth
+    );
+
+
+  playerY =
+    constrain(
+      playerY,
+      halfHeight,
+      height - halfHeight
+    );
+}
+
+
+// ==========================================================
+// DIFFICULTY
+// ==========================================================
+
+void updateDifficulty() {
+
+  int elapsed =
+    (
+      millis() -
+      startTime
+    ) / 1000;
+
+
+  int newLevel;
+
+
+  if (
+    elapsed <
+    CHASE_START
+  ) {
+
+    newLevel =
+      elapsed /
+      difficultyIncreaseTime +
+      1;
+
+  } else {
+
+    newLevel =
+      4 +
+      (
+        elapsed -
+        CHASE_START
+      ) /
+      difficultyIncreaseTimeAfterChase;
+
+  }
+
+
+  if (
+    newLevel < 1
+  ) {
+
+    newLevel = 1;
+  }
+
+
+  if (
+    newLevel !=
+    difficultyLevel
+  ) {
+
+    difficultyLevel =
+      newLevel;
+
+
+    missileSpeed =
+      STARTING_MISSILE_SPEED +
+      (
+        difficultyLevel -
+        1
+      ) *
+      MISSILE_SPEED_INCREASE;
+
+
+    spawnInterval =
+      max(
+        MINIMUM_SPAWN_INTERVAL,
+
+        STARTING_SPAWN_INTERVAL -
+        (
+          difficultyLevel -
+          1
+        ) *
+        SPAWN_INTERVAL_DECREASE
+      );
+  }
+}
+
+
+// ==========================================================
+// SPAWN MISSILES
+// ==========================================================
+
+void spawnMissiles() {
+
+  if (
+    millis() -
+    lastSpawnTime >=
+    spawnInterval
+  ) {
+
+    missiles.add(
+      new Missile()
+    );
+
+
+    lastSpawnTime =
+      millis();
+  }
+}
+
+
+// ==========================================================
+// UPDATE MISSILES
+// ==========================================================
+
+void updateMissiles() {
+
+  for (
+    int i =
+      missiles.size() - 1;
+
+    i >= 0;
+
+    i--
+  ) {
+
+    Missile m =
+      missiles.get(i);
+
+
+    m.update();
+
+    m.display();
+
+
+    if (
+      m.hitsPlayer()
+    ) {
+
+      missiles.remove(i);
+
+
+      playAudioClip(
+        hitSound
+      );
+
+
+      addKT();
+
+
+      if (
+        gameOver
+      ) {
+
+        return;
+      }
+
+
+      continue;
+    }
+
+
+    if (
+      m.x < -200 ||
+      m.x > width + 200 ||
+      m.y < -200 ||
+      m.y > height + 200
+    ) {
+
+      missiles.remove(i);
+
+    }
+  }
+}
+
+
+// ==========================================================
+// PLAYER HIT BLINK
+// ==========================================================
+
+void drawPlayerHitBlink() {
+
+  if (
+    !playerHitBlink
+  ) {
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    playerHitBlinkStart;
+
+
+  int totalTime =
+    HIT_BLINK_COUNT *
+    HIT_BLINK_TIME *
+    2;
+
+
+  if (
+    elapsed >=
+    totalTime
+  ) {
+
+    playerHitBlink =
+      false;
+
+    return;
+  }
+
+
+  int phase =
+    elapsed /
+    HIT_BLINK_TIME;
+
+
+  if (
+    phase % 2 == 0
+  ) {
+
+    PImage img =
+      getCurrentPlayerImage();
+
+
+    if (
+      img == null
+    ) {
+
+      return;
+    }
+
+
+    imageMode(CENTER);
+
+
+    tint(
+      255,
+      0,
+      0
+    );
+
+
+    if (
+      ktScore >= 5
+    ) {
+
+      image(
+        img,
+        playerX,
+        playerY,
+        LAST_PLAYER_WIDTH,
+        LAST_PLAYER_HEIGHT
+      );
+
+    } else {
+
+      image(
+        img,
+        playerX,
+        playerY,
+        PLAYER_WIDTH,
+        PLAYER_HEIGHT
+      );
+
+    }
+
+
+    noTint();
+
+
+    imageMode(CORNER);
+  }
+}
+
+
+// ==========================================================
+// PLAYER GREEN BLINK
+// ==========================================================
+
+void drawPlayerGreenBlink() {
+
+  if (
+    !playerGreenBlink
+  ) {
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    playerGreenBlinkStart;
+
+
+  int totalTime =
+    HIT_BLINK_COUNT *
+    HIT_BLINK_TIME *
+    2;
+
+
+  if (
+    elapsed >=
+    totalTime
+  ) {
+
+    playerGreenBlink =
+      false;
+
+    return;
+  }
+
+
+  int phase =
+    elapsed /
+    HIT_BLINK_TIME;
+
+
+  if (
+    phase % 2 == 0
+  ) {
+
+    PImage img =
+      getCurrentPlayerImage();
+
+
+    if (
+      img == null
+    ) {
+
+      return;
+    }
+
+
+    imageMode(CENTER);
+
+
+    tint(
+      0,
+      255,
+      0
+    );
+
+
+    if (
+      ktScore >= 5
+    ) {
+
+      image(
+        img,
+        playerX,
+        playerY,
+        LAST_PLAYER_WIDTH,
+        LAST_PLAYER_HEIGHT
+      );
+
+    } else {
+
+      image(
+        img,
+        playerX,
+        playerY,
+        PLAYER_WIDTH,
+        PLAYER_HEIGHT
+      );
+
+    }
+
+
+    noTint();
+
+
+    imageMode(CORNER);
+  }
+}
+
+
+// ==========================================================
+// SCHEDULE M.O
+// ==========================================================
+
+void scheduleMO() {
+
+  if (
+    MO_ACTIVE ||
+    MO_WAITING
+  ) {
+
+    return;
+  }
+
+
+  int delay =
+    int(
+      random(
+        SPECIAL_MIN_DELAY,
+        SPECIAL_MAX_DELAY + 1
+      )
+    );
+
+
+  MO_APPEAR_TIME =
+    millis() +
+    delay;
+
+
+  MO_WAITING =
+    true;
+}
+
+
+// ==========================================================
+// SCHEDULE V.K
+// ==========================================================
+
+void scheduleVK() {
+
+  if (
+    VK_ACTIVE ||
+    VK_WAITING
+  ) {
+
+    return;
+  }
+
+
+  int delay =
+    int(
+      random(
+        SPECIAL_MIN_DELAY,
+        SPECIAL_MAX_DELAY + 1
+      )
+    );
+
+
+  VK_APPEAR_TIME =
+    millis() +
+    delay;
+
+
+  VK_WAITING =
+    true;
+}
+
+
+// ==========================================================
+// ACTIVATE M.O
+// ==========================================================
+
+void activateMO() {
+
+  MO_WAITING =
+    false;
+
+  MO_ACTIVE =
+    true;
+
+
+  MO_START_TIME =
+    millis();
+
+
+  MO_ALPHA =
+    0;
+
+
+  MO_X =
+    random(
+      90,
+      width - 90
+    );
+
+
+  MO_Y =
+    random(
+      120,
+      height - 80
+    );
+}
+
+
+// ==========================================================
+// ACTIVATE V.K
+// ==========================================================
+
+void activateVK() {
+
+  VK_WAITING =
+    false;
+
+  VK_ACTIVE =
+    true;
+
+
+  VK_START_TIME =
+    millis();
+
+
+  VK_ALPHA =
+    0;
+
+
+  VK_X =
+    random(
+      90,
+      width - 90
+    );
+
+
+  VK_Y =
+    random(
+      120,
+      height - 80
+    );
+}
+
+
+// ==========================================================
+// UPDATE M.O
+// ==========================================================
+
+void updateMO() {
+
+  int elapsedGame =
+    (
+      millis() -
+      startTime
+    ) / 1000;
+
+
+  if (
+    elapsedGame <
+    40
+  ) {
+
+    if (
+      !MO_ACTIVE &&
+      !MO_WAITING
+    ) {
+
+      scheduleMO();
+
+    }
+
+  }
+
+
+  if (
+    MO_WAITING &&
+    millis() >=
+    MO_APPEAR_TIME
+  ) {
+
+    activateMO();
+
+  }
+
+
+  if (
+    !MO_ACTIVE
+  ) {
+
+    return;
+  }
+
+
+  float distance =
+    dist(
+      playerX,
+      playerY,
+      MO_X,
+      MO_Y
+    );
+
+
+  float playerRadius;
+
+
+  if (
+    ktScore >= 5
+  ) {
+
+    playerRadius =
+      max(
+        LAST_PLAYER_WIDTH,
+        LAST_PLAYER_HEIGHT
+      ) / 2.0;
+
+  } else {
+
+    playerRadius =
+      max(
+        PLAYER_WIDTH,
+        PLAYER_HEIGHT
+      ) / 2.0;
+
+  }
+
+
+  float moRadius =
+    max(
+      MO_WIDTH,
+      MO_HEIGHT
+    ) / 2.0;
+
+
+  float collisionDistance =
+    playerRadius +
+    moRadius -
+    15;
+
+
+  if (
+    distance <=
+    collisionDistance
+  ) {
+
+    removeKT();
+
+
+    MO_ACTIVE =
+      false;
+
+    MO_WAITING =
+      false;
+
+    MO_ALPHA =
+      0;
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    MO_START_TIME;
+
+
+  if (
+    elapsed >=
+    SPECIAL_VISIBLE_TIME
+  ) {
+
+    MO_ACTIVE =
+      false;
+
+    MO_WAITING =
+      false;
+
+    MO_ALPHA =
+      0;
+
+
+    if (
+      elapsedGame <
+      40
+    ) {
+
+      scheduleMO();
+
+    }
+  }
+}
+
+
+// ==========================================================
+// UPDATE V.K
+// ==========================================================
+
+void updateVK() {
+
+  int elapsedGame =
+    (
+      millis() -
+      startTime
+    ) / 1000;
+
+
+  if (
+    elapsedGame <
+    40
+  ) {
+
+    if (
+      !VK_ACTIVE &&
+      !VK_WAITING
+    ) {
+
+      scheduleVK();
+
+    }
+
+  }
+
+
+  if (
+    VK_WAITING &&
+    millis() >=
+    VK_APPEAR_TIME
+  ) {
+
+    activateVK();
+
+  }
+
+
+  if (
+    !VK_ACTIVE
+  ) {
+
+    return;
+  }
+
+
+  float distance =
+    dist(
+      playerX,
+      playerY,
+      VK_X,
+      VK_Y
+    );
+
+
+  float playerRadius;
+
+
+  if (
+    ktScore >= 5
+  ) {
+
+    playerRadius =
+      max(
+        LAST_PLAYER_WIDTH,
+        LAST_PLAYER_HEIGHT
+      ) / 2.0;
+
+  } else {
+
+    playerRadius =
+      max(
+        PLAYER_WIDTH,
+        PLAYER_HEIGHT
+      ) / 2.0;
+
+  }
+
+
+  float vkRadius =
+    max(
+      VK_WIDTH,
+      VK_HEIGHT
+    ) / 2.0;
+
+
+  float collisionDistance =
+    playerRadius +
+    vkRadius -
+    15;
+
+
+  if (
+    distance <=
+    collisionDistance
+  ) {
+
+    playerHitBlink = false;
+
+    playerGreenBlink = true;
+
+    playAudioClip(
+      greenBlinkSound
+    );
+
+    playerGreenBlinkStart =
+      millis();
+
+
+    VK_ACTIVE =
+      false;
+
+    VK_WAITING =
+      false;
+
+    VK_ALPHA =
+      0;
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    VK_START_TIME;
+
+
+  if (
+    elapsed >=
+    SPECIAL_VISIBLE_TIME
+  ) {
+
+    VK_ACTIVE =
+      false;
+
+    VK_WAITING =
+      false;
+
+    VK_ALPHA =
+      0;
+
+
+    addKT();
+
+
+    if (
+      gameOver
+    ) {
+
+      return;
+    }
+
+
+    if (
+      elapsedGame <
+      40
+    ) {
+
+      scheduleVK();
+
+    }
+  }
+}
+
+
+// ==========================================================
+// P.M 10% ROLL
+// ==========================================================
+
+void checkPMChance() {
+
+  if (
+    PM_ROLLED
+  ) {
+
+    return;
+  }
+
+
+  int elapsed =
+    (
+      millis() -
+      startTime
+    ) / 1000;
+
+
+  if (
+    elapsed < PM_START_TIME_LIMIT
+  ) {
+
+    return;
+  }
+
+
+  if (
+    elapsed >= PM_END_TIME_LIMIT
+  ) {
+
+    PM_ROLLED =
+      true;
+
+    return;
+  }
+
+
+  int roll =
+    int(
+      random(
+        100
+      )
+    );
+
+
+  PM_ROLLED =
+    true;
+
+
+  if (
+    roll <
+    PM_CHANCE_PERCENT
+  ) {
+
+    activatePM();
+
+  }
+}
+
+
+// ==========================================================
+// ACTIVATE P.M
+// ==========================================================
+
+void activatePM() {
+
+  PM_WAITING =
+    false;
+
+  PM_ACTIVE =
+    true;
+
+
+  PM_START_TIME =
+    millis();
+
+
+  PM_ALPHA =
+    0;
+
+
+  PM_X =
+    random(
+      90,
+      width - 90
+    );
+
+
+  PM_Y =
+    random(
+      120,
+      height - 80
+    );
+
+
+  playAudioClip(
+    angleSound
+  );
+
+
+  angleSoundPlaying =
+    true;
+}
+
+
+// ==========================================================
+// UPDATE P.M
+// ==========================================================
+
+void updatePM() {
+
+  int elapsedGame =
+    (
+      millis() -
+      startTime
+    ) / 1000;
+
+
+  if (
+    elapsedGame >=
+    PM_START_TIME_LIMIT &&
+    elapsedGame <
+    PM_END_TIME_LIMIT
+  ) {
+
+    checkPMChance();
+
+  }
+
+
+  if (
+    !PM_ACTIVE
+  ) {
+
+    return;
+  }
+
+
+  float distance =
+    dist(
+      playerX,
+      playerY,
+      PM_X,
+      PM_Y
+    );
+
+
+  float playerRadius;
+
+
+  if (
+    ktScore >= 5
+  ) {
+
+    playerRadius =
+      max(
+        LAST_PLAYER_WIDTH,
+        LAST_PLAYER_HEIGHT
+      ) / 2.0;
+
+  } else {
+
+    playerRadius =
+      max(
+        PLAYER_WIDTH,
+        PLAYER_HEIGHT
+      ) / 2.0;
+
+  }
+
+
+  float pmRadius =
+    max(
+      PM_WIDTH,
+      PM_HEIGHT
+    ) / 2.0;
+
+
+  float collisionDistance =
+    playerRadius +
+    pmRadius -
+    15;
+
+
+  if (
+    distance <=
+    collisionDistance
+  ) {
+
+    resetAllKT();
+
+
+    PM_ACTIVE =
+      false;
+
+    PM_WAITING =
+      false;
+
+    PM_ALPHA =
+      0;
+
+
+    stopAudioClip(
+      angleSound
+    );
+
+    angleSoundPlaying =
+      false;
+
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    PM_START_TIME;
+
+
+  if (
+    elapsed >=
+    SPECIAL_VISIBLE_TIME
+  ) {
+
+    PM_ACTIVE =
+      false;
+
+    PM_WAITING =
+      false;
+
+    PM_ALPHA =
+      0;
+
+
+    stopAudioClip(
+      angleSound
+    );
+
+    angleSoundPlaying =
+      false;
+  }
+}
+
+
+// ==========================================================
+// SPECIAL CHARACTER ALPHA
+// ==========================================================
+
+float getSpecialAlpha(
+  int elapsed
+) {
+
+  if (
+    elapsed <
+    SPECIAL_FADE_TIME
+  ) {
+
+    return map(
+      elapsed,
+      0,
+      SPECIAL_FADE_TIME,
+      0,
+      255
+    );
+  }
+
+
+  int blinkStart =
+    SPECIAL_VISIBLE_TIME -
+    (
+      SPECIAL_BLINK_COUNT *
+      SPECIAL_BLINK_TIME *
+      2
+    );
+
+
+  if (
+    elapsed <
+    blinkStart
+  ) {
+
+    return 255;
+  }
+
+
+  int blinkElapsed =
+    elapsed -
+    blinkStart;
+
+
+  int phase =
+    blinkElapsed /
+    SPECIAL_BLINK_TIME;
+
+
+  if (
+    phase % 2 == 0
+  ) {
+
+    return 255;
+  }
+
+
+  return 0;
+}
+
+
+// ==========================================================
+// DRAW M.O
+// ==========================================================
+
+void drawMO() {
+
+  if (
+    MO_IMAGE == null
+  ) {
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    MO_START_TIME;
+
+
+  MO_ALPHA =
+    getSpecialAlpha(
+      elapsed
+    );
+
+
+  imageMode(CENTER);
+
+
+  tint(
+    255,
+    MO_ALPHA
+  );
+
+
+  image(
+    MO_IMAGE,
+    MO_X,
+    MO_Y,
+    MO_WIDTH,
+    MO_HEIGHT
+  );
+
+
+  noTint();
+
+
+  imageMode(CORNER);
+
+
+  drawDialogue(
+    MO_X,
+    MO_Y,
+    MO_DIALOGUE,
+    MO_ALPHA
+  );
+}
+
+
+// ==========================================================
+// DRAW V.K
+// ==========================================================
+
+void drawVK() {
+
+  if (
+    VK_IMAGE == null
+  ) {
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    VK_START_TIME;
+
+
+  VK_ALPHA =
+    getSpecialAlpha(
+      elapsed
+    );
+
+
+  imageMode(CENTER);
+
+
+  tint(
+    255,
+    VK_ALPHA
+  );
+
+
+  image(
+    VK_IMAGE,
+    VK_X,
+    VK_Y,
+    VK_WIDTH,
+    VK_HEIGHT
+  );
+
+
+  noTint();
+
+
+  imageMode(CORNER);
+
+
+  drawDialogue(
+    VK_X,
+    VK_Y,
+    VK_DIALOGUE,
+    VK_ALPHA
+  );
+}
+
+
+// ==========================================================
+// DRAW P.M
+// ==========================================================
+
+void drawPM() {
+
+  if (
+    PM_IMAGE == null
+  ) {
+
+    return;
+  }
+
+
+  int elapsed =
+    millis() -
+    PM_START_TIME;
+
+
+  PM_ALPHA =
+    getSpecialAlpha(
+      elapsed
+    );
+
+
+  imageMode(CENTER);
+
+
+  tint(
+    255,
+    PM_ALPHA
+  );
+
+
+  image(
+    PM_IMAGE,
+    PM_X,
+    PM_Y,
+    PM_WIDTH,
+    PM_HEIGHT
+  );
+
+
+  noTint();
+
+
+  imageMode(CORNER);
+
+
+  drawDialogue(
+    PM_X,
+    PM_Y,
+    PM_DIALOGUE,
+    PM_ALPHA
+  );
+}
+
+
+// ==========================================================
+// DIALOGUE BOX
+// ==========================================================
+
+void drawDialogue(
+  float x,
+  float y,
+  String message,
+  float alpha
+) {
+
+  float boxY =
+    y - 70;
+
+
+  rectMode(CENTER);
+
+
+  fill(
+    255,
+    alpha
+  );
+
+
+  stroke(
+    0,
+    alpha
+  );
+
+
+  strokeWeight(2);
+
+
+  rect(
+    x,
+    boxY,
+    190,
+    50,
+    8
+  );
+
+
+  fill(
+    0,
+    alpha
+  );
+
+
+  textAlign(
+    CENTER,
+    CENTER
+  );
+
+
+  textSize(19);
+
+
+  text(
+    message,
+    x,
+    boxY
+  );
+
+
+  rectMode(CORNER);
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+}
+
+
+// ==========================================================
+// SERIAL EVENT
+// ==========================================================
+
+void serialEvent(
+  Serial port
+) {
+
+  String data =
+    port.readStringUntil(
+      '\n'
+    );
+
+
+  if (
+    data == null
+  ) {
+
+    return;
+  }
+
+
+  data =
+    trim(data);
+
+
+  if (
+    data.length() == 0
+  ) {
+
+    return;
+  }
+
+
+  String[] values =
+    split(
+      data,
+      ','
+    );
+
+
+  if (
+    values.length >= 2
+  ) {
+
+    try {
+
+      joystickX =
+        int(
+          trim(
+            values[0]
+          )
+        );
+
+
+      joystickY =
+        int(
+          trim(
+            values[1]
+          )
+        );
+
+
+      if (
+        values.length >= 3
+      ) {
+
+        joystickButton =
+          int(
+            trim(
+              values[2]
+            )
+          );
+
+      }
+
+    }
+
+    catch (
+      Exception e
+    ) {
+
+      println(
+        "Invalid Arduino data: " +
+        data
+      );
+
+    }
+  }
+}
+
+
+// ==========================================================
+// START / RESTART GAME
+// ==========================================================
+
+void startGame() {
+
+  startScreen = true;
+
+  disclaimerScreen = false;
+
+  characterInfo7Screen = false;
+
+  characterInfo8Screen = false;
+
+  characterInfo9Screen = false;
+
+  gameOver = false;
+
+  winScreen = false;
+
+
+  defeatSoundPlayed = false;
+
+  victorySoundPlayed = false;
+
+  drumRollStarted = false;
+
+  bgSoundPlaying = false;
+
+  angleSoundPlaying = false;
+
+
+  // --------------------------------------------------------
+  // STOP AUDIO
+  // --------------------------------------------------------
+
+  stopAudioClip(
+    victorySound
+  );
+
+  stopAudioClip(
+    defeatSound
+  );
+
+  stopAudioClip(
+    bgSound
+  );
+
+  stopAudioClip(
+    angleSound
+  );
+
+
+  // --------------------------------------------------------
+  // RESET KT
+  // --------------------------------------------------------
+
+  ktScore = 0;
+
+
+  playerX =
+    width / 2;
+
+
+  playerY =
+    height / 2;
+
+
+  missileSpeed =
+    STARTING_MISSILE_SPEED;
+
+
+  spawnInterval =
+    STARTING_SPAWN_INTERVAL;
+
+
+  difficultyLevel =
+    1;
+
+
+  missiles.clear();
+
+
+  // --------------------------------------------------------
+  // RESET M.O
+  // --------------------------------------------------------
+
+  MO_ACTIVE =
+    false;
+
+  MO_WAITING =
+    false;
+
+  MO_ALPHA =
+    0;
+
+
+  // --------------------------------------------------------
+  // RESET V.K
+  // --------------------------------------------------------
+
+  VK_ACTIVE =
+    false;
+
+  VK_WAITING =
+    false;
+
+  VK_ALPHA =
+    0;
+
+
+  // --------------------------------------------------------
+  // RESET P.M
+  // --------------------------------------------------------
+
+  PM_ACTIVE =
+    false;
+
+  PM_WAITING =
+    false;
+
+  PM_ROLLED =
+    false;
+
+  PM_ALPHA =
+    0;
+
+
+  playerHitBlink =
+    false;
+
+  playerGreenBlink =
+    false;
+
+
+  startTime =
+    0;
+
+
+  finalTime =
+    0;
+
+
+  lastSpawnTime =
+    millis();
+}
+
+
+// ==========================================================
+// GAME OVER / DEFEAT PAGE
+// ==========================================================
+
+void drawGameOver() {
+
+  background(0);
+
+
+  textAlign(
+    CENTER,
+    CENTER
+  );
+
+
+  // ========================================================
+  // TOP LABEL
+  // ========================================================
+
+  fill(130);
+
+  textSize(15);
+
+
+  text(
+    "SSD // ACADEMIC STATUS",
+    width / 2,
+    55
+  );
+
+
+  // ========================================================
+  // GOLDEN K.T
+  // ========================================================
+
+  fill(
+    255,
+    0,
+    0
+  );
+
+
+  textSize(54);
+
+
+  text(
+    "Golden K.T",
+    width / 2,
+    125
+  );
+
+
+  // ========================================================
+  // DIVIDER
+  // ========================================================
+
+  stroke(
+    255,
+    0,
+    0
+  );
+
+
+  strokeWeight(2);
+
+
+  line(
+    100,
+    170,
+    500,
+    170
+  );
+
+
+  noStroke();
+
+
+  // ========================================================
+  // FAILED SUBJECTS
+  // ========================================================
+
+  int failedSubjects =
+    ktScore;
+
+
+  fill(
+    255,
+    0,
+    0
+  );
+
+
+  textSize(34);
+
+
+  text(
+    "YOU FAILED",
+    width / 2,
+    225
+  );
+
+
+  textSize(60);
+
+
+  text(
+    failedSubjects,
+    width / 2,
+    290
+  );
+
+
+  fill(220);
+
+
+  textSize(20);
+
+
+  text(
+    "SUBJECTS",
+    width / 2,
+    330
+  );
+
+
+  // ========================================================
+  // SSD
+  // ========================================================
+
+  fill(
+    255,
+    0,
+    0
+  );
+
+
+  textSize(25);
+
+
+  text(
+    "in SSD",
+    width / 2,
+    375
+  );
+
+
+  // ========================================================
+  // SEMESTERS
+  // ========================================================
+
+  int survivedSemesters =
+    min(
+      8,
+      int(
+        finalTime /
+        (DEGREE_TIME / 8.0)
+      )
+    );
+
+
+  fill(190);
+
+
+  textSize(18);
+
+
+  text(
+    "SURVIVAL",
+    width / 2,
+    425
+  );
+
+
+  fill(255);
+
+
+  textSize(27);
+
+
+  text(
+    survivedSemesters +
+    " SEMESTERS",
+    width / 2,
+    460
+  );
+
+
+  // ========================================================
+  // RESTART
+  // ========================================================
+
+  fill(
+    255,
+    0,
+    0
+  );
+
+
+  textSize(18);
+
+
+  text(
+    "Pay your fees again to restart",
+    width / 2,
+    535
+  );
+
+
+  textAlign(
+    LEFT,
+    BASELINE
+  );
+}
+
+
+// ==========================================================
+// MISSILE CLASS
+// ==========================================================
+
+class Missile {
+
+  float x;
+  float y;
+
+  float vx;
+  float vy;
+
+  boolean chasing =
+    false;
+
+
+  // --------------------------------------------------------
+  // CONSTRUCTOR
+  // --------------------------------------------------------
+
+  Missile() {
+
+    int side =
+      int(
+        random(4)
+      );
+
+
+    if (
+      side == 0
+    ) {
+
+      x =
+        random(width);
+
+      y =
+        -100;
+
+    }
+
+
+    else if (
+      side == 1
+    ) {
+
+      x =
+        width + 100;
+
+      y =
+        random(height);
+
+    }
+
+
+    else if (
+      side == 2
+    ) {
+
+      x =
+        random(width);
+
+      y =
+        height + 100;
+
+    }
+
+
+    else {
+
+      x =
+        -100;
+
+      y =
+        random(height);
+
+    }
+
+
+    float angle =
+      atan2(
+        playerY - y,
+        playerX - x
+      );
+
+
+    vx =
+      cos(angle) *
+      missileSpeed;
+
+
+    vy =
+      sin(angle) *
+      missileSpeed;
+
+
+    int elapsed =
+      (
+        millis() -
+        startTime
+      ) / 1000;
+
+
+    if (
+      elapsed >=
+      CHASE_START &&
+      elapsed <
+      CHASE_START +
+      CHASE_DURATION
+    ) {
+
+      chasing =
+        true;
+
+    } else {
+
+      chasing =
+        false;
+
+    }
+  }
+
+
+  // --------------------------------------------------------
+  // UPDATE
+  // --------------------------------------------------------
+
+  void update() {
+
+    int elapsed =
+      (
+        millis() -
+        startTime
+      ) / 1000;
+
+
+    if (
+      elapsed >=
+      CHASE_START &&
+      elapsed <
+      CHASE_START +
+      CHASE_DURATION
+    ) {
+
+      chasing =
+        true;
+
+    } else {
+
+      chasing =
+        false;
+
+    }
+
+
+    if (
+      chasing
+    ) {
+
+      float dx =
+        playerX -
+        x;
+
+
+      float dy =
+        playerY -
+        y;
+
+
+      float distance =
+        sqrt(
+          dx * dx +
+          dy * dy
+        );
+
+
+      if (
+        distance > 0
+      ) {
+
+        float targetVX =
+          (
+            dx /
+            distance
+          ) *
+          missileSpeed *
+          CHASE_SPEED_MULTIPLIER;
+
+
+        float targetVY =
+          (
+            dy /
+            distance
+          ) *
+          missileSpeed *
+          CHASE_SPEED_MULTIPLIER;
+
+
+        vx =
+          lerp(
+            vx,
+            targetVX,
+            CHASE_TURN_SPEED
+          );
+
+
+        vy =
+          lerp(
+            vy,
+            targetVY,
+            CHASE_TURN_SPEED
+          );
+
+      }
+
+
+    } else {
+
+      float currentSpeed =
+        sqrt(
+          vx * vx +
+          vy * vy
+        );
+
+
+      if (
+        currentSpeed > 0
+      ) {
+
+        vx =
+          (
+            vx /
+            currentSpeed
+          ) *
+          missileSpeed;
+
+
+        vy =
+          (
+            vy /
+            currentSpeed
+          ) *
+          missileSpeed;
+
+      }
+    }
+
+
+    x += vx;
+
+    y += vy;
+  }
+
+
+  // --------------------------------------------------------
+  // DISPLAY
+  // --------------------------------------------------------
+
+  void display() {
+
+    if (
+      MISSILE_IMAGE == null
+    ) {
+
+      return;
+    }
+
+
+    pushMatrix();
+
+
+    translate(
+      x,
+      y
+    );
+
+
+    float angle =
+      atan2(
+        vy,
+        vx
+      );
+
+
+    rotate(
+      angle +
+      PI
+    );
+
+
+    imageMode(CENTER);
+
+
+    image(
+      MISSILE_IMAGE,
+      0,
+      0,
+      100,
+      60
+    );
+
+
+    imageMode(CORNER);
+
+
+    popMatrix();
+  }
+
+
+  // --------------------------------------------------------
+  // COLLISION
+  // --------------------------------------------------------
+
+  boolean hitsPlayer() {
+
+    float distance =
+      dist(
+        x,
+        y,
+        playerX,
+        playerY
+      );
+
+
+    float playerCollision;
+
+
+    if (
+      ktScore >= 5
+    ) {
+
+      playerCollision =
+        35;
+
+    } else {
+
+      playerCollision =
+        30;
+
+    }
+
+
+    return
+      distance <
+      playerCollision +
+      30;
+  }
+}
