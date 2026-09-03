@@ -1,183 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Surviving SSD — Emergent Tech</title>
 
+    <!-- Main website stylesheet -->
     <link rel="stylesheet" href="/unfinished-business/style.css">
 </head>
 
 <body>
 
+    <!-- HEADER -->
     <header class="site-header">
 
-        <div class="site-logo">
-            UNFINISHED<br>
-            COOL STUFF
+        <div class="site-title">
+            <a href="/unfinished-business/">UNFINISHED COOL STUFF</a>
         </div>
 
-        <nav class="main-nav">
-            <a href="../../../index.html">HOME</a>
-            <a href="../">EMERGENT TECH</a>
+        <nav class="site-nav">
+            <a href="/unfinished-business/">ARCHIVE</a>
         </nav>
-
-        <div class="site-meta">
-            PROJECT 001<br>
-            EXPERIMENT 001
-        </div>
 
     </header>
 
 
+    <!-- MAIN CONTENT -->
     <main>
 
-        <section class="hero">
+        <!-- PROJECT INTRO -->
+        <section class="project-hero">
 
-            <div class="hero-label">
-                EMERGENT TECH / EXPERIMENT 001
+            <div class="project-number">
+                001 / EMERGENT TECH
             </div>
 
-            <h1>
-                SURVIVING<br>
-                <span>SSD</span>
-            </h1>
+            <h1>SURVIVING SSD</h1>
 
-            <div class="hero-bottom">
+            <p class="project-description">
+                A small experimental game made in Processing.
+                Survive incoming threats, react quickly, and try not
+                to destroy your SSD.
+            </p>
 
-                <p>
-                    An experimental project archived as part
-                    of the Emergent Tech collection.
-                </p>
+        </section>
 
-                <div class="hero-number">
-                    001 / 001
-                </div>
 
+        <!-- PROJECT INFORMATION -->
+        <section class="project-info">
+
+            <div class="info-row">
+                <span>PROJECT</span>
+                <span>Surviving SSD</span>
+            </div>
+
+            <div class="info-row">
+                <span>PARENT PROJECT</span>
+                <span>Emergent Tech</span>
+            </div>
+
+            <div class="info-row">
+                <span>FORMAT</span>
+                <span>Processing / Java</span>
+            </div>
+
+            <div class="info-row">
+                <span>STATUS</span>
+                <span>UNFINISHED</span>
             </div>
 
         </section>
 
 
-        <section class="about-section">
+        <!-- FILES -->
+        <section class="project-section">
 
-            <div class="section-number">
-                01 / ARCHIVE
+            <div class="section-label">
+                02 / SOURCE FILES
             </div>
 
-            <div class="about-content">
-
-                <h2>
-                    PROJECT<br>
-                    FILES.
-                </h2>
-
-                <p>
-                    This page is currently an archive for the
-                    original Surviving SSD project files.
-                </p>
-
-                <p>
-                    Browser playback and interactive versions
-                    can be added later.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <section class="archive-section">
-
-            <div class="section-header">
-
-                <div class="section-number">
-                    02 / FILES
-                </div>
-
-                <div class="section-description">
-                    ORIGINAL PROJECT FILES
-                </div>
-
-            </div>
-
-
-            <div class="project-list">
+            <div class="file-list">
 
                 <a
-                    class="project"
+                    class="file-row"
                     href="Character.pde"
-                    download
+                    target="_blank"
                 >
-
-                    <div class="project-number">
-                        01
-                    </div>
-
-                    <div class="project-title">
-                        CHARACTER.PDE
-                    </div>
-
-                    <div class="project-type">
-                        PROCESSING
-                    </div>
-
-                    <div class="project-arrow">
-                        ↓
-                    </div>
-
+                    <span>CHARACTER.PDE</span>
+                    <span>PROCESSING SOURCE</span>
                 </a>
 
-
                 <a
-                    class="project"
+                    class="file-row"
                     href="Game%20Code.txt"
-                    download
+                    target="_blank"
                 >
-
-                    <div class="project-number">
-                        02
-                    </div>
-
-                    <div class="project-title">
-                        GAME CODE
-                    </div>
-
-                    <div class="project-type">
-                        TEXT
-                    </div>
-
-                    <div class="project-arrow">
-                        ↓
-                    </div>
-
+                    <span>GAME CODE.TXT</span>
+                    <span>SOURCE NOTES</span>
                 </a>
 
-
                 <a
-                    class="project"
+                    class="file-row"
                     href="GameCodeWithAudio.txt"
-                    download
+                    target="_blank"
                 >
-
-                    <div class="project-number">
-                        03
-                    </div>
-
-                    <div class="project-title">
-                        GAME CODE + AUDIO
-                    </div>
-
-                    <div class="project-type">
-                        TEXT
-                    </div>
-
-                    <div class="project-arrow">
-                        ↓
-                    </div>
-
+                    <span>GAMECODEWITHAUDIO.TXT</span>
+                    <span>SOURCE NOTES</span>
                 </a>
 
             </div>
@@ -185,39 +114,56 @@
         </section>
 
 
-        <section class="statement-section">
+        <!-- DATA FOLDER -->
+        <section class="project-section">
 
-            <div class="statement-mark">
-                *
+            <div class="section-label">
+                03 / ASSETS
             </div>
 
-            <h2>
-                MORE TO COME.
-            </h2>
+            <div class="file-list">
+
+                <a
+                    class="file-row"
+                    href="data/"
+                >
+                    <span>DATA</span>
+                    <span>23 ASSETS / FOLDER →</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTE -->
+        <section class="project-section">
+
+            <div class="section-label">
+                04 / NOTE
+            </div>
+
+            <p class="project-note">
+                This project was originally created in Processing.
+                The original source files and supporting assets are
+                preserved here as part of the archive.
+            </p>
 
         </section>
 
     </main>
 
 
+    <!-- FOOTER -->
     <footer class="site-footer">
 
-        <div>
-            <a href="../">
-                ← BACK TO EMERGENT TECH
-            </a>
-        </div>
+        <span>UNFINISHED COOL STUFF</span>
 
-        <div>
-            SURVIVING SSD
-        </div>
-
-        <div>
-            UNFINISHED COOL STUFF
-        </div>
+        <a href="/unfinished-business/">
+            BACK TO ARCHIVE ↑
+        </a>
 
     </footer>
 
 </body>
-
 </html>
