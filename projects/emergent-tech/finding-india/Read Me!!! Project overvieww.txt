@@ -1,0 +1,11 @@
+# 🌊 Finding India
+
+A fun, chaotic **Columbus exploration game** where you cruise a ridiculously zoomed-in world map, trying to figure out where you are while surviving the dangers of the sea.
+
+Your mission is simple:
+
+**Find India → Get the spices → Make it back to Europe.**
+
+Along the way, expect storms, navigation disasters, weird encounters, unexpected dangers, and **hilarious ways to completely mess up your voyage.**
+
+🧭 **Explore. Navigate. Survive. Get the spices. Don't get lost.**
