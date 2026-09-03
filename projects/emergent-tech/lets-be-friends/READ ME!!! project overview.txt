@@ -1,0 +1,21 @@
+PROJECT: Lets be Friends!
+
+A fun, creepy game about how companies collect our data and use it to build digital versions of us.
+
+You face your own Digital Replica — an AI that watches your face, movements and reactions. The more it learns, the more unsettling it becomes. 😈
+
+CURRENT PROGRESS 🚧
+• Live camera + face tracking
+• 478-point facial landmark tracking
+• Smile & movement detection
+• Hand tracking + automatic wave detection
+• Digital Replica system
+• Retro 1990s computer interface
+
+FUTURE 🔮
+More reactions, glitches, sound effects, challenges, data-themed gameplay and a final reveal showing just how much of "you" companies can build from your data.
+
+THE GOAL:
+Make you laugh at first...
+
+...then make you wonder how much of your digital self is already out there. 👁️
