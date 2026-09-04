@@ -201,6 +201,23 @@ p {
     position: relative;
 }
 
+.hero-bottom::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center center;
+    background-size: auto var(--pattern-height);
+}
+
 .hero-bottom p {
     max-width: 420px;
 
