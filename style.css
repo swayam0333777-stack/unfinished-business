@@ -319,6 +319,24 @@ p {
     position: relative;
 }
 
+/* Small pattern separator over ARCHIVE heading */
+
+.archive-section::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 8px;
+
+    background-image: url("assets/pattern-list.png");
+    background-repeat: repeat-x;
+    background-position: center center;
+    background-size: auto 8px;
+}
 
 /* Small pattern separator under ARCHIVE heading */
 
