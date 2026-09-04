@@ -34,6 +34,30 @@ p {
 
 
 /* =========================================================
+   PATTERN
+========================================================= */
+
+/*
+   Pattern image:
+   /assets/pattern-strip.png
+
+   The image is used as a repeating horizontal separator
+   instead of the old thin blue horizontal borders.
+*/
+
+:root {
+    --pattern-height: 18px;
+}
+
+.pattern-separator {
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
+}
+
+
+/* =========================================================
    HEADER
 ========================================================= */
 
@@ -45,9 +69,26 @@ p {
 
     align-items: center;
 
-    border-bottom: 1px solid #1234d8;
-
     padding: 18px 24px;
+
+    position: relative;
+}
+
+.site-header::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .site-logo {
@@ -90,13 +131,30 @@ p {
 .hero {
     min-height: 720px;
 
-    padding: 40px 24px 30px;
+    padding: 40px 24px 48px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    border-bottom: 1px solid #1234d8;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .hero-label {
@@ -131,21 +189,42 @@ p {
 
     align-items: end;
 
-    border-top: 1px solid #1234d8;
-
     padding-top: 18px;
+
+    position: relative;
+}
+
+.hero-bottom::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .hero-bottom p {
     max-width: 420px;
 
     font-size: 16px;
+
+    padding-top: 22px;
 }
 
 .hero-number {
     font-family: "Courier New", monospace;
 
     font-size: 13px;
+
+    padding-top: 22px;
 }
 
 
@@ -158,9 +237,26 @@ p {
 
     grid-template-columns: 25% 75%;
 
-    border-bottom: 1px solid #1234d8;
-
     min-height: 500px;
+
+    position: relative;
+}
+
+.about-section::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .section-number {
@@ -174,7 +270,7 @@ p {
 .about-content {
     border-left: 1px solid #1234d8;
 
-    padding: 70px 8vw 70px 5vw;
+    padding: 70px 8vw 90px 5vw;
 }
 
 .about-content h2 {
@@ -205,7 +301,24 @@ p {
 ========================================================= */
 
 .archive-section {
-    border-bottom: 1px solid #1234d8;
+    position: relative;
+}
+
+.archive-section::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .section-header {
@@ -213,11 +326,30 @@ p {
 
     grid-template-columns: 25% 75%;
 
-    border-bottom: 1px solid #1234d8;
+    position: relative;
+}
+
+.section-header::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .section-header .section-number {
     border-right: 1px solid #1234d8;
+
+    padding-bottom: calc(22px + var(--pattern-height));
 }
 
 .section-description {
@@ -225,7 +357,7 @@ p {
 
     font-size: 12px;
 
-    padding: 22px 24px;
+    padding: 22px 24px calc(22px + var(--pattern-height));
 }
 
 
@@ -248,15 +380,28 @@ p {
 
     padding: 0 24px;
 
-    border-bottom: 1px solid #1234d8;
+    position: relative;
 
     transition:
         background 0.2s ease,
         color 0.2s ease;
 }
 
-.project:last-child {
-    border-bottom: none;
+.project:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .project:hover {
@@ -302,7 +447,7 @@ p {
 .statement-section {
     min-height: 600px;
 
-    padding: 70px 24px;
+    padding: 70px 24px 88px;
 
     display: flex;
 
@@ -310,7 +455,24 @@ p {
 
     justify-content: space-between;
 
-    border-bottom: 1px solid #1234d8;
+    position: relative;
+}
+
+.statement-section::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .statement-mark {
@@ -371,13 +533,30 @@ p {
 .project-hero {
     min-height: 520px;
 
-    padding: 40px 24px 50px;
+    padding: 40px 24px 68px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    border-bottom: 1px solid #1234d8;
+    position: relative;
+}
+
+.project-hero::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .project-hero .project-number {
@@ -416,7 +595,7 @@ p {
 ========================================================= */
 
 .project-info {
-    border-bottom: 1px solid #1234d8;
+    position: relative;
 }
 
 .info-row {
@@ -428,13 +607,26 @@ p {
 
     align-items: center;
 
-    border-bottom: 1px solid #1234d8;
-
     padding: 0 24px;
+
+    position: relative;
 }
 
-.info-row:last-child {
-    border-bottom: none;
+.info-row:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .info-row span:first-child {
@@ -457,9 +649,26 @@ p {
 
     grid-template-columns: 25% 75%;
 
-    border-bottom: 1px solid #1234d8;
-
     min-height: 250px;
+
+    position: relative;
+}
+
+.project-section::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .section-label {
@@ -474,7 +683,7 @@ p {
 
 .project-section > p,
 .project-note {
-    padding: 60px 8vw 60px 5vw;
+    padding: 60px 8vw 78px 5vw;
 
     max-width: 800px;
 
@@ -503,15 +712,28 @@ p {
 
     padding: 20px 24px;
 
-    border-bottom: 1px solid #1234d8;
+    position: relative;
 
     transition:
         background 0.2s ease,
         color 0.2s ease;
 }
 
-.file-row:last-child {
-    border-bottom: none;
+.file-row:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--pattern-height);
+
+    background-image: url("assets/pattern-strip.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: auto var(--pattern-height);
 }
 
 .file-row:hover {
@@ -553,10 +775,19 @@ p {
 
 @media (max-width: 700px) {
 
+    :root {
+        --pattern-height: 16px;
+    }
+
+
+    /* HEADER */
+
     .site-header {
         grid-template-columns: 1fr auto;
 
         gap: 20px;
+
+        padding-bottom: 36px;
     }
 
     .site-meta {
@@ -567,10 +798,13 @@ p {
         gap: 15px;
     }
 
+
+    /* HERO */
+
     .hero {
         min-height: 600px;
 
-        padding: 30px 18px 20px;
+        padding: 30px 18px 46px;
     }
 
     .hero h1 {
@@ -589,25 +823,62 @@ p {
         gap: 20px;
     }
 
+
+    /* ABOUT */
+
     .about-section {
         grid-template-columns: 1fr;
+
+        padding-bottom: 40px;
     }
 
     .about-content {
         border-left: none;
 
-        border-top: 1px solid #1234d8;
+        padding: 50px 24px 70px;
 
-        padding: 50px 24px;
+        position: relative;
     }
+
+    .about-content::before {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        top: 0;
+
+        height: var(--pattern-height);
+
+        background-image: url("assets/pattern-strip.png");
+        background-repeat: repeat-x;
+        background-position: center;
+        background-size: auto var(--pattern-height);
+    }
+
+
+    /* ARCHIVE */
 
     .section-header {
         grid-template-columns: 1fr;
+
+        padding-bottom: var(--pattern-height);
     }
 
     .section-header .section-number {
         border-right: none;
+
+        padding-bottom: 22px;
     }
+
+    .section-description {
+        padding-top: 0;
+        padding-bottom: 22px;
+    }
+
+
+    /* PROJECTS */
 
     .project {
         grid-template-columns: 45px 1fr 35px;
@@ -625,11 +896,17 @@ p {
         font-size: 9vw;
     }
 
+
+    /* STATEMENT */
+
     .statement-section {
         min-height: 500px;
 
-        padding: 50px 18px;
+        padding: 50px 18px 66px;
     }
+
+
+    /* FOOTER */
 
     .site-footer {
         grid-template-columns: 1fr;
@@ -645,12 +922,14 @@ p {
     }
 
 
-    /* PROJECT PAGES */
+    /* =====================================================
+       PROJECT PAGES
+    ===================================================== */
 
     .project-hero {
         min-height: 500px;
 
-        padding: 30px 18px 40px;
+        padding: 30px 18px 56px;
     }
 
     .project-hero h1 {
@@ -680,14 +959,33 @@ p {
     .section-label {
         border-right: none;
 
-        border-bottom: 1px solid #1234d8;
-
         padding: 18px;
+
+        position: relative;
+
+        padding-bottom: 34px;
+    }
+
+    .section-label::after {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        height: var(--pattern-height);
+
+        background-image: url("assets/pattern-strip.png");
+        background-repeat: repeat-x;
+        background-position: center;
+        background-size: auto var(--pattern-height);
     }
 
     .project-section > p,
     .project-note {
-        padding: 40px 18px;
+        padding: 40px 18px 56px;
 
         font-size: 16px;
     }
