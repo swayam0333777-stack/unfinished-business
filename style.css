@@ -405,12 +405,12 @@ p {
     right: 0;
     bottom: 0;
 
-    height: var(--pattern-height);
+    height: 8px;
 
-    background-image: url("assets/pattern-strip.png");
+    background-image: url("assets/pattern-list.png");
     background-repeat: repeat-x;
     background-position: center center;
-    background-size: auto var(--pattern-height);
+    background-size: auto 8px;
 }
 
 .project:hover {
