@@ -232,23 +232,6 @@ p {
     position: relative;
 }
 
-.about-section::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: var(--pattern-height);
-
-    background-image: url("assets/pattern-strip.png");
-    background-repeat: repeat-x;
-    background-position: center center;
-    background-size: auto var(--pattern-height);
-}
-
 .section-number {
     font-family: "Courier New", monospace;
 
