@@ -147,6 +147,9 @@ p {
     position: relative;
 }
 
+
+/* Bottom strip of the hero */
+
 .hero::after {
     content: "";
 
@@ -164,12 +167,77 @@ p {
     background-size: auto var(--pattern-height);
 }
 
+
 .hero-label {
     font-family: "Courier New", monospace;
 
     font-size: 12px;
     letter-spacing: 0.05em;
 }
+
+
+/* =========================================================
+   HERO STATISTICS
+========================================================= */
+
+.hero-stats {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: auto 0;
+
+    position: relative;
+}
+
+.hero-stat-labels {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.hero-stat-labels div:first-child {
+    text-align: left;
+}
+
+.hero-stat-labels div:last-child {
+    text-align: right;
+}
+
+.hero-stat-numbers {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(140px, 18vw, 280px);
+
+    line-height: 0.8;
+
+    letter-spacing: -0.07em;
+}
+
+.hero-stat-numbers div:first-child {
+    text-align: left;
+}
+
+.hero-stat-numbers div:last-child {
+    text-align: right;
+}
+
+
+/* =========================================================
+   OLD HERO H1
+========================================================= */
 
 .hero h1 {
     font-family: Georgia, "Times New Roman", serif;
@@ -189,6 +257,11 @@ p {
     margin-left: 12vw;
 }
 
+
+/* =========================================================
+   HERO BOTTOM
+========================================================= */
+
 .hero-bottom {
     display: flex;
 
@@ -200,6 +273,9 @@ p {
 
     position: relative;
 }
+
+
+/* Restored strip above the description */
 
 .hero-bottom::before {
     content: "";
@@ -827,6 +903,30 @@ p {
         padding: 30px 18px 42px;
     }
 
+
+    /* HERO STATISTICS */
+
+    .hero-stats {
+        width: 100%;
+
+        margin: auto 0;
+    }
+
+    .hero-stat-labels {
+        font-size: 12px;
+    }
+
+    .hero-stat-numbers {
+        font-size: clamp(90px, 24vw, 170px);
+
+        line-height: 0.82;
+
+        letter-spacing: -0.07em;
+    }
+
+
+    /* OLD HERO H1 */
+
     .hero h1 {
         font-size: 20vw;
     }
@@ -835,12 +935,20 @@ p {
         margin-left: 5vw;
     }
 
+
+    /* HERO BOTTOM */
+
     .hero-bottom {
         flex-direction: column;
 
         align-items: flex-start;
 
         gap: 20px;
+    }
+
+    .hero-bottom::before {
+        left: -18px;
+        right: -18px;
     }
 
 
