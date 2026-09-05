@@ -174,15 +174,15 @@ p {
 .hero h1 {
     font-family: Georgia, "Times New Roman", serif;
 
-    font-size: clamp(55px, 8vw, 120px);
+    font-size: clamp(55px, 7vw, 120px);
 
-    line-height: 0.78;
+    line-height: 0.88;
 
-    letter-spacing: -0.07em;
+    letter-spacing: -0.06em;
 
     font-weight: normal;
 
-    max-width: 1200px;
+    max-width: 1400px;
 }
 
 .hero h1 span {
