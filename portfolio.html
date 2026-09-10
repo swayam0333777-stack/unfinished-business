@@ -17,6 +17,7 @@
         :root {
             --cream: #f4f0e6;
             --blue: #1234d8;
+            --black: #111111;
         }
 
 
@@ -44,9 +45,13 @@
         }
 
 
+        body.modal-open {
+            overflow: hidden;
+        }
+
+
         a {
             color: inherit;
-
             text-decoration: none;
         }
 
@@ -164,7 +169,7 @@
 
             font-size: 13px;
 
-            margin-bottom: 55px;
+            margin-bottom: 50px;
 
         }
 
@@ -173,7 +178,7 @@
 
             margin: 0;
 
-            max-width: 1100px;
+            max-width: 1200px;
 
             font-size:
                 clamp(
@@ -209,7 +214,7 @@
 
         .intro-text {
 
-            max-width: 600px;
+            max-width: 620px;
 
             font-family:
                 "Courier New",
@@ -239,19 +244,13 @@
 
 
         /* =========================
-           FEED
+           ARCHIVE
         ========================= */
 
-        .feed {
-
-            width: 100%;
-
-            max-width: 1100px;
-
-            margin: 0 auto;
+        .archive {
 
             padding:
-                50px
+                40px
                 24px
                 100px;
 
@@ -259,15 +258,20 @@
 
 
         /* =========================
-           YEAR MARKER
+           YEAR
         ========================= */
 
         .year-marker {
 
+            margin-top: 55px;
+
             padding:
-                60px
                 0
-                25px;
+                0
+                16px;
+
+            border-bottom:
+                1px solid var(--blue);
 
             display: flex;
 
@@ -277,15 +281,12 @@
             align-items:
                 baseline;
 
-            border-bottom:
-                1px solid var(--blue);
-
         }
 
 
         .year-marker:first-child {
 
-            padding-top: 0;
+            margin-top: 0;
 
         }
 
@@ -294,9 +295,9 @@
 
             font-size:
                 clamp(
-                    50px,
-                    8vw,
-                    100px
+                    45px,
+                    7vw,
+                    90px
                 );
 
             line-height: 0.8;
@@ -318,23 +319,133 @@
 
 
         /* =========================
-           FEED POST
+           GRID
         ========================= */
 
-        .feed-post {
+        .post-grid {
 
-            padding:
-                35px
-                0
-                65px;
+            display: grid;
 
-            border-bottom:
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0, 1fr)
+                );
+
+            gap: 18px;
+
+            margin-top: 18px;
+
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .post-card {
+
+            position: relative;
+
+            cursor: pointer;
+
+            min-width: 0;
+
+        }
+
+
+        .post-image-wrap {
+
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 1 / 1;
+
+            overflow: hidden;
+
+            background:
+                #e9e4d9;
+
+            border:
                 1px solid var(--blue);
 
         }
 
 
-        .post-header {
+        .post-image {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            transition:
+                transform
+                0.35s
+                ease;
+
+        }
+
+
+        .post-card:hover
+        .post-image {
+
+            transform:
+                scale(1.035);
+
+        }
+
+
+        .post-overlay {
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            padding:
+                10px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(
+                        18,
+                        52,
+                        216,
+                        0.9
+                    )
+                );
+
+            color:
+                var(--cream);
+
+            opacity: 0;
+
+            transition:
+                opacity
+                0.25s
+                ease;
+
+        }
+
+
+        .post-card:hover
+        .post-overlay {
+
+            opacity: 1;
+
+        }
+
+
+        .post-overlay-inner {
 
             display: flex;
 
@@ -344,13 +455,13 @@
             align-items:
                 baseline;
 
-            margin-bottom: 18px;
+            gap: 10px;
 
             font-family:
                 "Courier New",
                 monospace;
 
-            font-size: 12px;
+            font-size: 10px;
 
         }
 
@@ -370,174 +481,57 @@
 
 
         /* =========================
-           MEDIA
+           MEDIA BADGES
         ========================= */
 
-        .media-container {
+        .media-badge {
 
-            width: 100%;
+            position: absolute;
 
-            position: relative;
+            top: 8px;
 
-        }
-
-
-        .media-display {
-
-            display: block;
-
-            width: 100%;
-
-            max-height: 850px;
-
-            object-fit: contain;
-
-            background:
-                #e9e4d9;
-
-        }
-
-
-        video.media-display {
-
-            max-height: 850px;
-
-        }
-
-
-        /* =========================
-           CAROUSEL
-        ========================= */
-
-        .carousel-controls {
-
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            margin-top: 12px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
-
-        }
-
-
-        .carousel-button {
-
-            appearance: none;
-
-            border:
-                1px solid var(--blue);
-
-            background:
-                transparent;
-
-            color:
-                var(--blue);
-
-            padding:
-                8px
-                12px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
-
-            cursor: pointer;
-
-        }
-
-
-        .carousel-button:hover {
-
-            background:
-                var(--blue);
-
-            color:
-                var(--cream);
-
-        }
-
-
-        .carousel-position {
-
-            text-align: center;
-
-        }
-
-
-        /* =========================
-           CAPTION
-        ========================= */
-
-        .post-details {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr
-                250px;
-
-            gap: 50px;
-
-            margin-top: 25px;
-
-        }
-
-
-        .post-caption {
-
-            font-size:
-                clamp(
-                    22px,
-                    2.5vw,
-                    36px
-                );
-
-            line-height: 1;
-
-            letter-spacing: -0.03em;
-
-            white-space: pre-line;
-
-            overflow-wrap:
-                anywhere;
-
-        }
-
-
-        .post-tags {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            align-content:
-                flex-start;
-
-            gap: 6px;
-
-        }
-
-
-        .post-tag {
-
-            border:
-                1px solid var(--blue);
+            right: 8px;
 
             padding:
                 5px
                 7px;
+
+            background:
+                var(--cream);
+
+            border:
+                1px solid var(--blue);
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 9px;
+
+            line-height: 1;
+
+        }
+
+
+        /* =========================
+           HEIC FALLBACK
+        ========================= */
+
+        .heic-placeholder {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            text-align: center;
 
             font-family:
                 "Courier New",
@@ -549,7 +543,7 @@
 
 
         /* =========================
-           LOADING / ERROR
+           LOADING
         ========================= */
 
         .loading,
@@ -564,6 +558,334 @@
                 monospace;
 
             font-size: 13px;
+
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 1000;
+
+            display: none;
+
+            background:
+                rgba(
+                    244,
+                    240,
+                    230,
+                    0.98
+                );
+
+            overflow-y: auto;
+
+        }
+
+
+        .modal.active {
+
+            display: block;
+
+        }
+
+
+        .modal-header {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+            padding:
+                18px
+                24px;
+
+            background:
+                var(--cream);
+
+            border-bottom:
+                1px solid var(--blue);
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 12px;
+
+        }
+
+
+        .modal-close {
+
+            appearance: none;
+
+            border:
+                1px solid var(--blue);
+
+            background:
+                transparent;
+
+            color:
+                var(--blue);
+
+            padding:
+                7px
+                12px;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+        }
+
+
+        .modal-close:hover {
+
+            background:
+                var(--blue);
+
+            color:
+                var(--cream);
+
+        }
+
+
+        .modal-content {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin:
+                0 auto;
+
+            padding:
+                40px
+                24px
+                80px;
+
+        }
+
+
+        .modal-media {
+
+            position: relative;
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+        }
+
+
+        .modal-media img,
+        .modal-media video {
+
+            display: block;
+
+            max-width: 100%;
+
+            max-height: 75vh;
+
+            width: auto;
+
+            height: auto;
+
+            object-fit: contain;
+
+            background:
+                #e9e4d9;
+
+        }
+
+
+        .modal-heic {
+
+            width: 100%;
+
+            min-height: 500px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid var(--blue);
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 12px;
+
+            text-align: center;
+
+        }
+
+
+        .modal-controls {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-top: 15px;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 11px;
+
+        }
+
+
+        .modal-button {
+
+            appearance: none;
+
+            border:
+                1px solid var(--blue);
+
+            background:
+                transparent;
+
+            color:
+                var(--blue);
+
+            padding:
+                8px
+                14px;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+        }
+
+
+        .modal-button:hover {
+
+            background:
+                var(--blue);
+
+            color:
+                var(--cream);
+
+        }
+
+
+        .modal-details {
+
+            margin-top: 35px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid var(--blue);
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                250px;
+
+            gap: 40px;
+
+        }
+
+
+        .modal-caption {
+
+            font-size:
+                clamp(
+                    24px,
+                    3vw,
+                    42px
+                );
+
+            line-height: 0.95;
+
+            letter-spacing: -0.035em;
+
+            white-space: pre-line;
+
+            overflow-wrap:
+                anywhere;
+
+        }
+
+
+        .modal-meta {
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .modal-tags {
+
+            margin-top: 20px;
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+        }
+
+
+        .modal-tag {
+
+            border:
+                1px solid var(--blue);
+
+            padding:
+                5px
+                7px;
 
         }
 
@@ -617,7 +939,22 @@
            TABLET
         ========================= */
 
-        @media (max-width: 800px) {
+        @media (max-width: 1000px) {
+
+            .post-grid {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(0, 1fr)
+                    );
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
 
             .site-header {
 
@@ -647,7 +984,20 @@
             }
 
 
-            .post-details {
+            .post-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0, 1fr)
+                    );
+
+                gap: 12px;
+
+            }
+
+
+            .modal-details {
 
                 grid-template-columns:
                     1fr;
@@ -663,7 +1013,7 @@
            MOBILE
         ========================= */
 
-        @media (max-width: 600px) {
+        @media (max-width: 500px) {
 
             .site-header {
 
@@ -683,7 +1033,7 @@
 
                 gap: 18px;
 
-                font-size: 11px;
+                font-size: 10px;
 
             }
 
@@ -700,7 +1050,7 @@
 
             .intro-label {
 
-                margin-bottom: 45px;
+                margin-bottom: 40px;
 
             }
 
@@ -719,7 +1069,7 @@
 
             .intro-bottom {
 
-                margin-top: 45px;
+                margin-top: 40px;
 
                 display: grid;
 
@@ -734,15 +1084,15 @@
                 justify-self:
                     end;
 
-                font-size: 90px;
+                font-size: 85px;
 
             }
 
 
-            .feed {
+            .archive {
 
                 padding:
-                    35px
+                    30px
                     18px
                     70px;
 
@@ -751,48 +1101,56 @@
 
             .year-marker {
 
-                padding:
-                    50px
-                    0
-                    20px;
+                margin-top: 45px;
 
             }
 
 
             .year {
 
-                font-size: 58px;
+                font-size: 55px;
 
             }
 
 
-            .feed-post {
+            .post-grid {
+
+                gap: 8px;
+
+                margin-top: 12px;
+
+            }
+
+
+            .post-overlay {
+
+                display: none;
+
+            }
+
+
+            .modal-content {
 
                 padding:
                     25px
-                    0
-                    45px;
+                    15px
+                    60px;
 
             }
 
 
-            .post-header {
+            .modal-header {
 
-                font-size: 10px;
-
-            }
-
-
-            .post-details {
-
-                margin-top: 20px;
+                padding:
+                    15px
+                    18px;
 
             }
 
 
-            .post-caption {
+            .modal-caption {
 
-                font-size: 27px;
+                font-size: 28px;
 
             }
 
@@ -895,15 +1253,15 @@
 
         <div class="intro-text">
 
-            A chronological feed of work,
-            experiments, drawings, images,
-            digital objects and ideas collected
-            over the years.
+            A visual archive of work,
+            experiments, drawings,
+            digital objects and ideas
+            collected over the years.
 
             <br><br>
 
-            Scroll through the archive
-            and watch the work change.
+            Start anywhere.
+            Follow the work through time.
 
         </div>
 
@@ -924,12 +1282,12 @@
 
 
 <!-- =========================
-     FEED
+     ARCHIVE
 ========================= -->
 
 <main
-    class="feed"
-    id="feed"
+    class="archive"
+    id="archive"
 >
 
     <div class="loading">
@@ -939,6 +1297,89 @@
     </div>
 
 </main>
+
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="post-modal"
+>
+
+    <div class="modal-header">
+
+        <div id="modal-number">
+            —
+        </div>
+
+
+        <button
+            class="modal-close"
+            id="modal-close"
+        >
+
+            CLOSE ×
+
+        </button>
+
+    </div>
+
+
+    <div class="modal-content">
+
+        <div
+            class="modal-media"
+            id="modal-media"
+        >
+
+        </div>
+
+
+        <div
+            class="modal-controls"
+            id="modal-controls"
+        >
+
+        </div>
+
+
+        <div class="modal-details">
+
+            <div
+                class="modal-caption"
+                id="modal-caption"
+            >
+
+            </div>
+
+
+            <div>
+
+                <div
+                    class="modal-meta"
+                    id="modal-meta"
+                >
+
+                </div>
+
+
+                <div
+                    class="modal-tags"
+                    id="modal-tags"
+                >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 
@@ -974,6 +1415,10 @@
 
 <script>
 
+    /* =========================
+       SETTINGS
+    ========================= */
+
     const DATA_URL =
         "portfolio-data.json";
 
@@ -982,9 +1427,13 @@
         "https://swayam0333777-stack.github.io/unfinished-business/";
 
 
-    const feed =
+    /* =========================
+       ELEMENTS
+    ========================= */
+
+    const archive =
         document.getElementById(
-            "feed"
+            "archive"
         );
 
 
@@ -994,10 +1443,63 @@
         );
 
 
+    const modal =
+        document.getElementById(
+            "post-modal"
+        );
+
+
+    const modalClose =
+        document.getElementById(
+            "modal-close"
+        );
+
+
+    const modalNumber =
+        document.getElementById(
+            "modal-number"
+        );
+
+
+    const modalMedia =
+        document.getElementById(
+            "modal-media"
+        );
+
+
+    const modalControls =
+        document.getElementById(
+            "modal-controls"
+        );
+
+
+    const modalCaption =
+        document.getElementById(
+            "modal-caption"
+        );
+
+
+    const modalMeta =
+        document.getElementById(
+            "modal-meta"
+        );
+
+
+    const modalTags =
+        document.getElementById(
+            "modal-tags"
+        );
+
+
     let allPosts = [];
 
 
-    const carouselStates = {};
+    let currentPostIndex =
+        0;
+
+
+    let currentMediaIndex =
+        0;
 
 
     /* =========================
@@ -1068,11 +1570,11 @@
 
 
         /*
-            Supports both:
+            Supports old structure:
 
             portfolio/003/image-01.jpg
 
-            AND
+            and new structure:
 
             portfolio/003-image-01.jpg
         */
@@ -1125,22 +1627,123 @@
     }
 
 
+    function isHEIC(
+        path
+    ) {
+
+        return (
+            getExtension(path)
+            === "heic"
+        );
+
+    }
+
+
     /* =========================
-       MEDIA ELEMENT
+       IMAGE ERROR
     ========================= */
 
-    function createMediaElement(
-        post,
-        index
+    function addImageErrorHandler(
+        image,
+        mediaPath
+    ) {
+
+        image.onerror =
+            function() {
+
+                const placeholder =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                placeholder.className =
+                    "heic-placeholder";
+
+
+                placeholder.innerHTML = `
+
+                    IMAGE COULD NOT
+                    BE DISPLAYED
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        mediaPath
+                    )}
+
+                `;
+
+
+                image.replaceWith(
+                    placeholder
+                );
+
+            };
+
+    }
+
+
+    /* =========================
+       CARD IMAGE
+    ========================= */
+
+    function createCardMedia(
+        post
     ) {
 
         const media =
-            post.media[index];
+            post.media &&
+            post.media.length
+                ? post.media[0]
+                : null;
 
 
         if (!media) {
 
-            return "";
+            return `
+
+                <div
+                    class="heic-placeholder"
+                >
+                    NO MEDIA
+                </div>
+
+            `;
+
+        }
+
+
+        if (isVideo(media)) {
+
+            return `
+
+                <div
+                    class="heic-placeholder"
+                >
+
+                    VIDEO
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (isHEIC(media)) {
+
+            return `
+
+                <div
+                    class="heic-placeholder"
+                >
+
+                    HEIC IMAGE
+
+                </div>
+
+            `;
 
         }
 
@@ -1151,35 +1754,10 @@
             );
 
 
-        if (isVideo(media)) {
-
-            return `
-
-                <video
-                    class="media-display"
-                    controls
-                    playsinline
-                    preload="metadata"
-                >
-
-                    <source
-                        src="${source}"
-                    >
-
-                    Your browser does not
-                    support this video.
-
-                </video>
-
-            `;
-
-        }
-
-
         return `
 
             <img
-                class="media-display"
+                class="post-image"
                 src="${source}"
                 alt="${escapeHTML(
                     post.caption ||
@@ -1194,89 +1772,59 @@
 
 
     /* =========================
-       CAROUSEL
+       CARD
     ========================= */
 
-    function createCarousel(
-        post
+    function createCard(
+        post,
+        index
     ) {
 
-        const media =
-            post.media || [];
+        const mediaCount =
+            post.media
+                ? post.media.length
+                : 0;
+
+
+        const firstMedia =
+            post.media &&
+            post.media.length
+                ? post.media[0]
+                : "";
+
+
+        let badge = "";
 
 
         if (
-            media.length === 0
+            mediaCount > 1
         ) {
 
-            return `
+            badge = `
 
-                <div class="media-container">
+                <div
+                    class="media-badge"
+                >
 
-                    NO MEDIA
+                    ${mediaCount}
+                    MEDIA
 
                 </div>
 
             `;
 
-        }
-
-
-        const carouselID =
-            "carousel-" +
-            post.number;
-
-
-        let controls = "";
-
-
-        if (
-            media.length > 1
+        } else if (
+            firstMedia &&
+            isVideo(firstMedia)
         ) {
 
-            controls = `
+            badge = `
 
                 <div
-                    class="carousel-controls"
+                    class="media-badge"
                 >
 
-                    <button
-                        class="carousel-button"
-                        onclick="previousMedia(
-                            '${carouselID}'
-                        )"
-                    >
-
-                        ← PREVIOUS
-
-                    </button>
-
-
-                    <div
-                        class="carousel-position"
-                    >
-
-                        01 /
-                        ${String(
-                            media.length
-                        ).padStart(
-                            2,
-                            "0"
-                        )}
-
-                    </div>
-
-
-                    <button
-                        class="carousel-button"
-                        onclick="nextMedia(
-                            '${carouselID}'
-                        )"
-                    >
-
-                        NEXT →
-
-                    </button>
+                    VIDEO
 
                 </div>
 
@@ -1287,249 +1835,58 @@
 
         return `
 
-            <div
-                class="media-container"
-                id="${carouselID}"
+            <article
+                class="post-card"
+                onclick="openPost(
+                    ${index}
+                )"
             >
 
                 <div
-                    class="carousel-media"
+                    class="post-image-wrap"
                 >
 
-                    ${createMediaElement(
-                        post,
-                        0
+                    ${createCardMedia(
+                        post
                     )}
+
+                    ${badge}
+
+
+                    <div
+                        class="post-overlay"
+                    >
+
+                        <div
+                            class="post-overlay-inner"
+                        >
+
+                            <span>
+
+                                ${escapeHTML(
+                                    post.number
+                                )}
+
+                            </span>
+
+
+                            <span>
+
+                                ${escapeHTML(
+                                    post.date_display
+                                )}
+
+                            </span>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-
-                ${controls}
-
-            </div>
+            </article>
 
         `;
-
-    }
-
-
-    /* =========================
-       CAROUSEL UPDATE
-    ========================= */
-
-    function updateCarousel(
-        carouselID
-    ) {
-
-        const wrapper =
-            document.getElementById(
-                carouselID
-            );
-
-
-        if (!wrapper) {
-
-            return;
-
-        }
-
-
-        const number =
-            carouselID.replace(
-                "carousel-",
-                ""
-            );
-
-
-        const post =
-            allPosts.find(
-                item =>
-                    String(
-                        item.number
-                    ) === String(
-                        number
-                    )
-            );
-
-
-        if (!post) {
-
-            return;
-
-        }
-
-
-        const current =
-            carouselStates[
-                carouselID
-            ] || 0;
-
-
-        const mediaContainer =
-            wrapper.querySelector(
-                ".carousel-media"
-            );
-
-
-        const position =
-            wrapper.querySelector(
-                ".carousel-position"
-            );
-
-
-        mediaContainer.innerHTML =
-            createMediaElement(
-                post,
-                current
-            );
-
-
-        if (position) {
-
-            position.textContent =
-                String(
-                    current + 1
-                ).padStart(
-                    2,
-                    "0"
-                ) +
-                " / " +
-                String(
-                    post.media.length
-                ).padStart(
-                    2,
-                    "0"
-                );
-
-        }
-
-    }
-
-
-    /* =========================
-       NEXT
-    ========================= */
-
-    function nextMedia(
-        carouselID
-    ) {
-
-        const number =
-            carouselID.replace(
-                "carousel-",
-                ""
-            );
-
-
-        const post =
-            allPosts.find(
-                item =>
-                    String(
-                        item.number
-                    ) === String(
-                        number
-                    )
-            );
-
-
-        if (!post) {
-
-            return;
-
-        }
-
-
-        let current =
-            carouselStates[
-                carouselID
-            ] || 0;
-
-
-        current++;
-
-
-        if (
-            current >=
-            post.media.length
-        ) {
-
-            current = 0;
-
-        }
-
-
-        carouselStates[
-            carouselID
-        ] = current;
-
-
-        updateCarousel(
-            carouselID
-        );
-
-    }
-
-
-    /* =========================
-       PREVIOUS
-    ========================= */
-
-    function previousMedia(
-        carouselID
-    ) {
-
-        const number =
-            carouselID.replace(
-                "carousel-",
-                ""
-            );
-
-
-        const post =
-            allPosts.find(
-                item =>
-                    String(
-                        item.number
-                    ) === String(
-                        number
-                    )
-            );
-
-
-        if (!post) {
-
-            return;
-
-        }
-
-
-        let current =
-            carouselStates[
-                carouselID
-            ] || 0;
-
-
-        current--;
-
-
-        if (
-            current < 0
-        ) {
-
-            current =
-                post.media.length - 1;
-
-        }
-
-
-        carouselStates[
-            carouselID
-        ] = current;
-
-
-        updateCarousel(
-            carouselID
-        );
 
     }
 
@@ -1553,12 +1910,11 @@
 
 
         return hashtags
-
             .map(
                 tag => `
 
                     <span
-                        class="post-tag"
+                        class="modal-tag"
                     >
                         #${escapeHTML(
                             tag
@@ -1567,109 +1923,20 @@
 
                 `
             )
-
             .join("");
 
     }
 
 
     /* =========================
-       POST
+       RENDER ARCHIVE
     ========================= */
 
-    function createPost(
-        post
-    ) {
-
-        return `
-
-            <article
-                class="feed-post"
-                id="post-${escapeHTML(
-                    post.number
-                )}"
-            >
-
-                <div
-                    class="post-header"
-                >
-
-                    <div
-                        class="post-number"
-                    >
-
-                        ${escapeHTML(
-                            post.number
-                        )}
-
-                    </div>
-
-
-                    <div
-                        class="post-date"
-                    >
-
-                        ${escapeHTML(
-                            post.date_display
-                        )}
-
-                    </div>
-
-                </div>
-
-
-                ${createCarousel(
-                    post
-                )}
-
-
-                <div
-                    class="post-details"
-                >
-
-                    <div
-                        class="post-caption"
-                    >
-
-                        ${
-                            post.caption
-                                ? escapeHTML(
-                                    post.caption
-                                )
-                                : "UNTITLED"
-                        }
-
-                    </div>
-
-
-                    <div
-                        class="post-tags"
-                    >
-
-                        ${createTags(
-                            post.hashtags
-                        )}
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        `;
-
-    }
-
-
-    /* =========================
-       RENDER FEED
-    ========================= */
-
-    function renderFeed(
+    function renderArchive(
         posts
     ) {
 
-        feed.innerHTML = "";
+        archive.innerHTML = "";
 
 
         totalCount.textContent =
@@ -1685,8 +1952,14 @@
             null;
 
 
+        let grid = null;
+
+
         posts.forEach(
-            post => {
+            (
+                post,
+                index
+            ) => {
 
                 const year =
                     new Date(
@@ -1702,17 +1975,17 @@
                         year;
 
 
-                    const yearMarker =
+                    const marker =
                         document.createElement(
                             "div"
                         );
 
 
-                    yearMarker.className =
+                    marker.className =
                         "year-marker";
 
 
-                    const count =
+                    const yearCount =
                         posts.filter(
                             item =>
                                 new Date(
@@ -1722,12 +1995,14 @@
                         ).length;
 
 
-                    yearMarker.innerHTML = `
+                    marker.innerHTML = `
 
                         <div
                             class="year"
                         >
+
                             ${year}
+
                         </div>
 
 
@@ -1735,7 +2010,7 @@
                             class="year-info"
                         >
 
-                            ${count}
+                            ${yearCount}
                             POSTS
 
                         </div>
@@ -1743,17 +2018,33 @@
                     `;
 
 
-                    feed.appendChild(
-                        yearMarker
+                    archive.appendChild(
+                        marker
+                    );
+
+
+                    grid =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    grid.className =
+                        "post-grid";
+
+
+                    archive.appendChild(
+                        grid
                     );
 
                 }
 
 
-                feed.insertAdjacentHTML(
+                grid.insertAdjacentHTML(
                     "beforeend",
-                    createPost(
-                        post
+                    createCard(
+                        post,
+                        index
                     )
                 );
 
@@ -1761,6 +2052,410 @@
         );
 
     }
+
+
+    /* =========================
+       MODAL MEDIA
+    ========================= */
+
+    function renderModalMedia() {
+
+        const post =
+            allPosts[
+                currentPostIndex
+            ];
+
+
+        if (!post) {
+
+            return;
+
+        }
+
+
+        const media =
+            post.media || [];
+
+
+        const current =
+            media[
+                currentMediaIndex
+            ];
+
+
+        if (!current) {
+
+            modalMedia.innerHTML =
+                "NO MEDIA";
+
+            return;
+
+        }
+
+
+        const source =
+            normalizeMediaPath(
+                current
+            );
+
+
+        if (isVideo(current)) {
+
+            modalMedia.innerHTML = `
+
+                <video
+                    controls
+                    autoplay
+                    playsinline
+                >
+
+                    <source
+                        src="${source}"
+                    >
+
+                </video>
+
+            `;
+
+        } else if (
+            isHEIC(current)
+        ) {
+
+            modalMedia.innerHTML = `
+
+                <div
+                    class="modal-heic"
+                >
+
+                    HEIC IMAGE
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        current
+                    )}
+
+                </div>
+
+            `;
+
+        } else {
+
+            modalMedia.innerHTML = `
+
+                <img
+                    src="${source}"
+                    alt="${escapeHTML(
+                        post.caption ||
+                        "Portfolio image"
+                    )}"
+                >
+
+            `;
+
+        }
+
+
+        if (
+            media.length > 1
+        ) {
+
+            modalControls.innerHTML = `
+
+                <button
+                    class="modal-button"
+                    onclick="previousModalMedia()"
+                >
+
+                    ← PREVIOUS
+
+                </button>
+
+
+                <div>
+
+                    ${String(
+                        currentMediaIndex + 1
+                    ).padStart(
+                        2,
+                        "0"
+                    )}
+
+                    /
+
+                    ${String(
+                        media.length
+                    ).padStart(
+                        2,
+                        "0"
+                    )}
+
+                </div>
+
+
+                <button
+                    class="modal-button"
+                    onclick="nextModalMedia()"
+                >
+
+                    NEXT →
+
+                </button>
+
+            `;
+
+        } else {
+
+            modalControls.innerHTML = "";
+
+        }
+
+    }
+
+
+    /* =========================
+       OPEN POST
+    ========================= */
+
+    function openPost(
+        index
+    ) {
+
+        currentPostIndex =
+            index;
+
+
+        currentMediaIndex =
+            0;
+
+
+        const post =
+            allPosts[index];
+
+
+        if (!post) {
+
+            return;
+
+        }
+
+
+        modalNumber.textContent =
+            post.number +
+            " / " +
+            post.date_display;
+
+
+        modalCaption.textContent =
+            post.caption ||
+            "UNTITLED";
+
+
+        modalMeta.innerHTML = `
+
+            POST ${escapeHTML(
+                post.number
+            )}
+
+            <br>
+
+            ${escapeHTML(
+                post.date_display
+            )}
+
+            <br><br>
+
+            ${post.media_count || 0}
+            MEDIA
+
+        `;
+
+
+        modalTags.innerHTML =
+            createTags(
+                post.hashtags
+            );
+
+
+        renderModalMedia();
+
+
+        modal.classList.add(
+            "active"
+        );
+
+
+        document.body.classList.add(
+            "modal-open"
+        );
+
+    }
+
+
+    /* =========================
+       CLOSE POST
+    ========================= */
+
+    function closeModal() {
+
+        modal.classList.remove(
+            "active"
+        );
+
+
+        document.body.classList.remove(
+            "modal-open"
+        );
+
+
+        modalMedia.innerHTML = "";
+
+    }
+
+
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    modal.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === modal
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       MODAL NEXT
+    ========================= */
+
+    function nextModalMedia() {
+
+        const post =
+            allPosts[
+                currentPostIndex
+            ];
+
+
+        if (!post) {
+
+            return;
+
+        }
+
+
+        currentMediaIndex++;
+
+
+        if (
+            currentMediaIndex >=
+            post.media.length
+        ) {
+
+            currentMediaIndex = 0;
+
+        }
+
+
+        renderModalMedia();
+
+    }
+
+
+    /* =========================
+       MODAL PREVIOUS
+    ========================= */
+
+    function previousModalMedia() {
+
+        const post =
+            allPosts[
+                currentPostIndex
+            ];
+
+
+        if (!post) {
+
+            return;
+
+        }
+
+
+        currentMediaIndex--;
+
+
+        if (
+            currentMediaIndex < 0
+        ) {
+
+            currentMediaIndex =
+                post.media.length - 1;
+
+        }
+
+
+        renderModalMedia();
+
+    }
+
+
+    /* =========================
+       KEYBOARD
+    ========================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                !modal.classList.contains(
+                    "active"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeModal();
+
+            }
+
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                nextModalMedia();
+
+            }
+
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                previousModalMedia();
+
+            }
+
+        }
+    );
 
 
     /* =========================
@@ -1782,7 +2477,7 @@
             ) {
 
                 throw new Error(
-                    "Could not load portfolio data."
+                    "Could not load portfolio-data.json"
                 );
 
             }
@@ -1799,7 +2494,7 @@
             ) {
 
                 throw new Error(
-                    "Invalid portfolio data."
+                    "Portfolio data is invalid."
                 );
 
             }
@@ -1809,7 +2504,7 @@
                 posts;
 
 
-            renderFeed(
+            renderArchive(
                 posts
             );
 
@@ -1823,9 +2518,11 @@
             );
 
 
-            feed.innerHTML = `
+            archive.innerHTML = `
 
-                <div class="error">
+                <div
+                    class="error"
+                >
 
                     ERROR LOADING PORTFOLIO.
 
