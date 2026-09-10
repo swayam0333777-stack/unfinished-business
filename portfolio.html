@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -45,7 +46,6 @@
 
         .site-header {
             min-height: 100px;
-
             padding: 22px 24px;
 
             border-bottom: 1px solid var(--blue);
@@ -54,9 +54,9 @@
             grid-template-columns: 1fr auto 1fr;
 
             align-items: start;
-
             gap: 20px;
         }
+
 
         .site-logo {
             font-size: 28px;
@@ -66,6 +66,7 @@
 
             font-weight: bold;
         }
+
 
         .main-nav {
             display: flex;
@@ -77,13 +78,16 @@
             font-size: 13px;
         }
 
+
         .main-nav a {
             border-bottom: 1px solid transparent;
         }
 
+
         .main-nav a:hover {
             border-bottom-color: var(--blue);
         }
+
 
         .site-meta {
             justify-self: end;
@@ -116,11 +120,13 @@
             justify-content: space-between;
         }
 
+
         .intro-label {
             font-family: "Courier New", monospace;
 
             font-size: 13px;
         }
+
 
         .intro-title {
             max-width: 1500px;
@@ -140,6 +146,7 @@
             font-weight: normal;
         }
 
+
         .intro-bottom {
             display: grid;
 
@@ -150,6 +157,7 @@
             align-items: end;
         }
 
+
         .intro-text {
             max-width: 650px;
 
@@ -159,6 +167,7 @@
 
             line-height: 1.45;
         }
+
 
         .intro-count {
             font-size: clamp(
@@ -202,6 +211,7 @@
             border-bottom: 1px solid var(--blue);
         }
 
+
         .year-heading {
             padding: 18px 24px;
 
@@ -227,11 +237,13 @@
             border-bottom: 1px solid var(--blue);
         }
 
+
         .year-number {
             font-family: "Courier New", monospace;
 
             font-size: 12px;
         }
+
 
         .year-title {
             font-size: clamp(
@@ -246,6 +258,7 @@
 
             font-weight: normal;
         }
+
 
         .year-count {
             font-family: "Courier New", monospace;
@@ -270,6 +283,7 @@
 
             border-bottom: 1px solid var(--blue);
         }
+
 
         .post-number {
             padding: 20px 18px;
@@ -300,6 +314,7 @@
             min-width: 0;
         }
 
+
         .media-wrapper {
             width: 100%;
 
@@ -307,6 +322,7 @@
 
             position: relative;
         }
+
 
         .media-display {
             width: 100%;
@@ -320,12 +336,13 @@
             background: #e9e4d9;
         }
 
+
         .media-counter {
             position: absolute;
 
             right: 12px;
 
-            bottom: 12px;
+            top: 12px;
 
             padding: 7px 9px;
 
@@ -350,12 +367,13 @@
 
             align-items: center;
 
-            margin-top: 10px;
+            margin-top: 12px;
 
             font-family: "Courier New", monospace;
 
             font-size: 11px;
         }
+
 
         .carousel-button {
             appearance: none;
@@ -375,11 +393,13 @@
             cursor: pointer;
         }
 
+
         .carousel-button:hover {
             background: var(--blue);
 
             color: var(--cream);
         }
+
 
         .carousel-position {
             text-align: center;
@@ -402,6 +422,7 @@
             min-width: 0;
         }
 
+
         .post-date {
             font-family: "Courier New", monospace;
 
@@ -409,6 +430,7 @@
 
             line-height: 1.4;
         }
+
 
         .post-caption {
             margin: 45px 0;
@@ -428,6 +450,7 @@
             overflow-wrap: anywhere;
         }
 
+
         .post-tags {
             display: flex;
 
@@ -439,6 +462,7 @@
 
             font-size: 11px;
         }
+
 
         .post-tag {
             border: 1px solid var(--blue);
@@ -486,9 +510,11 @@
             line-height: 1.4;
         }
 
+
         .site-footer div:nth-child(2) {
             text-align: center;
         }
+
 
         .site-footer div:last-child {
             text-align: right;
@@ -507,11 +533,13 @@
                     auto;
             }
 
+
             .main-nav {
                 grid-column: 1 / -1;
 
                 grid-row: 2;
             }
+
 
             .site-meta {
                 grid-column: 2;
@@ -519,15 +547,18 @@
                 grid-row: 1;
             }
 
+
             .post {
                 grid-template-columns:
                     50px
                     1fr;
             }
 
+
             .post-number {
                 grid-row: 1 / span 2;
             }
+
 
             .post-media {
                 border-right: none;
@@ -535,9 +566,11 @@
                 border-bottom: 1px solid var(--blue);
             }
 
+
             .post-info {
                 border-bottom: 1px solid var(--blue);
             }
+
 
             .year-heading {
                 grid-template-columns:
@@ -559,9 +592,11 @@
                 padding: 18px;
             }
 
+
             .site-logo {
                 font-size: 22px;
             }
+
 
             .main-nav {
                 gap: 18px;
@@ -569,11 +604,13 @@
                 font-size: 11px;
             }
 
+
             .portfolio-intro {
                 min-height: 75vh;
 
                 padding: 40px 18px 30px;
             }
+
 
             .intro-title {
                 font-size: clamp(
@@ -585,9 +622,11 @@
                 margin: 70px 0 40px;
             }
 
+
             .intro-bottom {
                 grid-template-columns: 1fr;
             }
+
 
             .intro-count {
                 justify-self: end;
@@ -595,11 +634,13 @@
                 font-size: 100px;
             }
 
+
             .timeline-header {
                 padding: 15px 18px;
 
                 font-size: 11px;
             }
+
 
             .year-heading {
                 padding: 15px 18px;
@@ -610,9 +651,11 @@
                     auto;
             }
 
+
             .year-title {
                 font-size: 60px;
             }
+
 
             .post {
                 grid-template-columns:
@@ -620,13 +663,16 @@
                     1fr;
             }
 
+
             .post-number {
                 padding: 15px 10px;
             }
 
+
             .post-media {
                 padding: 15px;
             }
+
 
             .post-info {
                 grid-column: 2;
@@ -634,17 +680,20 @@
                 padding: 18px;
             }
 
+
             .post-caption {
                 margin: 35px 0;
 
                 font-size: 29px;
             }
 
+
             .site-footer {
                 grid-template-columns: 1fr;
 
                 padding: 25px 18px;
             }
+
 
             .site-footer div,
             .site-footer div:nth-child(2),
@@ -661,10 +710,6 @@
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header class="site-header">
 
@@ -694,7 +739,6 @@
     <div class="site-meta">
 
         PERSONAL PORTFOLIO<br>
-
         2020—2026
 
     </div>
@@ -702,10 +746,6 @@
 </header>
 
 
-
-<!-- =========================
-     INTRO
-========================= -->
 
 <section class="portfolio-intro">
 
@@ -717,9 +757,7 @@
     <h1 class="intro-title">
 
         WORK,<br>
-
         PROCESS,<br>
-
         EVOLUTION.
 
     </h1>
@@ -755,10 +793,6 @@
 
 
 
-<!-- =========================
-     ARCHIVE HEADER
-========================= -->
-
 <div class="timeline-header">
 
     <div>
@@ -773,10 +807,6 @@
 
 
 
-<!-- =========================
-     PORTFOLIO
-========================= -->
-
 <main id="portfolio">
 
     <div class="loading">
@@ -788,10 +818,6 @@
 </main>
 
 
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer class="site-footer">
 
@@ -813,8 +839,30 @@
 
 <script>
 
+    /*
+        IMPORTANT
+
+        Your current portfolio-data.json may contain
+        the older folder-style paths:
+
+        portfolio/003/image-01.jpg
+
+        Your GitHub portfolio folder now contains:
+
+        portfolio/003-image-01.jpg
+
+        The normalizeMediaPath() function below
+        automatically converts the old path into
+        the new path.
+    */
+
+
     const DATA_URL =
         "portfolio-data.json";
+
+
+    const GITHUB_BASE =
+        "https://swayam0333777-stack.github.io/unfinished-business/";
 
 
     const portfolio =
@@ -836,9 +884,7 @@
        ESCAPE HTML
     ========================= */
 
-    function escapeHTML(
-        text
-    ) {
+    function escapeHTML(text) {
 
         if (!text) {
             return "";
@@ -870,7 +916,61 @@
 
 
     /* =========================
-       GET FILE TYPE
+       NORMALIZE MEDIA PATH
+    ========================= */
+
+    function normalizeMediaPath(
+        mediaPath
+    ) {
+
+        if (!mediaPath) {
+            return "";
+        }
+
+
+        /*
+            Remove leading slash
+            if one exists.
+        */
+
+        mediaPath =
+            mediaPath.replace(
+                /^\/+/,
+                ""
+            );
+
+
+        /*
+            Convert:
+
+            portfolio/003/image-01.jpg
+
+            into:
+
+            portfolio/003-image-01.jpg
+        */
+
+        mediaPath =
+            mediaPath.replace(
+                /^portfolio\/(\d+)\/(.+)$/,
+                "portfolio/$1-$2"
+            );
+
+
+        /*
+            Make the final URL.
+        */
+
+        return (
+            GITHUB_BASE +
+            mediaPath
+        );
+
+    }
+
+
+    /* =========================
+       FILE EXTENSION
     ========================= */
 
     function getExtension(
@@ -885,12 +985,17 @@
     }
 
 
+    /* =========================
+       VIDEO CHECK
+    ========================= */
+
     function isVideo(
         path
     ) {
 
         const extension =
             getExtension(path);
+
 
         return (
             extension === "mp4" ||
@@ -915,17 +1020,16 @@
                 mediaIndex
             ];
 
+
         if (!media) {
             return "";
         }
 
 
-        const extension =
-            getExtension(media);
-
-
         const source =
-    "https://swayam0333777-stack.github.io/unfinished-business/" + media;
+            normalizeMediaPath(
+                media
+            );
 
 
         if (isVideo(media)) {
@@ -954,41 +1058,11 @@
 
 
         /*
-         HEIC files may not be supported
-         by some desktop browsers.
+            HEIC is not reliably supported
+            by all browsers.
+
+            We still point to the actual file.
         */
-
-        if (
-            extension === "heic"
-        ) {
-
-            return `
-
-                <div
-                    class="media-display"
-                    style="
-                        min-height: 350px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        padding: 30px;
-                        font-family: 'Courier New', monospace;
-                        font-size: 12px;
-                        text-align: center;
-                    "
-                >
-
-                    HEIC IMAGE<br>
-                    ${escapeHTML(
-                        media
-                    )}
-
-                </div>
-
-            `;
-
-        }
-
 
         return `
 
@@ -1008,7 +1082,38 @@
 
 
     /* =========================
-       CAROUSEL
+       CAROUSEL STATE
+    ========================= */
+
+    const carouselStates = {};
+
+
+    function getCarouselState(
+        carouselID
+    ) {
+
+        if (
+            carouselStates[
+                carouselID
+            ] === undefined
+        ) {
+
+            carouselStates[
+                carouselID
+            ] = 0;
+
+        }
+
+
+        return carouselStates[
+            carouselID
+        ];
+
+    }
+
+
+    /* =========================
+       CREATE CAROUSEL
     ========================= */
 
     function createCarousel(
@@ -1028,26 +1133,6 @@
                 <div class="media-wrapper">
 
                     NO MEDIA
-
-                </div>
-
-            `;
-
-        }
-
-
-        if (
-            media.length === 1
-        ) {
-
-            return `
-
-                <div class="media-wrapper">
-
-                    ${createMediaElement(
-                        post,
-                        0
-                    )}
 
                 </div>
 
@@ -1080,53 +1165,61 @@
                 </div>
 
 
-                <div
-                    class="media-counter"
-                >
+                ${
+                    media.length > 1
+                    ?
+                    `
 
-                    ${media.length}
-                    MEDIA
-
-                </div>
-
-
-                <div
-                    class="carousel-controls"
-                >
-
-                    <button
-                        class="carousel-button"
-                        onclick="previousMedia(
-                            '${carouselID}'
-                        )"
-                    >
-                        ← PREVIOUS
-                    </button>
+                        <div
+                            class="media-counter"
+                        >
+                            ${media.length}
+                            MEDIA
+                        </div>
 
 
-                    <div
-                        class="carousel-position"
-                    >
-                        01 /
-                        ${String(
-                            media.length
-                        ).padStart(
-                            2,
-                            "0"
-                        )}
-                    </div>
+                        <div
+                            class="carousel-controls"
+                        >
+
+                            <button
+                                class="carousel-button"
+                                onclick="previousMedia(
+                                    '${carouselID}'
+                                )"
+                            >
+                                ← PREVIOUS
+                            </button>
 
 
-                    <button
-                        class="carousel-button"
-                        onclick="nextMedia(
-                            '${carouselID}'
-                        )"
-                    >
-                        NEXT →
-                    </button>
+                            <div
+                                class="carousel-position"
+                            >
+                                01 /
+                                ${String(
+                                    media.length
+                                ).padStart(
+                                    2,
+                                    "0"
+                                )}
+                            </div>
 
-                </div>
+
+                            <button
+                                class="carousel-button"
+                                onclick="nextMedia(
+                                    '${carouselID}'
+                                )"
+                            >
+                                NEXT →
+                            </button>
+
+                        </div>
+
+                    `
+                    :
+                    ""
+                }
 
             </div>
 
@@ -1136,34 +1229,8 @@
 
 
     /* =========================
-       CAROUSEL STATE
+       UPDATE CAROUSEL
     ========================= */
-
-    const carouselStates = {};
-
-
-    function getCarouselState(
-        carouselID
-    ) {
-
-        if (
-            !carouselStates[
-                carouselID
-            ]
-        ) {
-
-            carouselStates[
-                carouselID
-            ] = 0;
-
-        }
-
-        return carouselStates[
-            carouselID
-        ];
-
-    }
-
 
     function updateCarousel(
         carouselID
@@ -1190,17 +1257,17 @@
         const post =
             allPosts.find(
                 item =>
-                    item.number === number
+                    String(
+                        item.number
+                    ) === String(
+                        number
+                    )
             );
 
 
         if (!post) {
             return;
         }
-
-
-        const media =
-            post.media || [];
 
 
         const current =
@@ -1228,23 +1295,31 @@
             );
 
 
-        position.textContent =
-            String(
-                current + 1
-            ).padStart(
-                2,
-                "0"
-            ) +
-            " / " +
-            String(
-                media.length
-            ).padStart(
-                2,
-                "0"
-            );
+        if (position) {
+
+            position.textContent =
+                String(
+                    current + 1
+                ).padStart(
+                    2,
+                    "0"
+                ) +
+                " / " +
+                String(
+                    post.media.length
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+        }
 
     }
 
+
+    /* =========================
+       NEXT MEDIA
+    ========================= */
 
     function nextMedia(
         carouselID
@@ -1260,17 +1335,17 @@
         const post =
             allPosts.find(
                 item =>
-                    item.number === number
+                    String(
+                        item.number
+                    ) === String(
+                        number
+                    )
             );
 
 
         if (!post) {
             return;
         }
-
-
-        const total =
-            post.media.length;
 
 
         let current =
@@ -1283,7 +1358,8 @@
 
 
         if (
-            current >= total
+            current >=
+            post.media.length
         ) {
 
             current = 0;
@@ -1303,6 +1379,10 @@
     }
 
 
+    /* =========================
+       PREVIOUS MEDIA
+    ========================= */
+
     function previousMedia(
         carouselID
     ) {
@@ -1317,17 +1397,17 @@
         const post =
             allPosts.find(
                 item =>
-                    item.number === number
+                    String(
+                        item.number
+                    ) === String(
+                        number
+                    )
             );
 
 
         if (!post) {
             return;
         }
-
-
-        const total =
-            post.media.length;
 
 
         let current =
@@ -1344,7 +1424,7 @@
         ) {
 
             current =
-                total - 1;
+                post.media.length - 1;
 
         }
 
@@ -1399,7 +1479,7 @@
 
 
     /* =========================
-       POST
+       CREATE POST
     ========================= */
 
     function createPost(
@@ -1491,7 +1571,7 @@
 
 
     /* =========================
-       RENDER
+       RENDER PORTFOLIO
     ========================= */
 
     function renderPortfolio(
@@ -1627,7 +1707,7 @@
 
 
     /* =========================
-       LOAD DATA
+       LOAD PORTFOLIO DATA
     ========================= */
 
     async function loadPortfolio() {
@@ -1710,10 +1790,15 @@
     }
 
 
+    /* =========================
+       START
+    ========================= */
+
     loadPortfolio();
 
 </script>
 
 
 </body>
+
 </html>
