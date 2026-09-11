@@ -1,773 +1,1052 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Portfolio — Unfinished Cool Stuff</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <title>Portfolio — UNFINISHED COOL STUFF</title>
 
     <style>
-
-        /* =====================================================
-           PORTFOLIO PAGE
-           ===================================================== */
-
-        .portfolio-page {
-            padding: 0 4vw 80px;
+        * {
+            box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
 
-        .portfolio-intro {
-            padding: 70px 0 50px;
+        body {
+            margin: 0;
+            background: #f4f0e6;
+            color: #1234d8;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 28px;
+
+            background: #f4f0e6;
             border-bottom: 1px solid #1234d8;
         }
 
+        .site-title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            font-weight: normal;
+            letter-spacing: -0.03em;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 28px;
+
+            font-family: "Courier New", monospace;
+            font-size: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .portfolio-intro {
+            padding: 80px 28px 55px;
+            border-bottom: 1px solid #1234d8;
+        }
 
         .portfolio-intro h1 {
             margin: 0;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
+            max-width: 1100px;
 
-            font-size:
-                clamp(4rem, 10vw, 10rem);
-
-            line-height: 0.85;
-            font-weight: 400;
-            letter-spacing: -0.06em;
+            font-size: clamp(52px, 9vw, 150px);
+            line-height: 0.86;
+            font-weight: normal;
+            letter-spacing: -0.065em;
         }
 
-
-        .portfolio-intro p {
-            max-width: 650px;
-
-            margin: 35px 0 0;
-
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-
-        /* =====================================================
-           CATEGORY FILTERS
-           ===================================================== */
-
-        .portfolio-filters {
+        .portfolio-intro-meta {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: flex-end;
 
-            padding: 20px 0;
+            margin-top: 55px;
+
+            font-family: "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .portfolio-intro-meta p {
+            margin: 0;
+            max-width: 420px;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filter-section {
+            padding: 20px 28px;
 
             border-bottom: 1px solid #1234d8;
         }
 
+        .filter-label {
+            margin-bottom: 12px;
 
-        .portfolio-filter {
-            border: 1px solid #1234d8;
-
-            background: #f4f0e6;
-            color: #1234d8;
-
-            padding: 7px 10px;
-
-            font-family: monospace;
-            font-size: 10px;
-
-            cursor: pointer;
-
-            text-transform: uppercase;
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
         }
 
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
 
-        .portfolio-filter:hover,
-        .portfolio-filter.active {
+        .filter-button {
+            padding: 8px 12px;
+
+            border: 1px solid #1234d8;
+            border-radius: 0;
+
+            background: transparent;
+            color: #1234d8;
+
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
             background: #1234d8;
             color: #f4f0e6;
         }
 
+        /* =========================
+           PORTFOLIO
+        ========================= */
 
-        /* =====================================================
-           YEAR
-           ===================================================== */
-
-        .portfolio-year {
-            margin-top: 55px;
+        #portfolio-container {
+            padding: 28px;
         }
 
+        .year-section {
+            margin-bottom: 65px;
+        }
 
-        .portfolio-year-title {
-            display: flex;
+        .year-title {
+            margin: 0 0 20px;
 
-            justify-content: space-between;
-            align-items: baseline;
-
-            padding-bottom: 12px;
+            padding-bottom: 10px;
 
             border-bottom: 1px solid #1234d8;
 
-            font-family: monospace;
+            font-family: "Courier New", monospace;
             font-size: 13px;
-
-            text-transform: uppercase;
+            font-weight: normal;
+            letter-spacing: 0.06em;
         }
-
-
-        .portfolio-year-title strong {
-            font-size: 22px;
-            font-weight: 400;
-        }
-
-
-        /* =====================================================
-           POST GRID
-           ===================================================== */
 
         .post-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
-            gap: 0;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
 
             background: #f4f0e6;
-
-            border-left: 1px solid #1234d8;
-            border-top: 1px solid #1234d8;
-
-            margin-top: 1px;
         }
 
+        /* =========================
+           POST CARD
+        ========================= */
 
         .post-card {
-            position: relative;
-
-            background: #f4f0e6;
-
             min-width: 0;
 
             cursor: pointer;
-
-            border-right: 1px solid #1234d8;
-            border-bottom: 1px solid #1234d8;
-
-            transition:
-                background 0.2s ease;
         }
 
-
-        .post-card:hover {
-            background: #ffffff;
+        .post-card.hidden {
+            display: none;
         }
-
-
-        /* =====================================================
-           MEDIA THUMBNAIL
-           ===================================================== */
 
         .post-media {
             position: relative;
 
             width: 100%;
-
             aspect-ratio: 1 / 1;
 
             overflow: hidden;
-        }
 
+            border: 1px solid #1234d8;
+
+            background: #e9e4d8;
+        }
 
         .post-media img,
         .post-media video {
-            width: 100%;
-            height: 100%;
-
             display: block;
 
-            object-fit: cover;
-        }
-
-
-        .post-media video {
-            pointer-events: none;
-        }
-
-
-        /* =====================================================
-           HEIC PLACEHOLDER
-           ===================================================== */
-
-        .heic-placeholder {
             width: 100%;
             height: 100%;
 
-            display: flex;
+            object-fit: cover;
 
-            align-items: center;
-            justify-content: center;
-
-            padding: 20px;
-
-            box-sizing: border-box;
-
-            text-align: center;
-
-            font-family: monospace;
-            font-size: 11px;
-            line-height: 1.4;
-
-            background: #e8e3d7;
+            transition: transform 0.35s ease;
         }
 
-
-        /* =====================================================
-           POST INFORMATION
-           ===================================================== */
+        .post-card:hover .post-media img,
+        .post-card:hover .post-media video {
+            transform: scale(1.025);
+        }
 
         .post-info {
-            padding: 13px;
+            padding-top: 9px;
         }
-
 
         .post-number {
-            font-family: monospace;
-            font-size: 11px;
-        }
+            margin-bottom: 4px;
 
+            font-family: "Courier New", monospace;
+            font-size: 10px;
+        }
 
         .post-title {
-            margin-top: 7px;
+            margin: 0;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.05;
+            font-weight: normal;
+            letter-spacing: -0.02em;
         }
-
 
         .post-date {
-            margin-top: 9px;
-
-            font-family: monospace;
-            font-size: 10px;
-
-            opacity: 0.65;
-        }
-
-
-        .post-count {
             margin-top: 7px;
 
-            font-family: monospace;
+            font-family: "Courier New", monospace;
             font-size: 10px;
-
-            opacity: 0.65;
+            line-height: 1.3;
         }
-
-
-        /* =====================================================
-           CATEGORY TAGS
-           ===================================================== */
 
         .post-categories {
             display: flex;
             flex-wrap: wrap;
-
             gap: 5px;
 
-            margin-top: 9px;
+            margin-top: 8px;
         }
-
 
         .post-category {
-            display: inline-block;
-
-            padding: 4px 5px;
+            padding: 3px 5px;
 
             border: 1px solid #1234d8;
 
-            font-family: monospace;
+            font-family: "Courier New", monospace;
             font-size: 8px;
-
             line-height: 1;
-
-            text-transform: uppercase;
         }
 
+        /* =========================
+           HEIC PLACEHOLDER
+        ========================= */
 
-        /* =====================================================
-           VIDEO INDICATOR
-           ===================================================== */
-
-        .video-indicator {
-            position: absolute;
-
-            right: 10px;
-            bottom: 10px;
-
-            padding: 5px 7px;
-
-            background: #f4f0e6;
-
-            border: 1px solid #1234d8;
-
-            font-family: monospace;
-            font-size: 9px;
-        }
-
-
-        /* =====================================================
-           EMPTY / LOADING / ERROR
-           ===================================================== */
-
-        .portfolio-status {
-            padding: 60px 0;
-
-            font-family: monospace;
-            font-size: 13px;
-        }
-
-
-        .portfolio-error {
-            padding: 30px;
-
-            border: 1px solid #1234d8;
-
-            font-family: monospace;
-            font-size: 13px;
-        }
-
-
-        .portfolio-empty {
-            padding: 60px 20px;
-
-            border: 1px solid #1234d8;
-
-            font-family: monospace;
-            font-size: 12px;
-        }
-
-
-        /* =====================================================
-           MODAL
-           ===================================================== */
-
-        .portfolio-modal {
-            position: fixed;
-
-            inset: 0;
-
-            z-index: 9999;
-
-            display: none;
-
-            background:
-                rgba(244, 240, 230, 0.97);
-        }
-
-
-        .portfolio-modal.active {
+        .heic-placeholder {
             display: flex;
-        }
+            justify-content: center;
+            align-items: center;
 
-
-        .modal-content {
             width: 100%;
             height: 100%;
 
-            display: flex;
+            padding: 20px;
 
-            flex-direction: column;
+            text-align: center;
+
+            font-family: "Courier New", monospace;
+            font-size: 10px;
+            line-height: 1.4;
         }
 
+        /* =========================
+           EMPTY STATE
+        ========================= */
 
-        .modal-header {
-            flex-shrink: 0;
+        .empty-message {
+            padding: 80px 20px;
 
-            display: flex;
-
-            justify-content: space-between;
-            align-items: center;
-
-            padding: 16px 20px;
-
-            border-bottom: 1px solid #1234d8;
-
-            font-family: monospace;
+            font-family: "Courier New", monospace;
             font-size: 12px;
         }
 
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+
+            display: none;
+
+            background: rgba(18, 52, 216, 0.96);
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-inner {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            width: 100%;
+            height: 100%;
+
+            padding: 25px;
+        }
+
+        .modal-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            color: #f4f0e6;
+        }
+
+        .modal-title {
+            max-width: 70%;
+
+            font-size: clamp(25px, 4vw, 55px);
+            line-height: 0.95;
+            font-weight: normal;
+            letter-spacing: -0.04em;
+        }
 
         .modal-close {
+            padding: 0;
+
             border: 0;
-
             background: transparent;
+            color: #f4f0e6;
 
-            font-family: monospace;
-            font-size: 12px;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
 
             cursor: pointer;
-
-            padding: 5px;
         }
 
+        .modal-content {
+            position: relative;
 
-        .modal-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
             flex: 1;
 
             min-height: 0;
 
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 30px;
-
-            position: relative;
+            margin: 20px 0;
         }
 
-
-        .modal-media {
-            max-width: 80vw;
-            max-height: 75vh;
+        .modal-content img,
+        .modal-content video {
+            max-width: 90%;
+            max-height: 78vh;
 
             object-fit: contain;
         }
 
+        .modal-heic {
+            padding: 40px;
 
-        .modal-caption {
-            flex-shrink: 0;
+            color: #f4f0e6;
 
-            max-height: 25vh;
+            border: 1px solid #f4f0e6;
 
-            overflow-y: auto;
-
-            padding: 20px;
-
-            border-top: 1px solid #1234d8;
-
-            font-family: monospace;
+            font-family: "Courier New", monospace;
             font-size: 12px;
-            line-height: 1.5;
-
-            white-space: pre-wrap;
+            text-align: center;
         }
-
 
         .modal-arrow {
             position: absolute;
-
             top: 50%;
 
             transform: translateY(-50%);
 
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
 
-            border: 1px solid #1234d8;
+            border: 1px solid #f4f0e6;
 
-            background: #f4f0e6;
+            background: transparent;
+            color: #f4f0e6;
 
-            font-family: monospace;
+            font-family: "Courier New", monospace;
             font-size: 18px;
 
             cursor: pointer;
-
-            z-index: 2;
         }
 
+        .modal-arrow:hover {
+            background: #f4f0e6;
+            color: #1234d8;
+        }
 
         .modal-prev {
-            left: 20px;
+            left: 0;
         }
-
 
         .modal-next {
-            right: 20px;
+            right: 0;
         }
 
+        .modal-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
 
-        /* =====================================================
+            gap: 20px;
+
+            color: #f4f0e6;
+
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .modal-caption {
+            max-width: 650px;
+
+            white-space: pre-line;
+        }
+
+        .modal-counter {
+            white-space: nowrap;
+        }
+
+        /* =========================
            RESPONSIVE
-           ===================================================== */
+        ========================= */
 
         @media (max-width: 1000px) {
-
             .post-grid {
-                grid-template-columns:
-                    repeat(3, minmax(0, 1fr));
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
-
         }
 
-
         @media (max-width: 700px) {
-
-            .portfolio-page {
-                padding: 0 3vw 60px;
+            .site-header {
+                padding: 15px 18px;
             }
 
+            .site-nav {
+                gap: 14px;
+            }
 
             .portfolio-intro {
-                padding: 50px 0 35px;
+                padding: 55px 18px 40px;
             }
 
-
-            .portfolio-intro h1 {
-                font-size: 17vw;
+            .portfolio-intro-meta {
+                display: block;
+                margin-top: 35px;
             }
 
-
-            .portfolio-filters {
-                gap: 6px;
+            .portfolio-intro-meta p + p {
+                margin-top: 15px;
             }
 
+            .filter-section {
+                padding: 18px;
+            }
+
+            #portfolio-container {
+                padding: 18px;
+            }
 
             .post-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
             }
-
 
             .post-title {
                 font-size: 15px;
             }
 
-
-            .modal-body {
-                padding: 15px;
+            .modal-inner {
+                padding: 18px;
             }
 
-
-            .modal-media {
-                max-width: 90vw;
-                max-height: 70vh;
+            .modal-arrow {
+                width: 35px;
+                height: 35px;
             }
 
-
-            .modal-prev {
-                left: 8px;
+            .modal-content img,
+            .modal-content video {
+                max-width: 82%;
             }
-
-
-            .modal-next {
-                right: 8px;
-            }
-
         }
-
 
         @media (max-width: 450px) {
-
-            .post-grid {
-                grid-template-columns: 1fr;
+            .site-title {
+                font-size: 15px;
             }
 
+            .site-nav {
+                font-size: 10px;
+                gap: 10px;
+            }
+
+            .portfolio-intro h1 {
+                font-size: 55px;
+            }
+
+            .post-grid {
+                gap: 12px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+<header class="site-header">
 
-    <!-- =====================================================
-         HEADER
-         ===================================================== -->
+    <a href="index.html" class="site-title">
+        UNFINISHED COOL STUFF
+    </a>
 
-    <header class="site-header">
+    <nav class="site-nav">
+        <a href="index.html">ARCHIVE</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="index.html#about">ABOUT</a>
+    </nav>
 
-        <a
-            href="index.html"
-            class="site-logo"
-        >
-            UNFINISHED<br>
-            COOL STUFF
-        </a>
-
-
-        <nav class="site-nav">
-
-            <a href="index.html">
-                ARCHIVE
-            </a>
-
-            <a href="portfolio.html">
-                PORTFOLIO
-            </a>
-
-            <a href="index.html#about">
-                ABOUT
-            </a>
-
-        </nav>
-
-    </header>
+</header>
 
 
-    <!-- =====================================================
-         PORTFOLIO
-         ===================================================== -->
+<section class="portfolio-intro">
 
-    <main class="portfolio-page">
+    <h1>PORTFOLIO</h1>
 
+    <div class="portfolio-intro-meta">
 
-        <section class="portfolio-intro">
+        <p>
+            A chronological archive of things I have made,
+            explored, drawn, photographed, designed,
+            rendered and experimented with.
+        </p>
 
-            <h1>
-                PORTFOLIO
-            </h1>
+        <p>
+            2020 — 2026<br>
+            INSTAGRAM / @ARTIST_SBK
+        </p>
 
+    </div>
 
-            <p>
-                A chronological record of things made,
-                tested, drawn, photographed, rendered,
-                abandoned and occasionally finished.
-            </p>
-
-        </section>
-
-
-        <!-- =================================================
-             CATEGORY FILTERS
-             ================================================= -->
-
-        <div
-            id="portfolio-filters"
-            class="portfolio-filters"
-            aria-label="Portfolio categories"
-        ></div>
+</section>
 
 
-        <!-- =================================================
-             PORTFOLIO CONTAINER
-             ================================================= -->
+<section class="filter-section">
 
-        <div
-            id="portfolio-container"
-            class="portfolio-status"
-        >
-            Loading portfolio...
+    <div class="filter-label">
+        FILTER BY CATEGORY
+    </div>
+
+    <div class="filters" id="filters">
+
+        <button
+            class="filter-button active"
+            data-filter="ALL">
+            ALL
+        </button>
+
+    </div>
+
+</section>
+
+
+<main id="portfolio-container">
+
+    <div class="empty-message">
+        Loading portfolio...
+    </div>
+
+</main>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div class="modal" id="portfolio-modal">
+
+    <div class="modal-inner">
+
+        <div class="modal-top">
+
+            <div class="modal-title" id="modal-title"></div>
+
+            <button
+                class="modal-close"
+                id="modal-close">
+                CLOSE ×
+            </button>
+
         </div>
-
-
-    </main>
-
-
-    <!-- =====================================================
-         MODAL
-         ===================================================== -->
-
-    <div
-        id="portfolio-modal"
-        class="portfolio-modal"
-        aria-hidden="true"
-    >
 
 
         <div class="modal-content">
 
+            <button
+                class="modal-arrow modal-prev"
+                id="modal-prev">
+                ←
+            </button>
 
-            <div class="modal-header">
+            <div id="modal-media"></div>
 
-                <span id="modal-counter">
-                    001 — 1 / 1
-                </span>
-
-
-                <button
-                    id="modal-close"
-                    class="modal-close"
-                    type="button"
-                >
-                    CLOSE ×
-                </button>
-
-            </div>
-
-
-            <div class="modal-body">
-
-                <button
-                    id="modal-prev"
-                    class="modal-arrow modal-prev"
-                    type="button"
-                    aria-label="Previous image"
-                >
-                    ←
-                </button>
-
-
-                <div
-                    id="modal-media-container"
-                ></div>
-
-
-                <button
-                    id="modal-next"
-                    class="modal-arrow modal-next"
-                    type="button"
-                    aria-label="Next image"
-                >
-                    →
-                </button>
-
-            </div>
-
-
-            <div
-                id="modal-caption"
-                class="modal-caption"
-            ></div>
-
+            <button
+                class="modal-arrow modal-next"
+                id="modal-next">
+                →
+            </button>
 
         </div>
 
 
+        <div class="modal-bottom">
+
+            <div
+                class="modal-caption"
+                id="modal-caption">
+            </div>
+
+            <div
+                class="modal-counter"
+                id="modal-counter">
+            </div>
+
+        </div>
+
     </div>
 
-
-    <!-- =====================================================
-         JAVASCRIPT
-         ===================================================== -->
-
-    <script>
-
-        /* ====================================================
-           DATA
-           ==================================================== */
-
-        const DATA_URL =
-            "portfolio-data.json";
+</div>
 
 
-        const GITHUB_BASE =
-            "https://swayam0333777-stack.github.io/unfinished-business/";
+<script>
+
+    /* =========================
+       SETTINGS
+    ========================= */
+
+    const DATA_URL = "portfolio-data.json";
+
+    const GITHUB_BASE =
+        "https://swayam0333777-stack.github.io/unfinished-business/";
 
 
-        /* ====================================================
-           ELEMENTS
-           ==================================================== */
+    /* =========================
+       GLOBAL DATA
+    ========================= */
+
+    let portfolioData = [];
+
+    let filteredPosts = [];
+
+    let currentPostIndex = 0;
+
+    let currentMediaIndex = 0;
+
+
+    /* =========================
+       IMPORTANT PATH FIX
+    ========================= */
+
+    function normalizeMediaPath(mediaPath) {
+
+        if (!mediaPath) {
+            return "";
+        }
+
+        let path = mediaPath
+            .replace(/^\/+/, "")
+            .replace(/\\/g, "/");
+
+
+        /*
+            CURRENT JSON FORMAT:
+
+            portfolio/001/001-image-1.jpg
+
+            ACTUAL GITHUB FILE:
+
+            portfolio/001-image-1.jpg
+        */
+
+        let match = path.match(
+            /^portfolio\/(\d+)\/\1-(.+)$/i
+        );
+
+        if (match) {
+
+            path =
+                `portfolio/${match[1]}-${match[2]}`;
+
+        }
+
+
+        /*
+            ALSO SUPPORT:
+
+            portfolio/001/image-1.jpg
+
+            ->
+
+            portfolio/001-image-1.jpg
+        */
+
+        else {
+
+            match = path.match(
+                /^portfolio\/(\d+)\/(.+)$/i
+            );
+
+            if (match) {
+
+                path =
+                    `portfolio/${match[1]}-${match[2]}`;
+
+            }
+
+        }
+
+
+        /*
+            If JSON already contains:
+
+            portfolio/001-image-1.jpg
+
+            leave it alone.
+        */
+
+        if (!path.startsWith("portfolio/")) {
+
+            path =
+                `portfolio/${path}`;
+
+        }
+
+
+        return GITHUB_BASE + path;
+
+    }
+
+
+    /* =========================
+       HELPERS
+    ========================= */
+
+    function getYear(post) {
+
+        if (post.date) {
+
+            return new Date(post.date)
+                .getFullYear();
+
+        }
+
+        return "UNKNOWN";
+
+    }
+
+
+    function isVideo(src, type) {
+
+        if (type === "video") {
+            return true;
+        }
+
+        return /\.(mp4|mov|m4v|webm)$/i.test(src);
+
+    }
+
+
+    function isHeic(src) {
+
+        return /\.(heic|heif)$/i.test(src);
+
+    }
+
+
+    /* =========================
+       LOAD DATA
+    ========================= */
+
+    async function loadPortfolio() {
+
+        const container =
+            document.getElementById(
+                "portfolio-container"
+            );
+
+        try {
+
+            const response =
+                await fetch(DATA_URL);
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `HTTP ${response.status}`
+                );
+
+            }
+
+            const data =
+                await response.json();
+
+
+            /*
+                Support either:
+
+                [
+                    {...},
+                    {...}
+                ]
+
+                OR:
+
+                {
+                    "posts": [...]
+                }
+            */
+
+            if (Array.isArray(data)) {
+
+                portfolioData = data;
+
+            }
+
+            else if (Array.isArray(data.posts)) {
+
+                portfolioData = data.posts;
+
+            }
+
+            else {
+
+                throw new Error(
+                    "Portfolio JSON does not contain posts."
+                );
+
+            }
+
+
+            filteredPosts =
+                [...portfolioData];
+
+
+            buildFilters();
+
+            renderPortfolio();
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Portfolio loading error:",
+                error
+            );
+
+            container.innerHTML = `
+                <div class="empty-message">
+                    Unable to load portfolio.<br><br>
+                    ${error.message}
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    /* =========================
+       BUILD FILTERS
+    ========================= */
+
+    function buildFilters() {
+
+        const filterContainer =
+            document.getElementById(
+                "filters"
+            );
+
+
+        const categories = new Set();
+
+
+        portfolioData.forEach(post => {
+
+            if (
+                Array.isArray(
+                    post.categories
+                )
+            ) {
+
+                post.categories.forEach(
+                    category => {
+                        categories.add(category);
+                    }
+                );
+
+            }
+
+        });
+
+
+        const sortedCategories =
+            [...categories].sort();
+
+
+        sortedCategories.forEach(
+            category => {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+                button.className =
+                    "filter-button";
+
+                button.dataset.filter =
+                    category;
+
+                button.textContent =
+                    category;
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        applyFilter(category);
+
+                    }
+                );
+
+                filterContainer.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        const allButton =
+            filterContainer.querySelector(
+                '[data-filter="ALL"]'
+            );
+
+
+        allButton.addEventListener(
+            "click",
+            () => {
+
+                applyFilter("ALL");
+
+            }
+        );
+
+    }
+
+
+    /* =========================
+       APPLY FILTER
+    ========================= */
+
+    function applyFilter(category) {
+
+        document
+            .querySelectorAll(
+                ".filter-button"
+            )
+            .forEach(button => {
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.filter === category
+                );
+
+            });
+
+
+        if (category === "ALL") {
+
+            filteredPosts =
+                [...portfolioData];
+
+        }
+
+        else {
+
+            filteredPosts =
+                portfolioData.filter(
+                    post =>
+                        Array.isArray(
+                            post.categories
+                        ) &&
+                        post.categories.includes(
+                            category
+                        )
+                );
+
+        }
+
+
+        renderPortfolio();
+
+    }
+
+
+    /* =========================
+       RENDER PORTFOLIO
+    ========================= */
+
+    function renderPortfolio() {
 
         const container =
             document.getElementById(
@@ -775,439 +1054,140 @@
             );
 
 
-        const filterContainer =
-            document.getElementById(
-                "portfolio-filters"
-            );
+        container.innerHTML = "";
 
 
-        const modal =
-            document.getElementById(
-                "portfolio-modal"
-            );
+        if (!filteredPosts.length) {
+
+            container.innerHTML = `
+                <div class="empty-message">
+                    No projects found.
+                </div>
+            `;
+
+            return;
+
+        }
 
 
-        const modalMediaContainer =
-            document.getElementById(
-                "modal-media-container"
-            );
+        const years = {};
 
 
-        const modalCaption =
-            document.getElementById(
-                "modal-caption"
-            );
+        filteredPosts.forEach(post => {
 
+            const year =
+                getYear(post);
 
-        const modalCounter =
-            document.getElementById(
-                "modal-counter"
-            );
+            if (!years[year]) {
 
-
-        const modalClose =
-            document.getElementById(
-                "modal-close"
-            );
-
-
-        const modalPrev =
-            document.getElementById(
-                "modal-prev"
-            );
-
-
-        const modalNext =
-            document.getElementById(
-                "modal-next"
-            );
-
-
-        /* ====================================================
-           STATE
-           ==================================================== */
-
-        let posts = [];
-
-        let currentPost = null;
-
-        let currentMediaIndex = 0;
-
-        let activeCategory = "ALL";
-
-
-        /* ====================================================
-           NORMALIZE MEDIA PATH
-           ==================================================== */
-
-        function normalizeMediaPath(
-            mediaPath
-        ) {
-
-            if (!mediaPath) {
-
-                return "";
+                years[year] = [];
 
             }
 
+            years[year].push(post);
 
-            let path =
-                mediaPath
-                    .replace(/^\/+/, "");
+        });
 
 
-            /*
-             * JSON currently uses paths such as:
-             *
-             * portfolio/001/image-1.jpg
-             *
-             * GitHub actually contains:
-             *
-             * portfolio/001-image-1.jpg
-             *
-             * Convert automatically.
-             */
-
-            path =
-                path.replace(
-                    /^portfolio\/(\d+)\/(.+)$/,
-                    "portfolio/$1-$2"
+        const sortedYears =
+            Object.keys(years)
+                .sort(
+                    (a, b) =>
+                        Number(b) - Number(a)
                 );
 
 
-            /*
-             * Also handle paths that are
-             * already flat.
-             */
+        sortedYears.forEach(year => {
 
-            if (
-                !path.startsWith(
-                    "portfolio/"
-                )
-            ) {
+            const yearSection =
+                document.createElement(
+                    "section"
+                );
 
-                path =
-                    `portfolio/${path}`;
+            yearSection.className =
+                "year-section";
 
-            }
 
+            const yearTitle =
+                document.createElement(
+                    "h2"
+                );
 
-            return (
-                GITHUB_BASE +
-                path
-            );
+            yearTitle.className =
+                "year-title";
 
-        }
+            yearTitle.textContent =
+                year;
 
 
-        /* ====================================================
-           LOAD DATA
-           ==================================================== */
-
-        async function loadPortfolio() {
-
-            try {
-
-                const response =
-                    await fetch(
-                        DATA_URL
-                    );
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "Could not load portfolio-data.json"
-                    );
-
-                }
-
-
-                const data =
-                    await response.json();
-
-
-                posts =
-                    data.posts || [];
-
-
-                if (!posts.length) {
-
-                    throw new Error(
-                        "No portfolio posts found."
-                    );
-
-                }
-
-
-                renderCategoryFilters();
-
-                renderPortfolio();
-
-
-            } catch (error) {
-
-                console.error(error);
-
-
-                container.innerHTML = `
-
-                    <div
-                        class="portfolio-error"
-                    >
-
-                        ERROR LOADING PORTFOLIO
-
-                        <br><br>
-
-                        ${error.message}
-
-                    </div>
-
-                `;
-
-            }
-
-        }
-
-
-        /* ====================================================
-           GROUP POSTS BY YEAR
-           ==================================================== */
-
-        function groupByYear(
-            postList
-        ) {
-
-            const groups = {};
-
-
-            postList.forEach(
-                post => {
-
-                    let year =
-                        "UNKNOWN";
-
-
-                    if (post.date) {
-
-                        year =
-                            post.date.substring(
-                                0,
-                                4
-                            );
-
-                    }
-
-
-                    if (!groups[year]) {
-
-                        groups[year] = [];
-
-                    }
-
-
-                    groups[year].push(
-                        post
-                    );
-
-                }
-            );
-
-
-            return groups;
-
-        }
-
-
-        /* ====================================================
-           GET CATEGORIES
-           ==================================================== */
-
-        function getAllCategories() {
-
-            const categorySet =
-                new Set();
-
-
-            posts.forEach(
-                post => {
-
-                    (
-                        post.categories || []
-                    ).forEach(
-                        category => {
-
-                            if (category) {
-
-                                categorySet.add(
-                                    category
-                                );
-
-                            }
-
-                        }
-                    );
-
-                }
-            );
-
-
-            return Array.from(
-                categorySet
-            ).sort(
-                (a, b) =>
-                    a.localeCompare(b)
-            );
-
-        }
-
-
-        /* ====================================================
-           CATEGORY MATCH
-           ==================================================== */
-
-        function postMatchesCategory(
-            post
-        ) {
-
-            if (
-                activeCategory ===
-                "ALL"
-            ) {
-
-                return true;
-
-            }
-
-
-            return (
-                post.categories || []
-            ).includes(
-                activeCategory
-            );
-
-        }
-
-
-        /* ====================================================
-           RENDER CATEGORY FILTERS
-           ==================================================== */
-
-        function renderCategoryFilters() {
-
-            filterContainer.innerHTML =
-                "";
-
-
-            const categories = [
-                "ALL",
-                ...getAllCategories()
-            ];
-
-
-            categories.forEach(
-                category => {
-
-                    const button =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    button.type =
-                        "button";
-
-
-                    button.className =
-                        "portfolio-filter";
-
-
-                    if (
-                        category ===
-                        activeCategory
-                    ) {
-
-                        button.classList.add(
-                            "active"
-                        );
-
-                    }
-
-
-                    button.textContent =
-                        category;
-
-
-                    button.addEventListener(
-                        "click",
-                        () => {
-
-                            activeCategory =
-                                category;
-
-
-                            renderCategoryFilters();
-
-                            renderPortfolio();
-
-                        }
-                    );
-
-
-                    filterContainer.appendChild(
-                        button
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* ====================================================
-           CREATE THUMBNAIL
-           ==================================================== */
-
-        function createThumbnail(
-            post
-        ) {
-
-            const media =
-                post.media || [];
-
-
-            const firstMedia =
-                media[0];
-
-
-            const wrapper =
+            const grid =
                 document.createElement(
                     "div"
                 );
 
-
-            wrapper.className =
-                "post-media";
-
-
-            if (!firstMedia) {
-
-                wrapper.innerHTML = `
-
-                    <div
-                        class="heic-placeholder"
-                    >
-                        NO MEDIA
-                    </div>
-
-                `;
+            grid.className =
+                "post-grid";
 
 
-                return wrapper;
+            years[year].forEach(post => {
 
-            }
+                const card =
+                    createPostCard(post);
 
+                grid.appendChild(card);
+
+            });
+
+
+            yearSection.appendChild(
+                yearTitle
+            );
+
+            yearSection.appendChild(
+                grid
+            );
+
+            container.appendChild(
+                yearSection
+            );
+
+        });
+
+    }
+
+
+    /* =========================
+       CREATE POST CARD
+    ========================= */
+
+    function createPostCard(post) {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+        card.className =
+            "post-card";
+
+
+        const mediaBox =
+            document.createElement(
+                "div"
+            );
+
+        mediaBox.className =
+            "post-media";
+
+
+        const firstMedia =
+            post.media &&
+            post.media.length
+                ? post.media[0]
+                : null;
+
+
+        if (firstMedia) {
 
             const src =
                 normalizeMediaPath(
@@ -1215,47 +1195,11 @@
                 );
 
 
-            const extension =
-                src
-                    .split("?")[0]
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
-
-
-            /* ------------------------------------------------
-               HEIC
-               ------------------------------------------------ */
-
             if (
-                extension === "heic" ||
-                extension === "heif"
-            ) {
-
-                wrapper.innerHTML = `
-
-                    <div
-                        class="heic-placeholder"
-                    >
-                        HEIC IMAGE<br>
-                        OPEN TO VIEW
-                    </div>
-
-                `;
-
-
-                return wrapper;
-
-            }
-
-
-            /* ------------------------------------------------
-               VIDEO
-               ------------------------------------------------ */
-
-            if (
-                firstMedia.type ===
-                "video"
+                isVideo(
+                    src,
+                    firstMedia.type
+                )
             ) {
 
                 const video =
@@ -1263,566 +1207,26 @@
                         "video"
                     );
 
+                video.src = src;
 
-                video.src =
-                    src;
+                video.muted = true;
 
+                video.loop = true;
 
-                video.muted =
-                    true;
+                video.autoplay = true;
 
+                video.playsInline = true;
 
-                video.playsInline =
-                    true;
+                video.preload = "metadata";
 
-
-                video.preload =
-                    "metadata";
-
-
-                wrapper.appendChild(
+                mediaBox.appendChild(
                     video
                 );
 
-
-                const indicator =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                indicator.className =
-                    "video-indicator";
-
-
-                indicator.textContent =
-                    "VIDEO";
-
-
-                wrapper.appendChild(
-                    indicator
-                );
-
-
-                return wrapper;
-
             }
 
-
-            /* ------------------------------------------------
-               IMAGE
-               ------------------------------------------------ */
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.src =
-                src;
-
-
-            img.alt =
-                post.title || "";
-
-
-            img.loading =
-                "lazy";
-
-
-            wrapper.appendChild(
-                img
-            );
-
-
-            return wrapper;
-
-        }
-
-
-        /* ====================================================
-           CREATE POST CARD
-           ==================================================== */
-
-        function createPostCard(
-            post
-        ) {
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "post-card";
-
-
-            card.appendChild(
-                createThumbnail(post)
-            );
-
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            info.className =
-                "post-info";
-
-
-            const number =
-                document.createElement(
-                    "div"
-                );
-
-
-            number.className =
-                "post-number";
-
-
-            number.textContent =
-                post.number || "";
-
-
-            const title =
-                document.createElement(
-                    "div"
-                );
-
-
-            title.className =
-                "post-title";
-
-
-            title.textContent =
-                post.title ||
-                "Untitled";
-
-
-            const date =
-                document.createElement(
-                    "div"
-                );
-
-
-            date.className =
-                "post-date";
-
-
-            date.textContent =
-                post.date_display ||
-                "";
-
-
-            const count =
-                document.createElement(
-                    "div"
-                );
-
-
-            count.className =
-                "post-count";
-
-
-            const mediaCount =
-                (
-                    post.media || []
-                ).length;
-
-
-            if (
-                mediaCount > 1
-            ) {
-
-                count.textContent =
-                    `${mediaCount} MEDIA`;
-
-            }
-
-
-            const categories =
-                post.categories || [];
-
-
-            const categoryWrap =
-                document.createElement(
-                    "div"
-                );
-
-
-            categoryWrap.className =
-                "post-categories";
-
-
-            categories.forEach(
-                category => {
-
-                    const tag =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    tag.className =
-                        "post-category";
-
-
-                    tag.textContent =
-                        category;
-
-
-                    categoryWrap.appendChild(
-                        tag
-                    );
-
-                }
-            );
-
-
-            info.appendChild(
-                number
-            );
-
-
-            info.appendChild(
-                title
-            );
-
-
-            info.appendChild(
-                date
-            );
-
-
-            if (
-                mediaCount > 1
-            ) {
-
-                info.appendChild(
-                    count
-                );
-
-            }
-
-
-            if (
-                categories.length
-            ) {
-
-                info.appendChild(
-                    categoryWrap
-                );
-
-            }
-
-
-            card.appendChild(
-                info
-            );
-
-
-            card.addEventListener(
-                "click",
-                () => {
-
-                    openModal(
-                        post,
-                        0
-                    );
-
-                }
-            );
-
-
-            return card;
-
-        }
-
-
-        /* ====================================================
-           RENDER PORTFOLIO
-           ==================================================== */
-
-        function renderPortfolio() {
-
-            container.innerHTML =
-                "";
-
-
-            const filteredPosts =
-                posts.filter(
-                    post =>
-                        postMatchesCategory(
-                            post
-                        )
-                );
-
-
-            if (
-                !filteredPosts.length
-            ) {
-
-                const empty =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                empty.className =
-                    "portfolio-empty";
-
-
-                empty.textContent =
-                    "NO POSTS IN THIS CATEGORY.";
-
-
-                container.appendChild(
-                    empty
-                );
-
-
-                return;
-
-            }
-
-
-            const groups =
-                groupByYear(
-                    filteredPosts
-                );
-
-
-            const years =
-                Object.keys(groups)
-                    .sort(
-                        (a, b) =>
-                            Number(b) -
-                            Number(a)
-                    );
-
-
-            years.forEach(
-                year => {
-
-                    const section =
-                        document.createElement(
-                            "section"
-                        );
-
-
-                    section.className =
-                        "portfolio-year";
-
-
-                    const header =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    header.className =
-                        "portfolio-year-title";
-
-
-                    const yearLabel =
-                        document.createElement(
-                            "strong"
-                        );
-
-
-                    yearLabel.textContent =
-                        year;
-
-
-                    const count =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    count.textContent =
-                        `${groups[year].length} POSTS`;
-
-
-                    header.appendChild(
-                        yearLabel
-                    );
-
-
-                    header.appendChild(
-                        count
-                    );
-
-
-                    const grid =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    grid.className =
-                        "post-grid";
-
-
-                    groups[year].forEach(
-                        post => {
-
-                            grid.appendChild(
-                                createPostCard(
-                                    post
-                                )
-                            );
-
-                        }
-                    );
-
-
-                    section.appendChild(
-                        header
-                    );
-
-
-                    section.appendChild(
-                        grid
-                    );
-
-
-                    container.appendChild(
-                        section
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* ====================================================
-           OPEN MODAL
-           ==================================================== */
-
-        function openModal(
-            post,
-            mediaIndex
-        ) {
-
-            currentPost =
-                post;
-
-
-            currentMediaIndex =
-                mediaIndex;
-
-
-            modal.classList.add(
-                "active"
-            );
-
-
-            modal.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            renderModalMedia();
-
-        }
-
-
-        /* ====================================================
-           CLOSE MODAL
-           ==================================================== */
-
-        function closeModal() {
-
-            modal.classList.remove(
-                "active"
-            );
-
-
-            modal.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-
-            document.body.style.overflow =
-                "";
-
-
-            modalMediaContainer.innerHTML =
-                "";
-
-
-            currentPost =
-                null;
-
-        }
-
-                /* ====================================================
-           RENDER MODAL MEDIA
-           ==================================================== */
-
-        function renderModalMedia() {
-
-            if (!currentPost) {
-
-                return;
-
-            }
-
-
-            const media =
-                currentPost.media || [];
-
-
-            if (!media.length) {
-
-                return;
-
-            }
-
-
-            const item =
-                media[
-                    currentMediaIndex
-                ];
-
-
-            modalMediaContainer.innerHTML =
-                "";
-
-
-            const src =
-                normalizeMediaPath(
-                    item.src
-                );
-
-
-            const extension =
-                src
-                    .split("?")[0]
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
-
-
-            /* ------------------------------------------------
-               HEIC
-               ------------------------------------------------ */
-
-            if (
-                extension === "heic" ||
-                extension === "heif"
+            else if (
+                isHeic(src)
             ) {
 
                 const placeholder =
@@ -1830,74 +1234,17 @@
                         "div"
                     );
 
-
                 placeholder.className =
                     "heic-placeholder";
 
-
-                placeholder.style.width =
-                    "500px";
-
-
-                placeholder.style.height =
-                    "400px";
-
-
                 placeholder.textContent =
-                    "HEIC IMAGE — BROWSER PREVIEW NOT SUPPORTED";
+                    "HEIC IMAGE";
 
-
-                modalMediaContainer.appendChild(
+                mediaBox.appendChild(
                     placeholder
                 );
 
             }
-
-
-            /* ------------------------------------------------
-               VIDEO
-               ------------------------------------------------ */
-
-            else if (
-                item.type === "video"
-            ) {
-
-                const video =
-                    document.createElement(
-                        "video"
-                    );
-
-
-                video.className =
-                    "modal-media";
-
-
-                video.src =
-                    src;
-
-
-                video.controls =
-                    true;
-
-
-                video.autoplay =
-                    true;
-
-
-                video.playsInline =
-                    true;
-
-
-                modalMediaContainer.appendChild(
-                    video
-                );
-
-            }
-
-
-            /* ------------------------------------------------
-               IMAGE
-               ------------------------------------------------ */
 
             else {
 
@@ -1906,179 +1253,547 @@
                         "img"
                     );
 
-
-                img.className =
-                    "modal-media";
-
-
-                img.src =
-                    src;
-
+                img.src = src;
 
                 img.alt =
-                    currentPost.title || "";
+                    post.title || "Portfolio image";
+
+                img.loading = "lazy";
+
+                img.onerror =
+                    function () {
+
+                        console.error(
+                            "IMAGE FAILED:",
+                            src
+                        );
+
+                        mediaBox.innerHTML = `
+                            <div class="heic-placeholder">
+                                IMAGE NOT FOUND
+                            </div>
+                        `;
+
+                    };
 
 
-                modalMediaContainer.appendChild(
+                mediaBox.appendChild(
                     img
                 );
 
             }
 
+        }
 
-            /* ------------------------------------------------
-               COUNTER
-               ------------------------------------------------ */
+        else {
 
-            modalCounter.textContent =
-                `${currentPost.number} — ${
-                    currentMediaIndex + 1
-                } / ${media.length}`;
-
-
-            /* ------------------------------------------------
-               CAPTION
-               ------------------------------------------------ */
-
-            let captionText =
-                currentPost.caption || "";
-
-
-            if (
-                currentPost.date_display
-            ) {
-
-                captionText =
-                    `${currentPost.date_display}\n\n${captionText}`;
-
-            }
-
-
-            modalCaption.textContent =
-                captionText;
-
-
-            /* ------------------------------------------------
-               ARROWS
-               ------------------------------------------------ */
-
-            modalPrev.style.display =
-                media.length > 1
-                    ? "block"
-                    : "none";
-
-
-            modalNext.style.display =
-                media.length > 1
-                    ? "block"
-                    : "none";
+            mediaBox.innerHTML = `
+                <div class="heic-placeholder">
+                    NO MEDIA
+                </div>
+            `;
 
         }
 
 
-        /* ====================================================
-           NEXT MEDIA
-           ==================================================== */
+        const info =
+            document.createElement(
+                "div"
+            );
 
-        function nextMedia() {
-
-            if (!currentPost) {
-
-                return;
-
-            }
+        info.className =
+            "post-info";
 
 
-            const media =
-                currentPost.media || [];
+        const number =
+            document.createElement(
+                "div"
+            );
+
+        number.className =
+            "post-number";
+
+        number.textContent =
+            post.number
+                ? `PROJECT ${post.number}`
+                : "";
 
 
-            if (
-                media.length <= 1
-            ) {
+        const title =
+            document.createElement(
+                "h3"
+            );
 
-                return;
+        title.className =
+            "post-title";
 
-            }
-
-
-            currentMediaIndex =
-                (
-                    currentMediaIndex + 1
-                ) % media.length;
+        title.textContent =
+            post.title || "Untitled";
 
 
-            renderModalMedia();
+        const date =
+            document.createElement(
+                "div"
+            );
+
+        date.className =
+            "post-date";
+
+        date.textContent =
+            post.date_display || "";
+
+
+        const categories =
+            document.createElement(
+                "div"
+            );
+
+        categories.className =
+            "post-categories";
+
+
+        if (
+            Array.isArray(
+                post.categories
+            )
+        ) {
+
+            post.categories.forEach(
+                category => {
+
+                    const tag =
+                        document.createElement(
+                            "span"
+                        );
+
+                    tag.className =
+                        "post-category";
+
+                    tag.textContent =
+                        category;
+
+                    categories.appendChild(
+                        tag
+                    );
+
+                }
+            );
 
         }
 
 
-        /* ====================================================
-           PREVIOUS MEDIA
-           ==================================================== */
+        info.appendChild(number);
 
-        function previousMedia() {
+        info.appendChild(title);
 
-            if (!currentPost) {
+        info.appendChild(date);
 
-                return;
-
-            }
+        info.appendChild(categories);
 
 
-            const media =
-                currentPost.media || [];
+        card.appendChild(mediaBox);
+
+        card.appendChild(info);
 
 
-            if (
-                media.length <= 1
-            ) {
+        card.addEventListener(
+            "click",
+            () => {
 
-                return;
+                openModal(post);
 
             }
+        );
 
 
-            currentMediaIndex =
-                (
-                    currentMediaIndex - 1 +
-                    media.length
-                ) % media.length;
+        return card;
+
+    }
 
 
-            renderModalMedia();
+    /* =========================
+       MODAL
+    ========================= */
+
+    function openModal(post) {
+
+        currentPostIndex =
+            filteredPosts.indexOf(post);
+
+        currentMediaIndex = 0;
+
+
+        document
+            .getElementById(
+                "portfolio-modal"
+            )
+            .classList.add("open");
+
+
+        document.body.style.overflow =
+            "hidden";
+
+
+        renderModal();
+
+    }
+
+
+    function closeModal() {
+
+        document
+            .getElementById(
+                "portfolio-modal"
+            )
+            .classList.remove("open");
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    function renderModal() {
+
+        const post =
+            filteredPosts[
+                currentPostIndex
+            ];
+
+
+        if (!post) {
+            return;
+        }
+
+
+        document
+            .getElementById(
+                "modal-title"
+            )
+            .textContent =
+            post.title || "Untitled";
+
+
+        document
+            .getElementById(
+                "modal-caption"
+            )
+            .textContent =
+            post.caption || "";
+
+
+        renderModalMedia();
+
+
+        const total =
+            post.media
+                ? post.media.length
+                : 0;
+
+
+        document
+            .getElementById(
+                "modal-counter"
+            )
+            .textContent =
+            `${String(currentPostIndex + 1).padStart(3, "0")} / ${String(filteredPosts.length).padStart(3, "0")} — ${currentMediaIndex + 1}/${total}`;
+
+    }
+
+
+    function renderModalMedia() {
+
+        const post =
+            filteredPosts[
+                currentPostIndex
+            ];
+
+
+        const mediaContainer =
+            document.getElementById(
+                "modal-media"
+            );
+
+
+        mediaContainer.innerHTML =
+            "";
+
+
+        if (
+            !post ||
+            !post.media ||
+            !post.media.length
+        ) {
+
+            return;
 
         }
 
 
-        /* ====================================================
-           EVENTS
-           ==================================================== */
+        const media =
+            post.media[
+                currentMediaIndex
+            ];
 
-        modalClose.addEventListener(
+
+        if (!media) {
+            return;
+        }
+
+
+        const src =
+            normalizeMediaPath(
+                media.src
+            );
+
+
+        if (
+            isVideo(
+                src,
+                media.type
+            )
+        ) {
+
+            const video =
+                document.createElement(
+                    "video"
+                );
+
+            video.src = src;
+
+            video.controls = true;
+
+            video.autoplay = true;
+
+            video.playsInline = true;
+
+            video.preload = "metadata";
+
+            mediaContainer.appendChild(
+                video
+            );
+
+        }
+
+        else if (
+            isHeic(src)
+        ) {
+
+            const placeholder =
+                document.createElement(
+                    "div"
+                );
+
+            placeholder.className =
+                "modal-heic";
+
+            placeholder.innerHTML =
+                `
+                    HEIC image<br><br>
+                    This browser does not display HEIC files directly.
+                `;
+
+            mediaContainer.appendChild(
+                placeholder
+            );
+
+        }
+
+        else {
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+            img.src = src;
+
+            img.alt =
+                post.title || "Portfolio image";
+
+            img.onerror =
+                function () {
+
+                    console.error(
+                        "MODAL IMAGE FAILED:",
+                        src
+                    );
+
+                    mediaContainer.innerHTML =
+                        `
+                            <div class="modal-heic">
+                                IMAGE NOT FOUND
+                            </div>
+                        `;
+
+                };
+
+
+            mediaContainer.appendChild(
+                img
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       NEXT / PREVIOUS MEDIA
+    ========================= */
+
+    function nextMedia() {
+
+        const post =
+            filteredPosts[
+                currentPostIndex
+            ];
+
+
+        if (
+            !post ||
+            !post.media ||
+            !post.media.length
+        ) {
+            return;
+        }
+
+
+        currentMediaIndex =
+            (
+                currentMediaIndex + 1
+            ) %
+            post.media.length;
+
+
+        renderModal();
+
+    }
+
+
+    function previousMedia() {
+
+        const post =
+            filteredPosts[
+                currentPostIndex
+            ];
+
+
+        if (
+            !post ||
+            !post.media ||
+            !post.media.length
+        ) {
+            return;
+        }
+
+
+        currentMediaIndex =
+            (
+                currentMediaIndex - 1 +
+                post.media.length
+            ) %
+            post.media.length;
+
+
+        renderModal();
+
+    }
+
+
+    /* =========================
+       NEXT / PREVIOUS POST
+    ========================= */
+
+    function nextPost() {
+
+        if (!filteredPosts.length) {
+            return;
+        }
+
+
+        currentPostIndex =
+            (
+                currentPostIndex + 1
+            ) %
+            filteredPosts.length;
+
+
+        currentMediaIndex = 0;
+
+        renderModal();
+
+    }
+
+
+    function previousPost() {
+
+        if (!filteredPosts.length) {
+            return;
+        }
+
+
+        currentPostIndex =
+            (
+                currentPostIndex - 1 +
+                filteredPosts.length
+            ) %
+            filteredPosts.length;
+
+
+        currentMediaIndex = 0;
+
+        renderModal();
+
+    }
+
+
+    /* =========================
+       EVENT LISTENERS
+    ========================= */
+
+    document
+        .getElementById(
+            "modal-close"
+        )
+        .addEventListener(
             "click",
             closeModal
         );
 
 
-        modalNext.addEventListener(
+    document
+        .getElementById(
+            "modal-next"
+        )
+        .addEventListener(
             "click",
             nextMedia
         );
 
 
-        modalPrev.addEventListener(
+    document
+        .getElementById(
+            "modal-prev"
+        )
+        .addEventListener(
             "click",
             previousMedia
         );
 
 
-        modal.addEventListener(
+    document
+        .getElementById(
+            "portfolio-modal"
+        )
+        .addEventListener(
             "click",
             event => {
 
                 if (
-                    event.target === modal
+                    event.target.id ===
+                    "portfolio-modal"
                 ) {
 
                     closeModal();
@@ -2089,60 +1804,60 @@
         );
 
 
-        document.addEventListener(
-            "keydown",
-            event => {
+    document.addEventListener(
+        "keydown",
+        event => {
 
-                if (
-                    !modal.classList.contains(
-                        "active"
-                    )
-                ) {
-
-                    return;
-
-                }
+            const modal =
+                document.getElementById(
+                    "portfolio-modal"
+                );
 
 
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeModal();
-
-                }
-
-
-                if (
-                    event.key === "ArrowRight"
-                ) {
-
-                    nextMedia();
-
-                }
+            if (
+                !modal.classList.contains(
+                    "open"
+                )
+            ) {
+                return;
+            }
 
 
-                if (
-                    event.key === "ArrowLeft"
-                ) {
+            if (
+                event.key === "Escape"
+            ) {
 
-                    previousMedia();
-
-                }
+                closeModal();
 
             }
-        );
+
+            else if (
+                event.key === "ArrowRight"
+            ) {
+
+                nextMedia();
+
+            }
+
+            else if (
+                event.key === "ArrowLeft"
+            ) {
+
+                previousMedia();
+
+            }
+
+        }
+    );
 
 
-        /* ====================================================
-           START
-           ==================================================== */
+    /* =========================
+       START
+    ========================= */
 
-        loadPortfolio();
+    loadPortfolio();
 
-    </script>
-
+</script>
 
 </body>
-
 </html>
