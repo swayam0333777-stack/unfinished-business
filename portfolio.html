@@ -1,361 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Portfolio — Unfinished Cool Stuff</title>
 
-    <title>PORTFOLIO — UNFINISHED COOL STUFF</title>
+    <link rel="stylesheet" href="style.css">
 
     <style>
+        /* =====================================================
+           PORTFOLIO PAGE
+           ===================================================== */
 
-        :root {
-            --cream: #f4f0e6;
-            --blue: #1234d8;
-            --black: #111111;
+        .portfolio-page {
+            padding: 0 4vw 80px;
         }
-
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-            margin: 0;
-
-            background: var(--cream);
-
-            color: var(--blue);
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-        }
-
-
-        body.modal-open {
-            overflow: hidden;
-        }
-
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        .site-header {
-
-            min-height: 100px;
-
-            padding: 22px 24px;
-
-            border-bottom:
-                1px solid var(--blue);
-
-            display: grid;
-
-            grid-template-columns:
-                1fr
-                auto
-                1fr;
-
-            align-items: start;
-
-            gap: 20px;
-
-        }
-
-
-        .site-logo {
-
-            font-size: 28px;
-
-            line-height: 0.9;
-
-            letter-spacing: -0.04em;
-
-            font-weight: bold;
-
-        }
-
-
-        .main-nav {
-
-            display: flex;
-
-            gap: 30px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 13px;
-
-        }
-
-
-        .main-nav a {
-
-            border-bottom:
-                1px solid transparent;
-
-        }
-
-
-        .main-nav a:hover {
-
-            border-bottom-color:
-                var(--blue);
-
-        }
-
-
-        .site-meta {
-
-            justify-self: end;
-
-            text-align: right;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 12px;
-
-            line-height: 1.3;
-
-        }
-
-
-        /* =========================
-           INTRO
-        ========================= */
 
         .portfolio-intro {
-
-            padding:
-                55px
-                24px
-                45px;
-
-            border-bottom:
-                1px solid var(--blue);
-
+            padding: 70px 0 50px;
+            border-bottom: 1px solid #1234d8;
         }
 
-
-        .intro-label {
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 13px;
-
-            margin-bottom: 50px;
-
-        }
-
-
-        .intro-title {
-
+        .portfolio-intro h1 {
             margin: 0;
-
-            max-width: 1200px;
-
-            font-size:
-                clamp(
-                    65px,
-                    11vw,
-                    170px
-                );
-
-            line-height: 0.8;
-
-            letter-spacing: -0.07em;
-
-            font-weight: normal;
-
-        }
-
-
-        .intro-bottom {
-
-            margin-top: 55px;
-
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items: flex-end;
-
-            gap: 30px;
-
-        }
-
-
-        .intro-text {
-
-            max-width: 620px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 14px;
-
-            line-height: 1.45;
-
-        }
-
-
-        .intro-count {
-
-            font-size:
-                clamp(
-                    70px,
-                    9vw,
-                    130px
-                );
-
-            line-height: 0.8;
-
-            letter-spacing: -0.07em;
-
-        }
-
-
-        /* =========================
-           ARCHIVE
-        ========================= */
-
-        .archive {
-
-            padding:
-                40px
-                24px
-                100px;
-
-        }
-
-
-        /* =========================
-           YEAR
-        ========================= */
-
-        .year-marker {
-
-            margin-top: 55px;
-
-            padding:
-                0
-                0
-                16px;
-
-            border-bottom:
-                1px solid var(--blue);
-
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                baseline;
-
-        }
-
-
-        .year-marker:first-child {
-
-            margin-top: 0;
-
-        }
-
-
-        .year {
-
-            font-size:
-                clamp(
-                    45px,
-                    7vw,
-                    90px
-                );
-
-            line-height: 0.8;
-
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(4rem, 10vw, 10rem);
+            line-height: 0.85;
+            font-weight: 400;
             letter-spacing: -0.06em;
-
         }
 
-
-        .year-info {
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
-
+        .portfolio-intro p {
+            max-width: 650px;
+            margin: 35px 0 0;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
+        /* =====================================================
+           YEAR
+           ===================================================== */
 
-        /* =========================
-           GRID
-        ========================= */
+        .portfolio-year {
+            margin-top: 55px;
+        }
+
+        .portfolio-year-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+
+            padding-bottom: 12px;
+
+            border-bottom: 1px solid #1234d8;
+
+            font-family: monospace;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-year-title strong {
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        /* =====================================================
+           POST GRID
+           ===================================================== */
 
         .post-grid {
-
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    4,
-                    minmax(0, 1fr)
-                );
+                repeat(4, minmax(0, 1fr));
 
-            gap: 18px;
+            gap: 1px;
 
-            margin-top: 18px;
+            background: #1234d8;
 
+            border-left: 1px solid #1234d8;
+            border-top: 1px solid #1234d8;
+
+            margin-top: 1px;
         }
 
-
-        /* =========================
-           CARD
-        ========================= */
-
         .post-card {
-
             position: relative;
 
-            cursor: pointer;
+            background: #f4f0e6;
 
             min-width: 0;
 
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease;
         }
 
+        .post-card:hover {
+            background: #ffffff;
+        }
 
-        .post-image-wrap {
+        /* =====================================================
+           MEDIA THUMBNAIL
+           ===================================================== */
 
+        .post-media {
             position: relative;
 
             width: 100%;
@@ -364,2190 +116,1285 @@
 
             overflow: hidden;
 
-            background:
-                #e9e4d9;
-
-            border:
-                1px solid var(--blue);
-
+            border-right: 1px solid #1234d8;
+            border-bottom: 1px solid #1234d8;
         }
 
-
-        .post-image {
-
+        .post-media img,
+        .post-media video {
             width: 100%;
-
             height: 100%;
 
             display: block;
 
             object-fit: cover;
-
-            transition:
-                transform
-                0.35s
-                ease;
-
         }
 
-
-        .post-card:hover
-        .post-image {
-
-            transform:
-                scale(1.035);
-
+        .post-media video {
+            pointer-events: none;
         }
 
-
-        .post-overlay {
-
-            position: absolute;
-
-            left: 0;
-
-            right: 0;
-
-            bottom: 0;
-
-            padding:
-                10px;
-
-            background:
-                linear-gradient(
-                    transparent,
-                    rgba(
-                        18,
-                        52,
-                        216,
-                        0.9
-                    )
-                );
-
-            color:
-                var(--cream);
-
-            opacity: 0;
-
-            transition:
-                opacity
-                0.25s
-                ease;
-
-        }
-
-
-        .post-card:hover
-        .post-overlay {
-
-            opacity: 1;
-
-        }
-
-
-        .post-overlay-inner {
-
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                baseline;
-
-            gap: 10px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 10px;
-
-        }
-
-
-        .post-number {
-
-            font-weight: bold;
-
-        }
-
-
-        .post-date {
-
-            text-align: right;
-
-        }
-
-
-        /* =========================
-           MEDIA BADGES
-        ========================= */
-
-        .media-badge {
-
-            position: absolute;
-
-            top: 8px;
-
-            right: 8px;
-
-            padding:
-                5px
-                7px;
-
-            background:
-                var(--cream);
-
-            border:
-                1px solid var(--blue);
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 9px;
-
-            line-height: 1;
-
-        }
-
-
-        /* =========================
-           HEIC FALLBACK
-        ========================= */
+        /* =====================================================
+           HEIC PLACEHOLDER
+           ===================================================== */
 
         .heic-placeholder {
-
             width: 100%;
-
             height: 100%;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             padding: 20px;
 
+            box-sizing: border-box;
+
             text-align: center;
 
-            font-family:
-                "Courier New",
-                monospace;
+            font-family: monospace;
+            font-size: 11px;
+            line-height: 1.4;
 
+            background: #e8e3d7;
+        }
+
+        /* =====================================================
+           POST INFORMATION
+           ===================================================== */
+
+        .post-info {
+            padding: 13px;
+
+            border-right: 1px solid #1234d8;
+            border-bottom: 1px solid #1234d8;
+        }
+
+        .post-number {
+            font-family: monospace;
+            font-size: 11px;
+        }
+
+        .post-title {
+            margin-top: 7px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 18px;
+            line-height: 1.05;
+        }
+
+        .post-date {
+            margin-top: 9px;
+
+            font-family: monospace;
             font-size: 10px;
 
+            opacity: 0.65;
         }
 
+        .post-count {
+            margin-top: 7px;
 
-        /* =========================
-           LOADING
-        ========================= */
+            font-family: monospace;
+            font-size: 10px;
 
-        .loading,
-        .error {
+            opacity: 0.65;
+        }
 
-            padding:
-                80px
-                0;
+        /* =====================================================
+           VIDEO INDICATOR
+           ===================================================== */
 
-            font-family:
-                "Courier New",
-                monospace;
+        .video-indicator {
+            position: absolute;
 
+            right: 10px;
+            bottom: 10px;
+
+            padding: 5px 7px;
+
+            background: #f4f0e6;
+
+            border: 1px solid #1234d8;
+
+            font-family: monospace;
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           LOADING / ERROR
+           ===================================================== */
+
+        .portfolio-status {
+            padding: 60px 0;
+
+            font-family: monospace;
             font-size: 13px;
-
         }
 
+        .portfolio-error {
+            padding: 30px;
 
-        /* =========================
+            border: 1px solid #1234d8;
+
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        /* =====================================================
            MODAL
-        ========================= */
+           ===================================================== */
 
-        .modal {
-
+        .portfolio-modal {
             position: fixed;
 
             inset: 0;
 
-            z-index: 1000;
+            z-index: 9999;
 
             display: none;
 
-            background:
-                rgba(
-                    244,
-                    240,
-                    230,
-                    0.98
-                );
-
-            overflow-y: auto;
-
+            background: rgba(244, 240, 230, 0.97);
         }
 
-
-        .modal.active {
-
-            display: block;
-
-        }
-
-
-        .modal-header {
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 5;
-
-            padding:
-                18px
-                24px;
-
-            background:
-                var(--cream);
-
-            border-bottom:
-                1px solid var(--blue);
-
+        .portfolio-modal.active {
             display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 12px;
-
         }
-
-
-        .modal-close {
-
-            appearance: none;
-
-            border:
-                1px solid var(--blue);
-
-            background:
-                transparent;
-
-            color:
-                var(--blue);
-
-            padding:
-                7px
-                12px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
-
-            cursor: pointer;
-
-        }
-
-
-        .modal-close:hover {
-
-            background:
-                var(--blue);
-
-            color:
-                var(--cream);
-
-        }
-
 
         .modal-content {
-
             width: 100%;
-
-            max-width: 1100px;
-
-            margin:
-                0 auto;
-
-            padding:
-                40px
-                24px
-                80px;
-
-        }
-
-
-        .modal-media {
-
-            position: relative;
-
-            width: 100%;
+            height: 100%;
 
             display: flex;
-
-            justify-content:
-                center;
-
-            align-items:
-                center;
-
+            flex-direction: column;
         }
 
-
-        .modal-media img,
-        .modal-media video {
-
-            display: block;
-
-            max-width: 100%;
-
-            max-height: 75vh;
-
-            width: auto;
-
-            height: auto;
-
-            object-fit: contain;
-
-            background:
-                #e9e4d9;
-
-        }
-
-
-        .modal-heic {
-
-            width: 100%;
-
-            min-height: 500px;
+        .modal-header {
+            flex-shrink: 0;
 
             display: flex;
-
+            justify-content: space-between;
             align-items: center;
 
-            justify-content: center;
+            padding: 16px 20px;
 
-            border:
-                1px solid var(--blue);
+            border-bottom: 1px solid #1234d8;
 
-            font-family:
-                "Courier New",
-                monospace;
-
+            font-family: monospace;
             font-size: 12px;
-
-            text-align: center;
-
         }
 
+        .modal-close {
+            border: 0;
+            background: transparent;
 
-        .modal-controls {
-
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            margin-top: 15px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
-
-        }
-
-
-        .modal-button {
-
-            appearance: none;
-
-            border:
-                1px solid var(--blue);
-
-            background:
-                transparent;
-
-            color:
-                var(--blue);
-
-            padding:
-                8px
-                14px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
+            font-family: monospace;
+            font-size: 12px;
 
             cursor: pointer;
 
+            padding: 5px;
         }
 
+        .modal-body {
+            flex: 1;
 
-        .modal-button:hover {
-
-            background:
-                var(--blue);
-
-            color:
-                var(--cream);
-
-        }
-
-
-        .modal-details {
-
-            margin-top: 35px;
-
-            padding-top: 25px;
-
-            border-top:
-                1px solid var(--blue);
-
-            display: grid;
-
-            grid-template-columns:
-                1fr
-                250px;
-
-            gap: 40px;
-
-        }
-
-
-        .modal-caption {
-
-            font-size:
-                clamp(
-                    24px,
-                    3vw,
-                    42px
-                );
-
-            line-height: 0.95;
-
-            letter-spacing: -0.035em;
-
-            white-space: pre-line;
-
-            overflow-wrap:
-                anywhere;
-
-        }
-
-
-        .modal-meta {
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
-
-            line-height: 1.5;
-
-        }
-
-
-        .modal-tags {
-
-            margin-top: 20px;
+            min-height: 0;
 
             display: flex;
+            align-items: center;
+            justify-content: center;
 
-            flex-wrap: wrap;
+            padding: 30px;
 
-            gap: 6px;
-
+            position: relative;
         }
 
+        .modal-media {
+            max-width: 80vw;
+            max-height: 75vh;
 
-        .modal-tag {
-
-            border:
-                1px solid var(--blue);
-
-            padding:
-                5px
-                7px;
-
+            object-fit: contain;
         }
 
+        .modal-caption {
+            flex-shrink: 0;
 
-        /* =========================
-           FOOTER
-        ========================= */
+            max-height: 25vh;
+            overflow-y: auto;
 
-        .site-footer {
+            padding: 20px;
 
-            padding:
-                30px
-                24px;
+            border-top: 1px solid #1234d8;
 
-            border-top:
-                1px solid var(--blue);
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.5;
 
-            display: grid;
-
-            grid-template-columns:
-                1fr
-                1fr
-                1fr;
-
-            gap: 20px;
-
-            font-family:
-                "Courier New",
-                monospace;
-
-            font-size: 11px;
-
+            white-space: pre-wrap;
         }
 
+        .modal-arrow {
+            position: absolute;
 
-        .site-footer div:nth-child(2) {
+            top: 50%;
 
-            text-align: center;
+            transform: translateY(-50%);
 
+            width: 45px;
+            height: 45px;
+
+            border: 1px solid #1234d8;
+
+            background: #f4f0e6;
+
+            font-family: monospace;
+            font-size: 18px;
+
+            cursor: pointer;
         }
 
-
-        .site-footer div:last-child {
-
-            text-align: right;
-
+        .modal-prev {
+            left: 20px;
         }
 
+        .modal-next {
+            right: 20px;
+        }
 
-        /* =========================
-           TABLET
-        ========================= */
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
 
         @media (max-width: 1000px) {
 
             .post-grid {
-
                 grid-template-columns:
-                    repeat(
-                        3,
-                        minmax(0, 1fr)
-                    );
-
+                    repeat(3, minmax(0, 1fr));
             }
-
         }
-
 
         @media (max-width: 700px) {
 
-            .site-header {
-
-                grid-template-columns:
-                    1fr
-                    auto;
-
+            .portfolio-page {
+                padding: 0 3vw 60px;
             }
-
-
-            .main-nav {
-
-                grid-column:
-                    1 / -1;
-
-                grid-row: 2;
-
-            }
-
-
-            .site-meta {
-
-                grid-column: 2;
-
-                grid-row: 1;
-
-            }
-
-
-            .post-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0, 1fr)
-                    );
-
-                gap: 12px;
-
-            }
-
-
-            .modal-details {
-
-                grid-template-columns:
-                    1fr;
-
-                gap: 25px;
-
-            }
-
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 500px) {
-
-            .site-header {
-
-                padding: 18px;
-
-            }
-
-
-            .site-logo {
-
-                font-size: 22px;
-
-            }
-
-
-            .main-nav {
-
-                gap: 18px;
-
-                font-size: 10px;
-
-            }
-
 
             .portfolio-intro {
-
-                padding:
-                    40px
-                    18px
-                    35px;
-
+                padding: 50px 0 35px;
             }
 
-
-            .intro-label {
-
-                margin-bottom: 40px;
-
+            .portfolio-intro h1 {
+                font-size: 17vw;
             }
-
-
-            .intro-title {
-
-                font-size:
-                    clamp(
-                        55px,
-                        16vw,
-                        100px
-                    );
-
-            }
-
-
-            .intro-bottom {
-
-                margin-top: 40px;
-
-                display: grid;
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .intro-count {
-
-                justify-self:
-                    end;
-
-                font-size: 85px;
-
-            }
-
-
-            .archive {
-
-                padding:
-                    30px
-                    18px
-                    70px;
-
-            }
-
-
-            .year-marker {
-
-                margin-top: 45px;
-
-            }
-
-
-            .year {
-
-                font-size: 55px;
-
-            }
-
 
             .post-grid {
-
-                gap: 8px;
-
-                margin-top: 12px;
-
-            }
-
-
-            .post-overlay {
-
-                display: none;
-
-            }
-
-
-            .modal-content {
-
-                padding:
-                    25px
-                    15px
-                    60px;
-
-            }
-
-
-            .modal-header {
-
-                padding:
-                    15px
-                    18px;
-
-            }
-
-
-            .modal-caption {
-
-                font-size: 28px;
-
-            }
-
-
-            .site-footer {
-
                 grid-template-columns:
-                    1fr;
-
-                padding:
-                    25px
-                    18px;
-
+                    repeat(2, minmax(0, 1fr));
             }
 
-
-            .site-footer div,
-            .site-footer div:nth-child(2),
-            .site-footer div:last-child {
-
-                text-align: left;
-
+            .post-title {
+                font-size: 15px;
             }
 
+            .modal-body {
+                padding: 15px;
+            }
+
+            .modal-media {
+                max-width: 90vw;
+                max-height: 70vh;
+            }
+
+            .modal-prev {
+                left: 8px;
+            }
+
+            .modal-next {
+                right: 8px;
+            }
         }
 
+        @media (max-width: 450px) {
+
+            .post-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-
 </head>
-
 
 <body>
 
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-<!-- =========================
-     HEADER
-========================= -->
+    <header class="site-header">
 
-<header class="site-header">
-
-    <div class="site-logo">
-
-        UNFINISHED<br>
-        COOL STUFF
-
-    </div>
-
-
-    <nav class="main-nav">
-
-        <a href="index.html">
-            ARCHIVE
+        <a href="index.html" class="site-logo">
+            UNFINISHED<br>
+            COOL STUFF
         </a>
 
-        <a href="portfolio.html">
-            PORTFOLIO
-        </a>
+        <nav class="site-nav">
+            <a href="index.html">ARCHIVE</a>
+            <a href="portfolio.html">PORTFOLIO</a>
+            <a href="index.html#about">ABOUT</a>
+        </nav>
 
-        <a href="index.html#about">
-            ABOUT
-        </a>
-
-    </nav>
+    </header>
 
 
-    <div class="site-meta">
+    <!-- =====================================================
+         PORTFOLIO
+         ===================================================== -->
 
-        PERSONAL PORTFOLIO<br>
-        2020—2026
+    <main class="portfolio-page">
 
-    </div>
+        <section class="portfolio-intro">
 
-</header>
+            <h1>PORTFOLIO</h1>
 
+            <p>
+                A chronological record of things made,
+                tested, drawn, photographed, rendered,
+                abandoned and occasionally finished.
+            </p>
 
-
-<!-- =========================
-     INTRO
-========================= -->
-
-<section class="portfolio-intro">
-
-    <div class="intro-label">
-
-        02 / PORTFOLIO
-
-    </div>
-
-
-    <h1 class="intro-title">
-
-        WORK,<br>
-        PROCESS,<br>
-        EVOLUTION.
-
-    </h1>
-
-
-    <div class="intro-bottom">
-
-        <div class="intro-text">
-
-            A visual archive of work,
-            experiments, drawings,
-            digital objects and ideas
-            collected over the years.
-
-            <br><br>
-
-            Start anywhere.
-            Follow the work through time.
-
-        </div>
+        </section>
 
 
         <div
-            class="intro-count"
-            id="total-count"
+            id="portfolio-container"
+            class="portfolio-status"
         >
-
-            —
-
+            Loading portfolio...
         </div>
 
-    </div>
-
-</section>
+    </main>
 
 
+    <!-- =====================================================
+         MODAL
+         ===================================================== -->
 
-<!-- =========================
-     ARCHIVE
-========================= -->
+    <div
+        id="portfolio-modal"
+        class="portfolio-modal"
+        aria-hidden="true"
+    >
 
-<main
-    class="archive"
-    id="archive"
->
+        <div class="modal-content">
 
-    <div class="loading">
+            <div class="modal-header">
 
-        LOADING ARCHIVE...
+                <span id="modal-counter">
+                    001 / 001
+                </span>
 
-    </div>
+                <button
+                    id="modal-close"
+                    class="modal-close"
+                    type="button"
+                >
+                    CLOSE ×
+                </button>
 
-</main>
-
-
-
-<!-- =========================
-     MODAL
-========================= -->
-
-<div
-    class="modal"
-    id="post-modal"
->
-
-    <div class="modal-header">
-
-        <div id="modal-number">
-            —
-        </div>
+            </div>
 
 
-        <button
-            class="modal-close"
-            id="modal-close"
-        >
+            <div class="modal-body">
 
-            CLOSE ×
+                <button
+                    id="modal-prev"
+                    class="modal-arrow modal-prev"
+                    type="button"
+                    aria-label="Previous image"
+                >
+                    ←
+                </button>
 
-        </button>
+                <div id="modal-media-container"></div>
 
-    </div>
+                <button
+                    id="modal-next"
+                    class="modal-arrow modal-next"
+                    type="button"
+                    aria-label="Next image"
+                >
+                    →
+                </button>
 
+            </div>
 
-    <div class="modal-content">
-
-        <div
-            class="modal-media"
-            id="modal-media"
-        >
-
-        </div>
-
-
-        <div
-            class="modal-controls"
-            id="modal-controls"
-        >
-
-        </div>
-
-
-        <div class="modal-details">
 
             <div
-                class="modal-caption"
                 id="modal-caption"
-            >
-
-            </div>
-
-
-            <div>
-
-                <div
-                    class="modal-meta"
-                    id="modal-meta"
-                >
-
-                </div>
-
-
-                <div
-                    class="modal-tags"
-                    id="modal-tags"
-                >
-
-                </div>
-
-            </div>
+                class="modal-caption"
+            ></div>
 
         </div>
 
     </div>
 
-</div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const DATA_URL = "portfolio-data.json";
+
+        const container =
+            document.getElementById(
+                "portfolio-container"
+            );
+
+        const modal =
+            document.getElementById(
+                "portfolio-modal"
+            );
+
+        const modalMediaContainer =
+            document.getElementById(
+                "modal-media-container"
+            );
+
+        const modalCaption =
+            document.getElementById(
+                "modal-caption"
+            );
+
+        const modalCounter =
+            document.getElementById(
+                "modal-counter"
+            );
+
+        const modalClose =
+            document.getElementById(
+                "modal-close"
+            );
+
+        const modalPrev =
+            document.getElementById(
+                "modal-prev"
+            );
+
+        const modalNext =
+            document.getElementById(
+                "modal-next"
+            );
 
 
+        let posts = [];
 
-<!-- =========================
-     FOOTER
-========================= -->
+        let currentPost = null;
 
-<footer class="site-footer">
-
-    <div>
-
-        UNFINISHED COOL STUFF
-
-    </div>
+        let currentMediaIndex = 0;
 
 
-    <div>
+        // ====================================================
+        // LOAD DATA
+        // ====================================================
 
-        PERSONAL EXPERIMENTAL ARCHIVE
+        async function loadPortfolio() {
 
-    </div>
+            try {
 
+                const response =
+                    await fetch(DATA_URL);
 
-    <div>
+                if (!response.ok) {
+                    throw new Error(
+                        "Could not load portfolio-data.json"
+                    );
+                }
 
-        © 2026
+                const data =
+                    await response.json();
 
-    </div>
+                posts = data.posts || [];
 
-</footer>
+                if (!posts.length) {
 
+                    throw new Error(
+                        "No portfolio posts found."
+                    );
+                }
 
+                renderPortfolio();
 
-<script>
+            } catch (error) {
 
-    /* =========================
-       SETTINGS
-    ========================= */
+                console.error(error);
 
-    const DATA_URL =
-        "portfolio-data.json";
-
-
-    const GITHUB_BASE =
-        "https://swayam0333777-stack.github.io/unfinished-business/";
-
-
-    /* =========================
-       ELEMENTS
-    ========================= */
-
-    const archive =
-        document.getElementById(
-            "archive"
-        );
-
-
-    const totalCount =
-        document.getElementById(
-            "total-count"
-        );
-
-
-    const modal =
-        document.getElementById(
-            "post-modal"
-        );
-
-
-    const modalClose =
-        document.getElementById(
-            "modal-close"
-        );
-
-
-    const modalNumber =
-        document.getElementById(
-            "modal-number"
-        );
-
-
-    const modalMedia =
-        document.getElementById(
-            "modal-media"
-        );
-
-
-    const modalControls =
-        document.getElementById(
-            "modal-controls"
-        );
-
-
-    const modalCaption =
-        document.getElementById(
-            "modal-caption"
-        );
-
-
-    const modalMeta =
-        document.getElementById(
-            "modal-meta"
-        );
-
-
-    const modalTags =
-        document.getElementById(
-            "modal-tags"
-        );
-
-
-    let allPosts = [];
-
-
-    let currentPostIndex =
-        0;
-
-
-    let currentMediaIndex =
-        0;
-
-
-    /* =========================
-       ESCAPE HTML
-    ========================= */
-
-    function escapeHTML(
-        text
-    ) {
-
-        if (!text) {
-
-            return "";
-
+                container.innerHTML = `
+                    <div class="portfolio-error">
+                        ERROR LOADING PORTFOLIO
+                        <br><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
         }
 
 
-        return String(text)
+        // ====================================================
+        // GROUP POSTS BY YEAR
+        // ====================================================
 
-            .replace(
-                /&/g,
-                "&amp;"
-            )
+        function groupByYear(posts) {
 
-            .replace(
-                /</g,
-                "&lt;"
-            )
+            const groups = {};
 
-            .replace(
-                />/g,
-                "&gt;"
-            )
+            posts.forEach(post => {
 
-            .replace(
-                /"/g,
-                "&quot;"
-            )
+                let year = "UNKNOWN";
 
-            .replace(
-                /'/g,
-                "&#039;"
-            );
+                if (post.date) {
 
-    }
+                    year =
+                        post.date.substring(0, 4);
+                }
 
+                if (!groups[year]) {
+                    groups[year] = [];
+                }
 
-    /* =========================
-       MEDIA PATH
-    ========================= */
+                groups[year].push(post);
+            });
 
-    function normalizeMediaPath(
-        mediaPath
-    ) {
-
-        if (!mediaPath) {
-
-            return "";
-
+            return groups;
         }
 
 
-        mediaPath =
-            mediaPath.replace(
-                /^\/+/,
-                ""
+        // ====================================================
+        // CREATE MEDIA THUMBNAIL
+        // ====================================================
+
+        function createThumbnail(
+            post
+        ) {
+
+            const media =
+                post.media || [];
+
+            const firstMedia =
+                media[0];
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+            wrapper.className =
+                "post-media";
+
+
+            if (!firstMedia) {
+
+                wrapper.innerHTML =
+                    `<div class="heic-placeholder">
+                        NO MEDIA
+                    </div>`;
+
+                return wrapper;
+            }
+
+
+            const src =
+                firstMedia.src;
+
+            const extension =
+                src
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            // ------------------------------------------------
+            // HEIC
+            // ------------------------------------------------
+
+            if (
+                extension === "heic" ||
+                extension === "heif"
+            ) {
+
+                wrapper.innerHTML =
+                    `<div class="heic-placeholder">
+                        HEIC IMAGE<br>
+                        OPEN TO VIEW
+                    </div>`;
+
+                return wrapper;
+            }
+
+
+            // ------------------------------------------------
+            // VIDEO
+            // ------------------------------------------------
+
+            if (
+                firstMedia.type === "video"
+            ) {
+
+                const video =
+                    document.createElement(
+                        "video"
+                    );
+
+                video.src = src;
+
+                video.muted = true;
+
+                video.playsInline = true;
+
+                video.preload = "metadata";
+
+                wrapper.appendChild(
+                    video
+                );
+
+
+                const indicator =
+                    document.createElement(
+                        "span"
+                    );
+
+                indicator.className =
+                    "video-indicator";
+
+                indicator.textContent =
+                    "VIDEO";
+
+                wrapper.appendChild(
+                    indicator
+                );
+
+                return wrapper;
+            }
+
+
+            // ------------------------------------------------
+            // IMAGE
+            // ------------------------------------------------
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+            img.src = src;
+
+            img.alt =
+                post.title || "";
+
+            img.loading = "lazy";
+
+            wrapper.appendChild(
+                img
+            );
+
+            return wrapper;
+        }
+
+
+        // ====================================================
+        // CREATE POST CARD
+        // ====================================================
+
+        function createPostCard(
+            post
+        ) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+            card.className =
+                "post-card";
+
+
+            card.appendChild(
+                createThumbnail(post)
             );
 
 
-        /*
-            Supports old structure:
+            const info =
+                document.createElement(
+                    "div"
+                );
 
-            portfolio/003/image-01.jpg
+            info.className =
+                "post-info";
 
-            and new structure:
 
-            portfolio/003-image-01.jpg
-        */
+            const number =
+                document.createElement(
+                    "div"
+                );
 
-        mediaPath =
-            mediaPath.replace(
-                /^portfolio\/(\d+)\/(.+)$/,
-                "portfolio/$1-$2"
+            number.className =
+                "post-number";
+
+            number.textContent =
+                post.number;
+
+
+            const title =
+                document.createElement(
+                    "div"
+                );
+
+            title.className =
+                "post-title";
+
+            title.textContent =
+                post.title ||
+                "Untitled";
+
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+            date.className =
+                "post-date";
+
+            date.textContent =
+                post.date_display ||
+                "";
+
+
+            const count =
+                document.createElement(
+                    "div"
+                );
+
+            count.className =
+                "post-count";
+
+            const mediaCount =
+                (post.media || []).length;
+
+            if (mediaCount > 1) {
+
+                count.textContent =
+                    `${mediaCount} MEDIA`;
+            }
+
+
+            info.appendChild(
+                number
+            );
+
+            info.appendChild(
+                title
+            );
+
+            info.appendChild(
+                date
+            );
+
+            info.appendChild(
+                count
+            );
+
+            card.appendChild(
+                info
             );
 
 
-        return (
-            GITHUB_BASE +
-            mediaPath
-        );
+            card.addEventListener(
+                "click",
+                () => {
 
-    }
-
-
-    /* =========================
-       EXTENSION
-    ========================= */
-
-    function getExtension(
-        path
-    ) {
-
-        return path
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-    }
+                    openModal(
+                        post,
+                        0
+                    );
+                }
+            );
 
 
-    function isVideo(
-        path
-    ) {
-
-        const extension =
-            getExtension(path);
+            return card;
+        }
 
 
-        return (
-            extension === "mp4" ||
-            extension === "mov" ||
-            extension === "m4v"
-        );
+        // ====================================================
+        // RENDER PORTFOLIO
+        // ====================================================
 
-    }
+        function renderPortfolio() {
+
+            container.innerHTML = "";
+
+            const groups =
+                groupByYear(posts);
+
+            const years =
+                Object.keys(groups)
+                    .sort(
+                        (a, b) =>
+                            Number(b) -
+                            Number(a)
+                    );
 
 
-    function isHEIC(
-        path
-    ) {
+            years.forEach(year => {
 
-        return (
-            getExtension(path)
-            === "heic"
-        );
+                const section =
+                    document.createElement(
+                        "section"
+                    );
 
-    }
+                section.className =
+                    "portfolio-year";
 
 
-    /* =========================
-       IMAGE ERROR
-    ========================= */
+                const header =
+                    document.createElement(
+                        "div"
+                    );
 
-    function addImageErrorHandler(
-        image,
-        mediaPath
-    ) {
+                header.className =
+                    "portfolio-year-title";
 
-        image.onerror =
-            function() {
+
+                const yearLabel =
+                    document.createElement(
+                        "strong"
+                    );
+
+                yearLabel.textContent =
+                    year;
+
+
+                const count =
+                    document.createElement(
+                        "span"
+                    );
+
+                count.textContent =
+                    `${groups[year].length} POSTS`;
+
+
+                header.appendChild(
+                    yearLabel
+                );
+
+                header.appendChild(
+                    count
+                );
+
+
+                const grid =
+                    document.createElement(
+                        "div"
+                    );
+
+                grid.className =
+                    "post-grid";
+
+
+                groups[year].forEach(
+                    post => {
+
+                        grid.appendChild(
+                            createPostCard(
+                                post
+                            )
+                        );
+                    }
+                );
+
+
+                section.appendChild(
+                    header
+                );
+
+                section.appendChild(
+                    grid
+                );
+
+                container.appendChild(
+                    section
+                );
+            });
+        }
+
+
+        // ====================================================
+        // OPEN MODAL
+        // ====================================================
+
+        function openModal(
+            post,
+            mediaIndex
+        ) {
+
+            currentPost = post;
+
+            currentMediaIndex =
+                mediaIndex;
+
+            modal.classList.add(
+                "active"
+            );
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+            renderModalMedia();
+        }
+
+
+        // ====================================================
+        // CLOSE MODAL
+        // ====================================================
+
+        function closeModal() {
+
+            modal.classList.remove(
+                "active"
+            );
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.style.overflow =
+                "";
+
+            modalMediaContainer.innerHTML =
+                "";
+
+            currentPost = null;
+        }
+
+
+        // ====================================================
+        // RENDER MODAL MEDIA
+        // ====================================================
+
+        function renderModalMedia() {
+
+            if (!currentPost) {
+                return;
+            }
+
+            const media =
+                currentPost.media || [];
+
+            if (!media.length) {
+                return;
+            }
+
+
+            const item =
+                media[currentMediaIndex];
+
+
+            modalMediaContainer.innerHTML =
+                "";
+
+
+            const src =
+                item.src;
+
+            const extension =
+                src
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            // ------------------------------------------------
+            // HEIC
+            // ------------------------------------------------
+
+            if (
+                extension === "heic" ||
+                extension === "heif"
+            ) {
 
                 const placeholder =
                     document.createElement(
                         "div"
                     );
 
-
                 placeholder.className =
                     "heic-placeholder";
 
+                placeholder.style.width =
+                    "500px";
 
-                placeholder.innerHTML = `
+                placeholder.style.height =
+                    "400px";
 
-                    IMAGE COULD NOT
-                    BE DISPLAYED
+                placeholder.textContent =
+                    "HEIC IMAGE — BROWSER PREVIEW NOT SUPPORTED";
 
-                    <br><br>
-
-                    ${escapeHTML(
-                        mediaPath
-                    )}
-
-                `;
-
-
-                image.replaceWith(
+                modalMediaContainer.appendChild(
                     placeholder
                 );
 
-            };
+            }
 
-    }
+            // ------------------------------------------------
+            // VIDEO
+            // ------------------------------------------------
+
+            else if (
+                item.type === "video"
+            ) {
+
+                const video =
+                    document.createElement(
+                        "video"
+                    );
+
+                video.className =
+                    "modal-media";
+
+                video.src =
+                    src;
+
+                video.controls =
+                    true;
+
+                video.autoplay =
+                    true;
+
+                video.playsInline =
+                    true;
+
+                modalMediaContainer.appendChild(
+                    video
+                );
+
+            }
+
+            // ------------------------------------------------
+            // IMAGE
+            // ------------------------------------------------
+
+            else {
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+                img.className =
+                    "modal-media";
+
+                img.src =
+                    src;
+
+                img.alt =
+                    currentPost.title || "";
+
+                modalMediaContainer.appendChild(
+                    img
+                );
+            }
 
 
-    /* =========================
-       CARD IMAGE
-    ========================= */
+            // ------------------------------------------------
+            // COUNTER
+            // ------------------------------------------------
 
-    function createCardMedia(
-        post
-    ) {
-
-        const media =
-            post.media &&
-            post.media.length
-                ? post.media[0]
-                : null;
+            modalCounter.textContent =
+                `${currentPost.number} — ${currentMediaIndex + 1} / ${media.length}`;
 
 
-        if (!media) {
+            // ------------------------------------------------
+            // CAPTION
+            // ------------------------------------------------
 
-            return `
+            let captionText =
+                currentPost.caption || "";
 
-                <div
-                    class="heic-placeholder"
-                >
-                    NO MEDIA
-                </div>
 
-            `;
+            if (
+                currentPost.date_display
+            ) {
 
+                captionText =
+                    `${currentPost.date_display}\n\n${captionText}`;
+            }
+
+
+            modalCaption.textContent =
+                captionText;
+
+
+            // ------------------------------------------------
+            // ARROWS
+            // ------------------------------------------------
+
+            modalPrev.style.display =
+                media.length > 1
+                    ? "block"
+                    : "none";
+
+            modalNext.style.display =
+                media.length > 1
+                    ? "block"
+                    : "none";
         }
 
 
-        if (isVideo(media)) {
+        // ====================================================
+        // NEXT MEDIA
+        // ====================================================
 
-            return `
+        function nextMedia() {
 
-                <div
-                    class="heic-placeholder"
-                >
+            if (!currentPost) {
+                return;
+            }
 
-                    VIDEO
+            const media =
+                currentPost.media || [];
 
-                </div>
+            if (media.length <= 1) {
+                return;
+            }
 
-            `;
+            currentMediaIndex =
+                (
+                    currentMediaIndex + 1
+                ) % media.length;
 
+            renderModalMedia();
         }
 
 
-        if (isHEIC(media)) {
+        // ====================================================
+        // PREVIOUS MEDIA
+        // ====================================================
 
-            return `
+        function previousMedia() {
 
-                <div
-                    class="heic-placeholder"
-                >
+            if (!currentPost) {
+                return;
+            }
 
-                    HEIC IMAGE
+            const media =
+                currentPost.media || [];
 
-                </div>
+            if (media.length <= 1) {
+                return;
+            }
 
-            `;
+            currentMediaIndex =
+                (
+                    currentMediaIndex - 1 +
+                    media.length
+                ) % media.length;
 
+            renderModalMedia();
         }
 
 
-        const source =
-            normalizeMediaPath(
-                media
-            );
-
-
-        return `
-
-            <img
-                class="post-image"
-                src="${source}"
-                alt="${escapeHTML(
-                    post.caption ||
-                    "Portfolio image"
-                )}"
-                loading="lazy"
-            >
-
-        `;
-
-    }
-
-
-    /* =========================
-       CARD
-    ========================= */
-
-    function createCard(
-        post,
-        index
-    ) {
-
-        const mediaCount =
-            post.media
-                ? post.media.length
-                : 0;
-
-
-        const firstMedia =
-            post.media &&
-            post.media.length
-                ? post.media[0]
-                : "";
-
-
-        let badge = "";
-
-
-        if (
-            mediaCount > 1
-        ) {
-
-            badge = `
-
-                <div
-                    class="media-badge"
-                >
-
-                    ${mediaCount}
-                    MEDIA
-
-                </div>
-
-            `;
-
-        } else if (
-            firstMedia &&
-            isVideo(firstMedia)
-        ) {
-
-            badge = `
-
-                <div
-                    class="media-badge"
-                >
-
-                    VIDEO
-
-                </div>
-
-            `;
-
-        }
-
-
-        return `
-
-            <article
-                class="post-card"
-                onclick="openPost(
-                    ${index}
-                )"
-            >
-
-                <div
-                    class="post-image-wrap"
-                >
-
-                    ${createCardMedia(
-                        post
-                    )}
-
-                    ${badge}
-
-
-                    <div
-                        class="post-overlay"
-                    >
-
-                        <div
-                            class="post-overlay-inner"
-                        >
-
-                            <span>
-
-                                ${escapeHTML(
-                                    post.number
-                                )}
-
-                            </span>
-
-
-                            <span>
-
-                                ${escapeHTML(
-                                    post.date_display
-                                )}
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        `;
-
-    }
-
-
-    /* =========================
-       TAGS
-    ========================= */
-
-    function createTags(
-        hashtags
-    ) {
-
-        if (
-            !hashtags ||
-            hashtags.length === 0
-        ) {
-
-            return "";
-
-        }
-
-
-        return hashtags
-            .map(
-                tag => `
-
-                    <span
-                        class="modal-tag"
-                    >
-                        #${escapeHTML(
-                            tag
-                        )}
-                    </span>
-
-                `
-            )
-            .join("");
-
-    }
-
-
-    /* =========================
-       RENDER ARCHIVE
-    ========================= */
-
-    function renderArchive(
-        posts
-    ) {
-
-        archive.innerHTML = "";
-
-
-        totalCount.textContent =
-            String(
-                posts.length
-            ).padStart(
-                3,
-                "0"
-            );
-
-
-        let currentYear =
-            null;
-
-
-        let grid = null;
-
-
-        posts.forEach(
-            (
-                post,
-                index
-            ) => {
-
-                const year =
-                    new Date(
-                        post.date
-                    ).getFullYear();
-
+        // ====================================================
+        // EVENTS
+        // ====================================================
+
+        modalClose.addEventListener(
+            "click",
+            closeModal
+        );
+
+        modalNext.addEventListener(
+            "click",
+            nextMedia
+        );
+
+        modalPrev.addEventListener(
+            "click",
+            previousMedia
+        );
+
+
+        modal.addEventListener(
+            "click",
+            event => {
 
                 if (
-                    year !== currentYear
+                    event.target === modal
                 ) {
 
-                    currentYear =
-                        year;
+                    closeModal();
+                }
+            }
+        );
 
 
-                    const marker =
-                        document.createElement(
-                            "div"
-                        );
+        document.addEventListener(
+            "keydown",
+            event => {
 
+                if (
+                    !modal.classList.contains(
+                        "active"
+                    )
+                ) {
 
-                    marker.className =
-                        "year-marker";
-
-
-                    const yearCount =
-                        posts.filter(
-                            item =>
-                                new Date(
-                                    item.date
-                                ).getFullYear()
-                                === year
-                        ).length;
-
-
-                    marker.innerHTML = `
-
-                        <div
-                            class="year"
-                        >
-
-                            ${year}
-
-                        </div>
-
-
-                        <div
-                            class="year-info"
-                        >
-
-                            ${yearCount}
-                            POSTS
-
-                        </div>
-
-                    `;
-
-
-                    archive.appendChild(
-                        marker
-                    );
-
-
-                    grid =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    grid.className =
-                        "post-grid";
-
-
-                    archive.appendChild(
-                        grid
-                    );
-
+                    return;
                 }
 
 
-                grid.insertAdjacentHTML(
-                    "beforeend",
-                    createCard(
-                        post,
-                        index
-                    )
-                );
+                if (
+                    event.key === "Escape"
+                ) {
 
+                    closeModal();
+                }
+
+
+                if (
+                    event.key === "ArrowRight"
+                ) {
+
+                    nextMedia();
+                }
+
+
+                if (
+                    event.key === "ArrowLeft"
+                ) {
+
+                    previousMedia();
+                }
             }
         );
 
-    }
 
+        // ====================================================
+        // START
+        // ====================================================
 
-    /* =========================
-       MODAL MEDIA
-    ========================= */
+        loadPortfolio();
 
-    function renderModalMedia() {
-
-        const post =
-            allPosts[
-                currentPostIndex
-            ];
-
-
-        if (!post) {
-
-            return;
-
-        }
-
-
-        const media =
-            post.media || [];
-
-
-        const current =
-            media[
-                currentMediaIndex
-            ];
-
-
-        if (!current) {
-
-            modalMedia.innerHTML =
-                "NO MEDIA";
-
-            return;
-
-        }
-
-
-        const source =
-            normalizeMediaPath(
-                current
-            );
-
-
-        if (isVideo(current)) {
-
-            modalMedia.innerHTML = `
-
-                <video
-                    controls
-                    autoplay
-                    playsinline
-                >
-
-                    <source
-                        src="${source}"
-                    >
-
-                </video>
-
-            `;
-
-        } else if (
-            isHEIC(current)
-        ) {
-
-            modalMedia.innerHTML = `
-
-                <div
-                    class="modal-heic"
-                >
-
-                    HEIC IMAGE
-
-                    <br><br>
-
-                    ${escapeHTML(
-                        current
-                    )}
-
-                </div>
-
-            `;
-
-        } else {
-
-            modalMedia.innerHTML = `
-
-                <img
-                    src="${source}"
-                    alt="${escapeHTML(
-                        post.caption ||
-                        "Portfolio image"
-                    )}"
-                >
-
-            `;
-
-        }
-
-
-        if (
-            media.length > 1
-        ) {
-
-            modalControls.innerHTML = `
-
-                <button
-                    class="modal-button"
-                    onclick="previousModalMedia()"
-                >
-
-                    ← PREVIOUS
-
-                </button>
-
-
-                <div>
-
-                    ${String(
-                        currentMediaIndex + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    )}
-
-                    /
-
-                    ${String(
-                        media.length
-                    ).padStart(
-                        2,
-                        "0"
-                    )}
-
-                </div>
-
-
-                <button
-                    class="modal-button"
-                    onclick="nextModalMedia()"
-                >
-
-                    NEXT →
-
-                </button>
-
-            `;
-
-        } else {
-
-            modalControls.innerHTML = "";
-
-        }
-
-    }
-
-
-    /* =========================
-       OPEN POST
-    ========================= */
-
-    function openPost(
-        index
-    ) {
-
-        currentPostIndex =
-            index;
-
-
-        currentMediaIndex =
-            0;
-
-
-        const post =
-            allPosts[index];
-
-
-        if (!post) {
-
-            return;
-
-        }
-
-
-        modalNumber.textContent =
-            post.number +
-            " / " +
-            post.date_display;
-
-
-        modalCaption.textContent =
-            post.caption ||
-            "UNTITLED";
-
-
-        modalMeta.innerHTML = `
-
-            POST ${escapeHTML(
-                post.number
-            )}
-
-            <br>
-
-            ${escapeHTML(
-                post.date_display
-            )}
-
-            <br><br>
-
-            ${post.media_count || 0}
-            MEDIA
-
-        `;
-
-
-        modalTags.innerHTML =
-            createTags(
-                post.hashtags
-            );
-
-
-        renderModalMedia();
-
-
-        modal.classList.add(
-            "active"
-        );
-
-
-        document.body.classList.add(
-            "modal-open"
-        );
-
-    }
-
-
-    /* =========================
-       CLOSE POST
-    ========================= */
-
-    function closeModal() {
-
-        modal.classList.remove(
-            "active"
-        );
-
-
-        document.body.classList.remove(
-            "modal-open"
-        );
-
-
-        modalMedia.innerHTML = "";
-
-    }
-
-
-    modalClose.addEventListener(
-        "click",
-        closeModal
-    );
-
-
-    modal.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target === modal
-            ) {
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       MODAL NEXT
-    ========================= */
-
-    function nextModalMedia() {
-
-        const post =
-            allPosts[
-                currentPostIndex
-            ];
-
-
-        if (!post) {
-
-            return;
-
-        }
-
-
-        currentMediaIndex++;
-
-
-        if (
-            currentMediaIndex >=
-            post.media.length
-        ) {
-
-            currentMediaIndex = 0;
-
-        }
-
-
-        renderModalMedia();
-
-    }
-
-
-    /* =========================
-       MODAL PREVIOUS
-    ========================= */
-
-    function previousModalMedia() {
-
-        const post =
-            allPosts[
-                currentPostIndex
-            ];
-
-
-        if (!post) {
-
-            return;
-
-        }
-
-
-        currentMediaIndex--;
-
-
-        if (
-            currentMediaIndex < 0
-        ) {
-
-            currentMediaIndex =
-                post.media.length - 1;
-
-        }
-
-
-        renderModalMedia();
-
-    }
-
-
-    /* =========================
-       KEYBOARD
-    ========================= */
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                !modal.classList.contains(
-                    "active"
-                )
-            ) {
-
-                return;
-
-            }
-
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                closeModal();
-
-            }
-
-
-            if (
-                event.key === "ArrowRight"
-            ) {
-
-                nextModalMedia();
-
-            }
-
-
-            if (
-                event.key === "ArrowLeft"
-            ) {
-
-                previousModalMedia();
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       LOAD DATA
-    ========================= */
-
-    async function loadPortfolio() {
-
-        try {
-
-            const response =
-                await fetch(
-                    DATA_URL
-                );
-
-
-            if (
-                !response.ok
-            ) {
-
-                throw new Error(
-                    "Could not load portfolio-data.json"
-                );
-
-            }
-
-
-            const posts =
-                await response.json();
-
-
-            if (
-                !Array.isArray(
-                    posts
-                )
-            ) {
-
-                throw new Error(
-                    "Portfolio data is invalid."
-                );
-
-            }
-
-
-            allPosts =
-                posts;
-
-
-            renderArchive(
-                posts
-            );
-
-
-        } catch (
-            error
-        ) {
-
-            console.error(
-                error
-            );
-
-
-            archive.innerHTML = `
-
-                <div
-                    class="error"
-                >
-
-                    ERROR LOADING PORTFOLIO.
-
-                    <br><br>
-
-                    Make sure
-                    <strong>
-                        portfolio-data.json
-                    </strong>
-                    exists in the repository root.
-
-                </div>
-
-            `;
-
-        }
-
-    }
-
-
-    loadPortfolio();
-
-</script>
-
+    </script>
 
 </body>
-
 </html>
